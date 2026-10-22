@@ -7,8 +7,7 @@
 <style>:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
 <title>Verbum Graecum</title>
 <meta name="claude:viewport-fit-sides" content="cover">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500&family=EB+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Gentium+Book+Plus:ital,wght@0,400;0,700;1,400&display=swap">
+<script src="fonts.js"></script>
 <style>
 /* Layout: página de edição de estudo impressa. Frontispício centrado, régua de navegação fixa,
    coluna de texto (português sobre o grego) e, à margem direita, o verbete de léxico da palavra tocada.
@@ -144,6 +143,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ini-rod p{margin:0}
 .ini-rod .sc{color:var(--tinta)}
 .ini-rod .fontes{margin-top:6px;font-size:.88rem;font-style:italic;color:var(--muted)}
+.ini-rod .fontes a,footer a{color:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.ini-rod .fontes a:hover,footer a:hover{color:var(--fg)}
+.bas-txt a{color:var(--ouro-2);text-decoration:underline;text-decoration-color:var(--ouro);text-underline-offset:3px}
+.lnk-rod{all:unset;cursor:pointer;font-style:italic;color:inherit;text-decoration:underline;text-decoration-color:var(--line-2);text-underline-offset:3px}
+.lnk-rod:hover{color:var(--fg)}
+.lnk-rod:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.rod-priv{font-size:.92rem;color:var(--muted)}
 .casa{all:unset;cursor:pointer;font-family:var(--f-marca);font-size:.92rem;letter-spacing:.12em;color:var(--bg);background:var(--accent);padding:4px 12px;border-radius:2px;transition:background .15s}
 .casa:hover{background:var(--fg);color:var(--bg)}
 .casa:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
@@ -452,7 +458,8 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
 
   <div class="ini-rod">
     <p>Projeto desenvolvido por <span class="sc">Jório Serra Maia Júnior</span></p>
-    <p class="fontes">Texto grego: SBLGNT (CC BY 4.0) · Morfologia e sintaxe: MACULA Greek (CC BY 4.0) · Tradução: João Ferreira de Almeida, domínio público</p>
+    <p class="fontes">Texto grego: <a href="https://sblgnt.com" target="_blank" rel="noopener">SBLGNT</a>, © Society of Biblical Literature e Logos Bible Software · Morfologia e sintaxe: <a href="https://github.com/Clear-Bible/macula-greek" target="_blank" rel="noopener">MACULA Greek</a>, © Biblica, Inc. · Ambos sob licença <a href="https://creativecommons.org/licenses/by/4.0/deed.pt-br" target="_blank" rel="noopener">CC BY 4.0</a>, adaptados para este site · Tradução: João Ferreira de Almeida, domínio público</p>
+    <p class="fontes">Notas e comentários © Jório Serra Maia Júnior. Todos os direitos reservados. · <button class="lnk-rod" data-priv>Aviso de Privacidade</button></p>
   </div>
 </section>
 
@@ -1119,6 +1126,73 @@ adjuntos.</p></li>
     <div class="bas-fim">
       <p>Agora, leia o texto grego com a análise de cada palavra.</p>
       <button class="btn-ouro" data-home-livros>Ir para os livros bíblicos ›</button>
+      <p class="rod-priv"><button class="lnk-rod" data-priv>Aviso de Privacidade</button></p>
+    </div>
+  </div>
+</section>
+
+<section id="privacidade" class="basico" hidden aria-labelledby="tit-priv">
+  <header class="ini-cab bas-cab">
+    <div class="ini-cab-in">
+      <div class="logo">
+        <p class="marca marca-p"><button class="casa-txt" data-home>Verbum Graecum</button></p>
+      </div>
+      <nav class="ini-links" aria-label="Ligações">
+        <button class="lnk" data-home>Início</button>
+        <button class="lnk" data-home-livros>Livros bíblicos</button>
+        <button class="lnk" data-basico>O Básico do Grego</button>
+      </nav>
+    </div>
+  </header>
+  <div class="bas-in">
+    <div class="bas-topo">
+      <p class="kicker">Lei nº 13.709/2018 (LGPD)</p>
+      <h1 id="tit-priv">Aviso de Privacidade</h1>
+      <p class="bas-sub">Última atualização: 22 de outubro de 2026</p>
+    </div>
+    <article class="bas-txt">
+<h2>1. Quem é o responsável</h2>
+<p>O Verbum Graecum é um projeto pessoal, gratuito e sem fins comerciais, mantido por <strong>Jório Serra Maia Júnior</strong>, controlador dos dados pessoais tratados no site.</p>
+<p>Canal de contato para titulares de dados e para a Autoridade Nacional de Proteção de Dados (ANPD): <strong>joriomserra@gmail.com</strong>.</p>
+
+<h2>2. O que o site não faz</h2>
+<ul>
+<li><p>Não pede cadastro, login nem preenchimento de formulários.</p></li>
+<li><p>Não exibe anúncios.</p></li>
+<li><p>Não usa ferramentas de estatística, de rastreamento ou de publicidade.</p></li>
+<li><p>Não vende, aluga nem compartilha dados de visitantes.</p></li>
+<li><p>O código do site não cria cookies.</p></li>
+</ul>
+
+<h2>3. Dados técnicos de acesso</h2>
+<p>Como qualquer site, ao ser acessado o Verbum Graecum recebe dados técnicos do seu aparelho: endereço IP, data e hora do acesso, página solicitada e tipo de navegador. Esses dados são processados pela <strong>Cloudflare, Inc.</strong>, empresa que hospeda o site, apenas para entregar as páginas e proteger o site contra ataques e abusos.</p>
+<p>A base legal é o legítimo interesse (art. 7º, IX, da LGPD), limitado ao funcionamento e à segurança do site. A Cloudflare mantém servidores em vários países, inclusive fora do Brasil, o que pode configurar transferência internacional de dados (art. 33 da LGPD). O tratamento feito pela Cloudflare segue também a <a href="https://www.cloudflare.com/pt-br/privacypolicy/" target="_blank" rel="noopener">política de privacidade da Cloudflare</a>.</p>
+<p>As fontes tipográficas, os textos e as imagens são servidos pelo próprio site. Nenhum dado é enviado ao Google ou a outros fornecedores de conteúdo.</p>
+
+<h2>4. Preferências guardadas no seu navegador</h2>
+<p>Para facilitar a leitura, o site guarda no armazenamento local do seu navegador (<em>localStorage</em>) algumas preferências:</p>
+<ul>
+<li><p>o último livro e o último capítulo lidos, para oferecer “Continuar a leitura”;</p></li>
+<li><p>o modo de exibição escolhido (bilíngue, só grego ou só português);</p></li>
+<li><p>se as opções “Casos em cores” e “Notas” estão ligadas.</p></li>
+</ul>
+<p>Essas informações ficam apenas no seu aparelho. Não são enviadas ao site nem a terceiros e não identificam você. Para apagá-las, basta limpar os dados deste site nas configurações do navegador.</p>
+
+<h2>5. Dados do comentarista</h2>
+<p>O nome, a fotografia, o currículo e o e-mail publicados na seção “Sobre o comentarista” são dados do próprio responsável pelo site, divulgados por ele.</p>
+
+<h2>6. Links para outros sites</h2>
+<p>O site contém links para serviços de terceiros, como o Substack. Ao segui-los, você passa a estar sujeito às políticas de privacidade desses serviços.</p>
+
+<h2>7. Seus direitos</h2>
+<p>Você pode exercer os direitos previstos no art. 18 da LGPD, como confirmar a existência de tratamento, acessar, corrigir ou eliminar dados e obter informações sobre compartilhamento, escrevendo para <strong>joriomserra@gmail.com</strong>. Como o site não guarda dados que identifiquem os visitantes, na maior parte dos casos não haverá dados pessoais a fornecer; pedidos relativos aos registros técnicos serão encaminhados à Cloudflare quando necessário.</p>
+<p>Você também pode apresentar petição à Autoridade Nacional de Proteção de Dados (<a href="https://www.gov.br/anpd" target="_blank" rel="noopener">ANPD</a>).</p>
+
+<h2>8. Alterações</h2>
+<p>Este aviso pode ser atualizado. A data da última atualização aparece no topo da página.</p>
+    </article>
+    <div class="bas-fim">
+      <button class="btn-ouro" data-home>Voltar ao início ›</button>
     </div>
   </div>
 </section>
@@ -1181,7 +1255,8 @@ adjuntos.</p></li>
     <p class="empty"><b>Toque em qualquer palavra grega</b> para ver a tradução, a análise morfológica e a função sintática na frase. Use as setas ← → do teclado para percorrer o texto.</p>
   </aside>
   <footer>
-    Texto grego: SBL Greek New Testament (SBLGNT), © Society of Biblical Literature e Logos Bible Software, CC BY 4.0. Morfologia e árvores sintáticas: MACULA Greek, © Biblica, Inc., CC BY 4.0. Texto português: tradução de João Ferreira de Almeida, edição em domínio público (eBible.org). Glosas, notas e descrições em português preparadas para este protótipo. Onde o grego e a Almeida divergem (por exemplo, Mt 17:21, Mc 9:44, Lc 17:36, Jo 1:34 e 5:4), a diferença é variante textual. Em Lc 9:61 a edição-fonte da Almeida não traz o texto português. Em At 19:41 a diferença é só de numeração: o SBLGNT põe esse texto no fim do v. 40.
+    Texto grego: SBL Greek New Testament (<a href="https://sblgnt.com" target="_blank" rel="noopener">SBLGNT</a>), © Society of Biblical Literature e Logos Bible Software. Morfologia e árvores sintáticas: <a href="https://github.com/Clear-Bible/macula-greek" target="_blank" rel="noopener">MACULA Greek</a>, © Biblica, Inc. Ambos são usados sob a licença <a href="https://creativecommons.org/licenses/by/4.0/deed.pt-br" target="_blank" rel="noopener">CC BY 4.0</a> e foram adaptados: as análises foram traduzidas e reorganizadas em português, com glosas e descrições próprias. Texto português: tradução de João Ferreira de Almeida, edição em domínio público. Notas e comentários © Jório Serra Maia Júnior, todos os direitos reservados. Onde o grego e a Almeida divergem (por exemplo, Mt 17:21, Mc 9:44, Lc 17:36, Jo 1:34 e 5:4), a diferença é variante textual. Em Lc 9:61 a edição-fonte da Almeida não traz o texto português. Em At 19:41 a diferença é só de numeração: o SBLGNT põe esse texto no fim do v. 40.
+    <br><button class="lnk-rod" data-priv>Aviso de Privacidade</button>
   </footer>
 </div>
 </div>
@@ -1262,9 +1337,9 @@ function carregar(id, tentativa = 0) {
     const suave = !matchMedia('(prefers-reduced-motion: reduce)').matches;
     window.scrollTo({top: 0, behavior: suave ? 'smooth' : 'auto'});
   }; }
-const vInicio = document.getElementById('inicio'), vLeitor = document.getElementById('leitor'), vBasico = document.getElementById('basico');
+const vInicio = document.getElementById('inicio'), vLeitor = document.getElementById('leitor'), vBasico = document.getElementById('basico'), vPriv = document.getElementById('privacidade');
 function mostrarInicio(alvo) {
-  vInicio.hidden = false; vLeitor.hidden = true; vBasico.hidden = true;
+  vInicio.hidden = false; vLeitor.hidden = true; vBasico.hidden = true; vPriv.hidden = true;
   document.title = 'Verbum Graecum';
   const ult = ler('ev-livro');
   const cont = document.getElementById('continuar');
@@ -1279,7 +1354,7 @@ function mostrarInicio(alvo) {
   else window.scrollTo(0, 0);
 }
 function mostrarBasico() {
-  vInicio.hidden = true; vLeitor.hidden = true; vBasico.hidden = false;
+  vInicio.hidden = true; vLeitor.hidden = true; vBasico.hidden = false; vPriv.hidden = true;
   document.title = 'Verbum Graecum · O Básico do Grego';
   try { history.replaceState(null, '', '#basico'); } catch (e) {}
   window.scrollTo(0, 0);
@@ -1288,6 +1363,16 @@ document.getElementById('irBasico').onclick = mostrarBasico;
 vBasico.querySelectorAll('[data-home]').forEach(b => b.onclick = () => mostrarInicio());
 vBasico.querySelectorAll('[data-home-livros]').forEach(b => b.onclick = () => mostrarInicio('livros'));
 vBasico.querySelectorAll('[data-home-sobre]').forEach(b => b.onclick = () => mostrarInicio('sobre'));
+function mostrarPrivacidade() {
+  vInicio.hidden = true; vLeitor.hidden = true; vBasico.hidden = true; vPriv.hidden = false;
+  document.title = 'Verbum Graecum · Aviso de Privacidade';
+  try { history.replaceState(null, '', '#privacidade'); } catch (e) {}
+  window.scrollTo(0, 0);
+}
+document.querySelectorAll('[data-priv]').forEach(b => b.onclick = mostrarPrivacidade);
+vPriv.querySelectorAll('[data-home]').forEach(b => b.onclick = () => mostrarInicio());
+vPriv.querySelectorAll('[data-home-livros]').forEach(b => b.onclick = () => mostrarInicio('livros'));
+vPriv.querySelectorAll('[data-basico]').forEach(b => b.onclick = mostrarBasico);
 vBasico.querySelectorAll('[data-sec]').forEach(b => b.onclick = () => document.getElementById(b.dataset.sec).scrollIntoView({behavior: 'smooth'}));
 document.querySelectorAll('[data-ir]').forEach(b => b.onclick = () => abrirLivro(b.dataset.ir, 1));
 document.getElementById('irInicio').onclick = () => mostrarInicio();
@@ -1303,7 +1388,7 @@ document.getElementById('irLivros').onclick = () => document.getElementById('liv
 let pedido = 0;   // só o último livro clicado é aberto, mesmo que outro termine de carregar depois
 async function abrirLivro(id, cap, verso) {
   const meu = ++pedido;
-  vInicio.hidden = true; vBasico.hidden = true; vLeitor.hidden = false;
+  vInicio.hidden = true; vBasico.hidden = true; vLeitor.hidden = false; vPriv.hidden = true;
   if (!LIVROS[id]) id = 'jo';
   document.querySelectorAll('[data-livro]').forEach(b => b.setAttribute('aria-pressed', b.dataset.livro === id));
   const L = LIVROS[id];
@@ -1644,6 +1729,7 @@ else if (hm) { ini = 'jo'; iniCap = +hm[1]; }
 else if (ini === 'jo' && ler('jo-cap')) iniCap = +ler('jo-cap');
 if (hm) abrirLivro(ini, iniCap, iniV);
 else if (location.hash === '#basico') mostrarBasico();
+else if (location.hash === '#privacidade') mostrarPrivacidade();
 else mostrarInicio();
 
 // Legenda dos casos: definição breve (extraída de “O Básico do Grego”)
