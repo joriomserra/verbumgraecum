@@ -84,6 +84,9 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lnk:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
 .lnk.lnk-vocab,.ini-links .lnk.lnk-vocab{color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:1px 10px;margin-left:10px}
 .lnk.lnk-vocab:hover{background:var(--accent);color:var(--bg)}
+.lnk.lnk-substack,.ini-links .lnk.lnk-substack{background:#ff6719;color:#ffffff;border:1px solid #ff6719;border-radius:2px;padding:1px 10px;margin-left:10px}
+.lnk.lnk-substack:hover{background:#ff8340;border-color:#ff8340;color:#ffffff}
+.ini-links .lnk.lnk-substack+.lnk{border-left:1px solid var(--accent)}
 @media (max-width:420px){.ini-links .lnk.lnk-vocab{margin:6px 0 0;padding:1px 8px}}
 .ini-corpo{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:44px 24px;display:grid;gap:52px}
 .capitular{float:left;font-family:var(--f-greek);font-size:4.1em;line-height:.82;padding:.08em .12em 0 0;color:var(--tinta)}
@@ -367,7 +370,7 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
         <button class="lnk" id="irLivros">Livros bíblicos</button>
         <button class="lnk" id="irBasico">O Básico do Grego</button>
         <button class="lnk" id="irSobre">Sobre o comentarista</button>
-        <a class="lnk" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a>
+        <a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a>
         <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
       </nav>
     </div>
@@ -1210,7 +1213,7 @@ adjuntos.</p></li>
   <div class="orn" aria-hidden="true">✠</div>
 </header>
 <nav class="top" aria-label="Navegação"><div class="top-in">
-  <div class="casa-g"><button class="casa" id="irInicio" aria-label="Página inicial">Verbum Graecum</button><a class="lnk" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a><a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a></div>
+  <div class="casa-g"><button class="casa" id="irInicio" aria-label="Página inicial">Verbum Graecum</button><a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a><a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a></div>
   <div class="livros" role="group" aria-label="Livro">
     <button data-livro="mt" aria-pressed="false">Mateus</button>
     <button data-livro="mc" aria-pressed="false">Marcos</button>
