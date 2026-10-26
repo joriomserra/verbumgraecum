@@ -338,6 +338,10 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .livros .ind-grade button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);text-decoration:none}
 .livros .ind-grade button:focus-visible{outline:1px solid var(--accent);outline-offset:1px}
 @media (max-width:520px){.indice{padding:12px 14px 16px}.ind-grade{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.ctrls button.ne-info{border-left:0;margin-left:2px;padding:0;width:1.15rem;height:1.15rem;line-height:1.15rem;text-align:center;border:1px solid var(--line-2);border-radius:50%;font-variant-caps:normal;letter-spacing:0;font-size:.78rem;color:var(--muted);align-self:center}
+.ctrls button.ne-info:hover,.ctrls button.ne-info[aria-expanded="true"]{color:var(--accent);border-color:var(--accent)}
+.ne-dica{position:fixed;z-index:30;width:min(270px,calc(100vw - 32px));box-sizing:border-box;background:var(--surface);color:var(--fg);border:1px solid var(--line-2);box-shadow:0 8px 22px rgba(0,0,0,.25);padding:10px 14px;font-family:var(--f-ui);font-size:.98rem;line-height:1.4;font-variant-caps:normal;letter-spacing:0}
+.ne-dica b{color:var(--accent);font-weight:600;letter-spacing:.04em}
 .cap{display:flex;align-items:center;gap:6px;color:var(--muted)}
 .cap label{font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:1.02rem}
 .cap select{font-family:var(--f-ui);font-size:1rem;padding:1px 4px;border:0;border-bottom:1px solid var(--line-2);border-radius:0;background:transparent;color:var(--fg);font-variant-numeric:lining-nums}
@@ -1523,7 +1527,9 @@ adjuntos.</p></li>
     <div class="grupo" role="group" aria-label="Opções">
       <button id="v-cor" aria-pressed="false">Casos em cores</button>
       <button id="v-com" aria-pressed="true">Notas</button>
+      <button class="ne-info" id="neInfo" type="button" aria-label="O que é N.E.?" aria-expanded="false" aria-controls="neDica">?</button>
     </div>
+    <div class="ne-dica" id="neDica" role="tooltip" hidden>Onde aparece <b>N.E.</b> ao lado do versículo, há um comentário do editor sobre ele. Toque na sigla para ler a nota.</div>
   </div>
 </div></nav>
 <div class="legend-bar" id="legenda">
@@ -2041,6 +2047,25 @@ sel.onchange = () => abrir(+sel.value);
 ['capPrev','capPrev2'].forEach(id => document.getElementById(id).onclick = () => passo(-1));
 ['capNext','capNext2'].forEach(id => document.getElementById(id).onclick = () => passo(1));
 document.querySelectorAll('[data-livro]').forEach(b => b.onclick = () => { fecharIndice(); if (b.dataset.livro !== livro || !CAPS.length || !texto.querySelector('.w')) abrirLivro(b.dataset.livro); });
+// Dica do botão “?” ao lado de “Notas”: explica a sigla N.E.
+(() => {
+  const btn = document.getElementById('neInfo'), dica = document.getElementById('neDica');
+  const fechar = () => { dica.hidden = true; btn.setAttribute('aria-expanded', 'false'); };
+  const posicionar = () => {
+    const r = btn.getBoundingClientRect(), w = dica.offsetWidth;
+    dica.style.top = (r.bottom + 8) + 'px';
+    dica.style.left = Math.max(16, Math.min(r.left + r.width / 2 - w / 2, innerWidth - w - 16)) + 'px';
+  };
+  btn.onclick = e => {
+    e.stopPropagation();
+    if (!dica.hidden) return fechar();
+    dica.hidden = false; btn.setAttribute('aria-expanded', 'true'); posicionar();
+  };
+  document.addEventListener('click', e => { if (!dica.hidden && e.target !== dica) fechar(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !dica.hidden) { fechar(); btn.focus(); } });
+  addEventListener('scroll', () => { if (!dica.hidden) fechar(); }, {passive: true});
+  addEventListener('resize', () => { if (!dica.hidden) posicionar(); });
+})();
 // Índice dos livros: abre e fecha pelo botão “Livro”, fecha com Esc ou clique fora.
 const btnIndice = document.getElementById('btnIndice'), indiceLivros = document.getElementById('indiceLivros');
 function fecharIndice() { indiceLivros.hidden = true; btnIndice.setAttribute('aria-expanded', 'false'); }
