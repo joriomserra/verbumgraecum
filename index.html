@@ -394,15 +394,15 @@ body.cor .legend-bar{display:block}
 
 .verse{display:grid;grid-template-columns:2rem minmax(0,1fr);gap:0 12px;padding:9px 0 13px}
 .vn{font-family:var(--f-greek);font-size:.9rem;color:var(--verse);padding-top:.3rem;text-align:right;font-variant-numeric:lining-nums tabular-nums}
-.pt{margin:0 0 4px;color:var(--muted);font-size:1.02rem;line-height:1.5;max-width:62ch;hyphens:auto}
-.gr{font-family:var(--f-greek);font-size:1.38rem;line-height:1.72;margin:0;hyphens:none}
+.pt{margin:0 0 4px;color:var(--muted);font-size:calc(1.02rem * var(--esc,1));line-height:1.5;max-width:62ch;hyphens:auto}
+.gr{font-family:var(--f-greek);font-size:calc(1.38rem * var(--esc,1));line-height:1.72;margin:0;hyphens:none}
 .verse.prim .vn{padding-top:0}
 .verse,.chead,.com{scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--nav-h,60px) + var(--leg-h,0px) + 16px)}
 .verse.alvo{animation:alvo 2.4s ease-out}
 @keyframes alvo{0%,35%{background:var(--accent-soft)}100%{background:transparent}}
 .capnum{font-family:var(--f-greek);font-size:2.6rem;line-height:1;color:var(--accent);display:block;margin-top:.15rem}
 body.only-gr .pt, body.only-pt .gr{display:none}
-body.only-pt .pt{color:var(--fg);font-size:1.12rem}
+body.only-pt .pt{color:var(--fg);font-size:calc(1.12rem * var(--esc,1))}
 .w{cursor:pointer;padding:0 1px;transition:background .12s,color .12s;border-bottom:1px solid transparent}
 .w:hover{background:var(--accent-soft)}
 .w:focus-visible{outline:1px solid var(--accent);outline-offset:1px}
@@ -460,6 +460,91 @@ aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--nav-h,60px) 
 .dist b{color:var(--fg);font-weight:500}
 .dist .at{color:var(--accent)}
 .dist .at b{color:var(--accent)}
+.dist button{all:unset;cursor:pointer;color:inherit;border-bottom:1px dotted transparent}
+.dist button:hover{color:var(--accent);border-bottom-color:var(--accent)}
+.dist button:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.dist .dist-tot{color:var(--accent)}
+.ph .ref-comp{all:unset;cursor:pointer;font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:.95rem;color:var(--accent);margin-left:auto;white-space:nowrap;font-variant-numeric:lining-nums;border-bottom:1px dotted transparent}
+.ph .ref-comp:hover{border-bottom-color:var(--accent)}
+.ph .ref-comp:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.vn{cursor:pointer;border-radius:2px}
+.vn:hover{text-decoration:underline;text-underline-offset:3px}
+.vn:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+/* Busca e ocorrências */
+.livros{gap:6px}
+.livros .bus-btn{gap:5px;align-items:center}
+.livros .bus-btn svg{color:var(--accent);flex:none}
+body.com-janela{overflow:hidden}
+.busca{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.45);display:flex;justify-content:center;align-items:flex-start;padding:calc(24px + env(safe-area-inset-top,0px)) 16px 24px;box-sizing:border-box}
+.busca[hidden]{display:none}
+.busca-in{width:min(760px,100%);max-height:100%;overflow:auto;box-sizing:border-box;background:var(--surface);color:var(--fg);border:1px solid var(--line-2);border-radius:4px;box-shadow:0 16px 40px rgba(0,0,0,.35);padding:16px 22px 22px;font-family:var(--f-ui)}
+.busca-cab{display:flex;align-items:center;gap:10px}
+.busca-cab h2{flex:1;margin:0;font-family:var(--f-body);font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:1.15rem;color:var(--accent)}
+#buscaForm{margin:10px 0 6px}
+#buscaCampo{width:100%;box-sizing:border-box;font:inherit;font-size:1.15rem;padding:9px 12px;border:1px solid var(--line-2);border-radius:3px;background:transparent;color:var(--fg)}
+#buscaCampo:focus{outline:1px solid var(--accent);border-color:var(--accent)}
+.res-dica{color:var(--muted);font-size:1rem;line-height:1.5}
+.res-dica b{color:var(--fg);font-weight:500}
+.res-dica kbd{border:1px solid var(--line-2);border-radius:3px;padding:0 5px;font-family:inherit}
+.res-cat{margin:16px 0 6px;font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:.98rem;color:var(--muted)}
+.res-livro{margin:18px 0 4px;font-size:1.15rem;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:2px}
+.res-msg{color:var(--muted);font-style:italic;margin:14px 0}
+.res-texto{margin:16px 0 0;text-align:center}
+.res-item{all:unset;cursor:pointer;box-sizing:border-box;display:grid;width:100%;padding:9px 10px;border-bottom:1px solid var(--line);border-radius:2px}
+.res-item:hover{background:var(--accent-soft)}
+.res-item:focus-visible{outline:1px solid var(--accent);outline-offset:-1px}
+.res-lema{grid-template-columns:minmax(0,1fr) auto;gap:2px 12px}
+.res-lema .res-tit{font-size:1.1rem}
+.res-lema .res-tit b{font-family:var(--f-greek);font-weight:500;font-size:1.2rem}
+.res-lema .res-tit i{color:var(--muted)}
+.res-lema .res-sub{grid-column:1;color:var(--muted)}
+.res-lema .res-n{grid-column:2;grid-row:1 / span 2;align-self:center;color:var(--accent);font-variant-numeric:lining-nums}
+.res-ref .res-tit{font-size:1.15rem;color:var(--fg)}
+.res-ref .res-sub{color:var(--accent);font-size:.95rem}
+.res-verso{gap:2px}
+.res-ref-n{font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--accent);font-variant-numeric:lining-nums}
+.res-gr{font-family:var(--f-greek);font-size:1.12rem;line-height:1.55}
+.res-gr mark{background:var(--accent-soft);color:var(--accent);border-radius:2px;padding:0 2px}
+.res-pt{color:var(--muted);font-size:.98rem;line-height:1.45}
+.res-oculto{display:none}
+.conc-cab{text-align:center;padding:4px 0 6px}
+.conc-lema{font-family:var(--f-greek);font-size:2rem;margin:4px 0 0;line-height:1.2}
+.conc-tr{margin:0;color:var(--muted);font-style:italic}
+.conc-gl{margin:4px 0 0;font-size:1.08rem}
+.conc-tot{margin:8px 0 6px;color:var(--muted);font-size:.98rem}
+.conc-dist{display:flex;flex-wrap:wrap;justify-content:center;gap:4px 12px;font-size:.95rem;color:var(--muted);font-variant-numeric:lining-nums}
+.conc-dist button{all:unset;cursor:pointer;border-bottom:1px dotted transparent}
+.conc-dist button b{color:var(--fg);font-weight:500}
+.conc-dist button:hover,.conc-dist .at,.conc-dist .at b{color:var(--accent)}
+.busca .voltar{margin:8px 0 0}
+.busca .lnk-sum,.lnk-dica{all:unset;cursor:pointer;color:var(--accent);border-bottom:1px solid transparent}
+.busca .lnk-sum:hover,.lnk-dica:hover{border-bottom-color:var(--accent)}
+.lnk-dica{display:inline;margin-left:2px}
+@media (max-width:600px){.busca{padding:0}.busca-in{width:100%;height:100%;max-height:none;border:0;border-radius:0;padding:calc(12px + env(safe-area-inset-top,0px)) 16px calc(20px + env(safe-area-inset-bottom,0px))}}
+/* Compartilhar versículo */
+.comp-menu{position:fixed;z-index:35;min-width:220px;max-width:calc(100vw - 24px);box-sizing:border-box;background:var(--surface);color:var(--fg);border:1px solid var(--line-2);border-radius:4px;box-shadow:0 10px 26px rgba(0,0,0,.28);padding:8px 6px;font-family:var(--f-ui);display:grid}
+.comp-menu[hidden]{display:none}
+.comp-ref{margin:0 8px 4px;font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--accent);font-variant-numeric:lining-nums}
+.comp-menu button{all:unset;cursor:pointer;padding:6px 10px;border-radius:2px;font-size:1.02rem}
+.comp-menu button[hidden]{display:none}
+.comp-menu button:hover,.comp-menu button:focus-visible{background:var(--accent-soft);color:var(--accent)}
+.comp-msg{margin:4px 10px 0;font-size:.92rem;color:var(--muted);min-height:0}
+.comp-msg:empty{display:none}
+/* Tamanho da letra e leitura sem internet */
+.ctrls .grupo-fonte button{font-variant-caps:normal;letter-spacing:0;font-size:.98rem}
+.ctrls .grupo-fonte button:disabled{opacity:.35;cursor:default}
+.ind-off{margin-top:16px;padding-top:12px;border-top:1px solid var(--line);display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px}
+.ind-off-msg{color:var(--muted);font-size:.95rem}
+.ind-off .btn[hidden]{display:none}
+/* Índice das notas do editor */
+.notas-tot{text-align:center;margin:-10px 0 18px;font-style:italic}
+.notas-livro{font-family:var(--f-body);font-weight:400;font-size:1.4rem;color:var(--tinta);margin:28px 0 8px;padding-bottom:4px;border-bottom:1px solid var(--line-2)}
+.nota-item{all:unset;cursor:pointer;box-sizing:border-box;display:grid;gap:3px;width:100%;padding:12px 4px;border-bottom:1px solid var(--line)}
+.nota-item:hover .nota-ler{text-decoration:underline}
+.nota-item:focus-visible{outline:1px solid var(--ouro);outline-offset:2px}
+.nota-ref{font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--ouro);font-variant-numeric:lining-nums}
+.nota-txt{color:var(--tinta);line-height:1.55}
+.nota-ler{color:var(--ouro);font-size:.95rem}
 .nav{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
 .close{display:none}
 
@@ -511,7 +596,7 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
 }
 @media (max-width:600px){
   body{font-size:17px}
-  .gr{font-size:1.26rem}
+  .gr{font-size:calc(1.26rem * var(--esc,1))}
   .verse{grid-template-columns:1.5rem minmax(0,1fr);gap:0 8px}
   .chcom{padding-left:1.5rem}
   .top{position:relative}
@@ -547,6 +632,8 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
         <button class="lnk" id="irBasico">O Básico do Grego</button>
         <button class="lnk" data-lit>Análise da Liturgia Dominical</button>
         <button class="lnk" data-cur>Cursos e Formações</button>
+        <button class="lnk" data-notas>Notas do editor</button>
+        <button class="lnk" data-busca>Buscar</button>
         <button class="lnk" id="irSobre">Sobre o editor</button>
         <a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a>
         <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
@@ -1497,6 +1584,32 @@ adjuntos.</p></li>
   </div>
 </section>
 
+<section id="notasEd" class="basico" hidden aria-labelledby="tit-notas">
+  <header class="ini-cab bas-cab">
+  <button class="tema" type="button" data-tema-btn>Claro/Escuro</button>
+    <div class="ini-cab-in">
+      <div class="logo">
+        <p class="marca marca-p"><button class="casa-txt" data-home>Verbum Graecum</button></p>
+      </div>
+      <nav class="ini-links" aria-label="Ligações">
+        <button class="lnk" data-home>Início</button>
+        <button class="lnk" data-home-livros>Livros bíblicos</button>
+        <button class="lnk" data-basico>O Básico do Grego</button>
+        <button class="lnk" data-lit>Análise da Liturgia Dominical</button>
+        <button class="lnk" data-cur>Cursos e Formações</button>
+      </nav>
+    </div>
+  </header>
+  <div class="bas-in">
+    <div class="bas-topo">
+      <p class="kicker">Comentários aos versículos</p>
+      <h1 id="tit-notas">Notas do editor</h1>
+      <p class="bas-sub">Todas as notas publicadas, na ordem do Novo Testamento. No leitor, elas aparecem com a sigla N.E.</p>
+    </div>
+    <div id="notasCorpo"></div>
+  </div>
+</section>
+
 <div id="leitor" hidden>
 <header class="fronte">
   <button class="tema" type="button" data-tema-btn>Claro/Escuro</button>
@@ -1508,6 +1621,7 @@ adjuntos.</p></li>
   <div class="casa-g"><button class="casa" id="irInicio" aria-label="Página inicial">Verbum Graecum</button><a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a><a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a></div>
   <div class="livros">
     <button class="ind-btn" id="btnIndice" type="button" aria-expanded="false" aria-controls="indiceLivros"><span class="ind-rot">Livro</span> <span id="livroAtual">João</span> <span class="ind-seta" aria-hidden="true">▾</span></button>
+    <button class="ind-btn bus-btn" id="btnBusca" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>Buscar</span></button>
     <div class="indice" id="indiceLivros" role="group" aria-label="Índice dos livros bíblicos" hidden>
       <p class="ind-tit">Índice</p>
       <div class="ind-grupo"><p class="ind-cat">Evangelhos</p><div class="ind-grade"><button data-livro="mt" aria-pressed="false">Mateus</button><button data-livro="mc" aria-pressed="false">Marcos</button><button data-livro="lc" aria-pressed="false">Lucas</button><button data-livro="jo" aria-pressed="false">João</button></div></div>
@@ -1516,6 +1630,7 @@ adjuntos.</p></li>
       <div class="ind-grupo"><p class="ind-cat">Carta aos Hebreus</p><div class="ind-grade"><button data-livro="hb" aria-pressed="false">Hebreus</button></div></div>
       <div class="ind-grupo"><p class="ind-cat">Cartas católicas</p><div class="ind-grade"><button data-livro="tg" aria-pressed="false">Tiago</button><button data-livro="1pe" aria-pressed="false">1 Pedro</button><button data-livro="2pe" aria-pressed="false">2 Pedro</button><button data-livro="1jo" aria-pressed="false">1 João</button><button data-livro="2jo" aria-pressed="false">2 João</button><button data-livro="3jo" aria-pressed="false">3 João</button><button data-livro="jd" aria-pressed="false">Judas</button></div></div>
       <div class="ind-grupo"><p class="ind-cat">Apocalipse</p><div class="ind-grade"><button data-livro="ap" aria-pressed="false">Apocalipse</button></div></div>
+      <div class="ind-off" id="indOff" hidden><button class="btn" id="btnBaixar" type="button">Baixar todos os livros para ler sem internet</button><span class="ind-off-msg" id="baixarMsg" aria-live="polite"></span></div>
     </div>
   </div>
   <div class="cap">
@@ -1532,12 +1647,16 @@ adjuntos.</p></li>
       <button id="v-gr" aria-pressed="false">Grego</button>
       <button id="v-pt" aria-pressed="false">Português</button>
     </div>
+    <div class="grupo grupo-fonte" role="group" aria-label="Tamanho da letra">
+      <button id="fonteMenos" type="button" aria-label="Diminuir a letra" title="Diminuir a letra">A−</button>
+      <button id="fonteMais" type="button" aria-label="Aumentar a letra" title="Aumentar a letra">A+</button>
+    </div>
     <div class="grupo" role="group" aria-label="Opções">
       <button id="v-cor" aria-pressed="false">Casos em cores</button>
       <button id="v-com" aria-pressed="true">Notas (N.E.)</button>
       <button class="ne-info" id="neInfo" type="button" aria-label="O que é N.E.?" aria-expanded="false" aria-controls="neDica">?</button>
     </div>
-    <div class="ne-dica" id="neDica" role="tooltip" hidden>Onde aparece <b>N.E.</b> ao lado do versículo, há um comentário do editor sobre ele. Toque na sigla para ler a nota.</div>
+    <div class="ne-dica" id="neDica" role="tooltip" hidden>Onde aparece <b>N.E.</b> ao lado do versículo, há um comentário do editor sobre ele. Toque na sigla para ler a nota. <button class="lnk-dica" type="button" data-notas>Ver todas as notas ›</button></div>
   </div>
 </div></nav>
 <div class="legend-bar" id="legenda">
@@ -1569,6 +1688,21 @@ adjuntos.</p></li>
 </div>
 
 <div class="aviso" id="aviso" role="dialog" aria-labelledby="avisoTit" hidden></div>
+<div class="busca" id="busca" role="dialog" aria-modal="true" aria-labelledby="buscaTit" hidden>
+  <div class="busca-in">
+    <div class="busca-cab"><h2 id="buscaTit">Buscar</h2><button class="aviso-x" type="button" data-busca-fechar aria-label="Fechar">×</button></div>
+    <form id="buscaForm" role="search" autocomplete="off"><label class="sr" for="buscaCampo">Buscar</label><input id="buscaCampo" type="search" enterkeyhint="search" spellcheck="false" placeholder="Jo 3,16 · λόγος · logos · graça"></form>
+    <div id="buscaRes" aria-live="polite"></div>
+  </div>
+</div>
+<div class="comp-menu" id="compMenu" role="menu" hidden>
+  <p class="comp-ref"></p>
+  <button type="button" role="menuitem" data-comp="nativo">Compartilhar…</button>
+  <button type="button" role="menuitem" data-comp="whats">Enviar pelo WhatsApp</button>
+  <button type="button" role="menuitem" data-comp="link">Copiar link do versículo</button>
+  <button type="button" role="menuitem" data-comp="texto">Copiar texto e link</button>
+  <p class="comp-msg" aria-live="polite"></p>
+</div>
 <button class="subir" id="subir" type="button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 const LIVROS = {
@@ -1783,7 +1917,7 @@ function abrir(c, verso) {
   frag.appendChild(ch);
   C.V.forEach(v => {
     const div = document.createElement('div'); div.className = 'verse'; div.id = 'v' + v.v;
-    div.innerHTML = `<div class="vn">${v.v}</div>`;
+    div.innerHTML = `<div class="vn" tabindex="0" role="button" title="Compartilhar este versículo" aria-label="Compartilhar o versículo ${v.v}">${v.v}</div>`;
     const body = document.createElement('div');
     if (v.pt) body.innerHTML = `<p class="pt">${esc(v.pt)}</p>`;
     else {
@@ -1854,7 +1988,8 @@ verSel.onchange = () => irVerso(+verSel.value || 0);
 function distribuicao(lema) {
   const n = CONTAGEM[lema];
   if (!n) return '';
-  return `<div class="dist">${ORDEM.map((id, k) => (n[k] || id === livro) && `<span class="${id === livro ? 'at' : ''}">${LIVROS[id].abrev} <b>${n[k]}</b></span>`).filter(Boolean).join('')}<span>· total ${n.reduce((a, b) => a + b, 0)}</span></div>`;
+  const l = esc(lema);
+  return `<div class="dist">${ORDEM.map((id, k) => n[k] > 0 && `<button type="button" class="${id === livro ? 'at' : ''}" data-conc="${l}" data-conc-livro="${id}" title="Ver as ocorrências em ${esc(LIVROS[id].nome)}">${LIVROS[id].abrev} <b>${n[k]}</b></button>`).filter(Boolean).join('')}<button type="button" class="dist-tot" data-conc="${l}">· total ${n.reduce((a, b) => a + b, 0)} · ver todas ›</button></div>`;
 }
 
 // Transliteração (convenção acadêmica, sem acentos) e pronúncia aproximada para falantes de português,
@@ -1990,7 +2125,7 @@ function mostrar(i, focar) {
   const pos = lst.indexOf(i);
   const ocorr = lst.length, tot = DADOS[livro].totalLema[t.lema];
   const L = LIVROS[livro];
-  let h = `<div class="ph"><p class="word" lang="grc">${esc(t.g)}</p><span class="ref">${L.abrev} ${capAtual}:${v}</span><button class="btn close" id="fechar" aria-label="Fechar">✕</button></div>`;
+  let h = `<div class="ph"><p class="word" lang="grc">${esc(t.g)}</p><button class="ref ref-comp" type="button" data-compartilhar="${v}" title="Compartilhar este versículo">${L.abrev} ${capAtual}:${v} <span aria-hidden="true">↗</span></button><button class="btn close" id="fechar" aria-label="Fechar">✕</button></div>`;
   const tr = TL(t.g);
   if (tr) {
     h += `<p class="tl"><span class="tl-t" lang="grc-Latn" title="Transliteração">${esc(tr.trans)}</span><span class="tl-p" title="Pronúncia aproximada (erasmiana); sílaba tônica em maiúsculas">pronúncia: ${esc(tr.pron)}</span></p>`;
@@ -2296,7 +2431,7 @@ function refLeitor(ref) {
   return {id, cap: +m[3], v: m[4] ? +m[4] : 0};
 }
 
-function so(v) { [vInicio, vLeitor, vBasico, vPriv, vLit, vCur].forEach(x => { x.hidden = x !== v; }); }
+function so(v) { [vInicio, vLeitor, vBasico, vPriv, vLit, vCur, document.getElementById('notasEd')].forEach(x => { x.hidden = x !== v; }); }
 function ligarNav(raiz) {
   raiz.querySelectorAll('[data-home]').forEach(b => b.onclick = () => mostrarInicio());
   raiz.querySelectorAll('[data-home-livros]').forEach(b => b.onclick = () => mostrarInicio('livros'));
@@ -2633,6 +2768,370 @@ carregarFixo();
   iniciarConteudo();
 })();
 
+// ---------- Busca, concordância, compartilhar versículo, índice das notas, tamanho da letra e leitura sem internet.
+
+const LEX_V = '9a4ec446c0';
+const norm = s => String(s || '').normalize('NFD').replace(/[̀-ͯ᾽᾿῾ʼ’']/g, '').toLowerCase().replace(/ς/g, 'σ').trim();
+const temGrego = s => /[Ͱ-Ͽἀ-῿]/.test(s);
+const refPt = (id, c, v) => `${LIVROS[id].abrev} ${c}${v ? ',' + v : ''}`;
+const URL_SITE = /(^|\.)verbumgraecum\.com\.br$/.test(location.hostname) ? location.origin + '/' : 'https://verbumgraecum.com.br/';
+
+// Nomes e abreviações aceitos na busca por referência (sem acentos, sem espaços).
+const APELIDOS = (() => {
+  const A = {};
+  const por = (id, ...ns) => ns.forEach(n => { A[norm(n).replace(/[\s.]/g, '')] = id; });
+  ORDEM.forEach(id => por(id, id, LIVROS[id].abrev, LIVROS[id].nome));
+  por('mt', 'mateus', 'mat'); por('mc', 'marcos', 'mar', 'mr'); por('lc', 'lucas', 'luc', 'lu'); por('jo', 'joao', 'jo');
+  por('at', 'atos', 'atos dos apostolos', 'act'); por('rm', 'romanos', 'rom'); por('gl', 'galatas', 'gal');
+  por('ef', 'efesios', 'efe'); por('fl', 'filipenses', 'fp', 'flp', 'fil'); por('cl', 'colossenses', 'col');
+  por('tt', 'tito', 'tit'); por('fm', 'filemon', 'flm', 'fil'); por('hb', 'hebreus', 'heb'); por('tg', 'tiago', 'tia');
+  por('jd', 'judas', 'jud'); por('ap', 'apocalipse', 'apoc', 'ap');
+  [['co', 'corintios', 'cor'], ['ts', 'tessalonicenses', 'tes', 'ts'], ['tm', 'timoteo', 'tim', 'tm'], ['pe', 'pedro', 'pd', 'ped'], ['jo', 'joao', 'jo']].forEach(([s, ...ns]) => {
+    ['1', '2', '3'].forEach((n, k) => {
+      const id = n + s;
+      if (!LIVROS[id]) return;
+      const rom = ['i', 'ii', 'iii'][k];
+      ns.forEach(x => por(id, n + x, n + ' ' + x, rom + ' ' + x));
+    });
+  });
+  return A;
+})();
+
+function lerReferencia(q) {
+  const m = /^\s*([1-3]?\s*[a-z]+(?:\s+[a-z]+)*?)\.?\s*(\d+)?(?:\s*[,:.]\s*(\d+)(?:\s*[-–]\s*\d+)?)?\s*$/.exec(norm(q));
+  if (!m) return null;
+  const id = APELIDOS[m[1].replace(/\s+/g, '')];
+  if (!id) return null;
+  return {id, cap: m[2] ? +m[2] : 0, v: m[3] ? +m[3] : 0};
+}
+
+// Léxico de todos os livros (lema -> glosa), carregado na primeira busca.
+let LEX = null, LEX_IDX = null, lexPend = null;
+window.__lex = d => { LEX = d; };
+function carregarLex() {
+  if (LEX_IDX) return Promise.resolve(LEX_IDX);
+  if (lexPend) return lexPend;
+  lexPend = new Promise((ok, falha) => {
+    const s = document.createElement('script');
+    s.src = `data/lex.js?v=${LEX_V}`;
+    s.onload = () => {
+      s.remove();
+      if (!LEX) return falha(new Error('léxico'));
+      LEX_IDX = Object.keys(LEX).map(l => {
+        const tr = TL(l);
+        const tot = (CONTAGEM[l] || []).reduce((a, b) => a + b, 0);
+        return {l, gk: norm(l), tr: tr ? norm(tr.trans) : '', gl: LEX[l] || '', gn: norm(LEX[l]), tot};
+      });
+      ok(LEX_IDX);
+    };
+    s.onerror = () => { s.remove(); lexPend = null; falha(new Error('léxico')); };
+    document.head.appendChild(s);
+  });
+  return lexPend;
+}
+function buscarLemas(q) {
+  const qn = norm(q);
+  if (!qn || !LEX_IDX) return [];
+  const grego = temGrego(qn);
+  const res = [];
+  for (const x of LEX_IDX) {
+    let s = 99;
+    if (grego) {
+      if (x.gk === qn) s = 0; else if (x.gk.startsWith(qn)) s = 1; else if (qn.length >= 4 && qn.startsWith(x.gk.slice(0, -2)) && x.gk.length >= 4) s = 2; else if (qn.length >= 3 && x.gk.includes(qn)) s = 3;
+    } else {
+      if (x.tr === qn) s = 0; else if (qn.length >= 2 && x.tr.startsWith(qn)) s = 1;
+      const palavras = x.gn.split(/[^a-z0-9]+/);
+      if (palavras.includes(qn)) s = Math.min(s, 2); else if (qn.length >= 3 && palavras.some(p => p.startsWith(qn))) s = Math.min(s, 4);
+    }
+    if (s < 99) res.push([s, x]);
+  }
+  res.sort((a, b) => a[0] - b[0] || b[1].tot - a[1].tot);
+  return res.slice(0, 40).map(r => r[1]);
+}
+
+// ----- Janela de busca e de ocorrências
+const buscaEl = document.getElementById('busca'), buscaCampo = document.getElementById('buscaCampo'), buscaRes = document.getElementById('buscaRes');
+const buscaTit = document.getElementById('buscaTit'), buscaForm = document.getElementById('buscaForm');
+let buscaFoco = null, buscaSeq = 0, deBusca = false;
+function abrirJanela(modoBusca) {
+  if (buscaEl.hidden) buscaFoco = document.activeElement;
+  fecharIndice();
+  buscaEl.hidden = false;
+  document.body.classList.add('com-janela');
+  buscaForm.hidden = !modoBusca;
+  buscaTit.textContent = modoBusca ? 'Buscar' : 'Ocorrências';
+}
+function fecharBusca() {
+  buscaSeq++;
+  buscaEl.hidden = true;
+  document.body.classList.remove('com-janela');
+  if (buscaFoco && buscaFoco.focus) try { buscaFoco.focus({preventScroll: true}); } catch (e) {}
+}
+function abrirBusca(q) {
+  deBusca = false;
+  abrirJanela(true);
+  if (typeof q === 'string') buscaCampo.value = q;
+  pintarBusca();
+  setTimeout(() => { buscaCampo.focus(); buscaCampo.select(); }, 30);
+  carregarLex().then(() => { if (!buscaEl.hidden && !buscaForm.hidden) pintarBusca(); }).catch(() => {});
+}
+buscaEl.addEventListener('click', e => {
+  if (e.target === buscaEl || e.target.closest('[data-busca-fechar]')) { fecharBusca(); return; }
+  const r = e.target.closest('[data-ir-ref]');
+  if (r) { const [id, c, v] = r.dataset.irRef.split(':'); fecharBusca(); abrirLivro(id, +c, +v || 0); return; }
+  const l = e.target.closest('[data-conc]');
+  if (l) { concordancia(l.dataset.conc, l.dataset.concLivro || '', !buscaForm.hidden || deBusca); return; }
+  if (e.target.closest('[data-texto-todo]')) { buscarTexto(buscaCampo.value); return; }
+  const mais = e.target.closest('[data-mais]');
+  if (mais) { mais.parentElement.querySelectorAll('.res-oculto').forEach(x => x.classList.remove('res-oculto')); mais.remove(); }
+  if (e.target.closest('[data-voltar-busca]')) { abrirJanela(true); pintarBusca(); buscaCampo.focus(); }
+});
+document.addEventListener('keydown', e => {
+  if (!buscaEl.hidden && e.key === 'Escape') { e.preventDefault(); fecharBusca(); return; }
+  if (e.key === '/' && buscaEl.hidden && !e.target.closest('input,textarea,select,[contenteditable]')) { e.preventDefault(); abrirBusca(); }
+});
+let tBusca = 0;
+buscaCampo.addEventListener('input', () => { clearTimeout(tBusca); tBusca = setTimeout(pintarBusca, 120); });
+buscaForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const r = lerReferencia(buscaCampo.value);
+  if (r && LIVROS[r.id]) { fecharBusca(); abrirLivro(r.id, r.cap || 1, r.v); return; }
+  const primeiro = buscaRes.querySelector('[data-conc],[data-ir-ref]');
+  if (primeiro) primeiro.click();
+});
+
+function pintarBusca() {
+  const q = buscaCampo.value.trim();
+  if (!q) {
+    buscaRes.innerHTML = `<div class="res-dica"><p>Digite uma <b>referência</b> (Jo 3,16 · Rm 5 · 1Co 13,4), uma <b>palavra grega</b> (λόγος, ἀγάπη), sua <b>transliteração</b> (logos, agape) ou uma <b>palavra em português</b> (graça, amor).</p><p>Dica: no computador, a tecla <kbd>/</kbd> abre a busca.</p></div>`;
+    return;
+  }
+  let h = '';
+  const r = lerReferencia(q);
+  if (r) {
+    const C = r.cap ? ` ${r.cap}${r.v ? ',' + r.v : ''}` : '';
+    h += `<p class="res-cat">Referência</p><button class="res-item res-ref" data-ir-ref="${r.id}:${r.cap || 1}:${r.v || 0}"><span class="res-tit">${esc(LIVROS[r.id].nome)}${esc(C)}</span><span class="res-sub">Abrir no leitor ›</span></button>`;
+  }
+  if (!LEX_IDX) h += `<p class="res-msg">Carregando o vocabulário…</p>`;
+  else {
+    const L = buscarLemas(q);
+    if (L.length) {
+      h += `<p class="res-cat">Palavras gregas (lemas) · toque para ver todas as ocorrências</p><div class="res-lista">`;
+      h += L.map(x => `<button class="res-item res-lema" data-conc="${esc(x.l)}"><span class="res-tit"><b lang="grc">${esc(x.l)}</b>${x.tr ? ` <i>${esc(TL(x.l).trans)}</i>` : ''}</span><span class="res-sub">${esc(x.gl)}</span><span class="res-n">${x.tot}×</span></button>`).join('');
+      h += `</div>`;
+    } else if (!r) h += `<p class="res-msg">Nenhum lema encontrado para “${esc(q)}”.</p>`;
+  }
+  if (q.length >= 2 && !r) h += `<p class="res-texto"><button class="btn" data-texto-todo>Procurar “${esc(q)}” no texto grego e português dos 27 livros</button></p>`;
+  buscaRes.innerHTML = h;
+}
+
+// Carrega vários livros, com indicação de progresso.
+async function carregarVarios(ids, onProg) {
+  let n = 0;
+  await Promise.all(ids.map(id => carregar(id).catch(() => null).then(() => { n++; onProg && onProg(n, ids.length); })));
+  return ids.filter(id => DADOS[id]);
+}
+const grVerso = (v, marcar) => v.gr.map(t => (marcar(t) ? `<mark>${esc(t[0])}</mark>` : esc(t[0])) + esc(t.length > 3 ? t[3] : ' ')).join('').trim();
+function itemVerso(id, c, v, marcar, oculto) {
+  return `<button class="res-item res-verso${oculto ? ' res-oculto' : ''}" data-ir-ref="${id}:${c}:${v.v}"><span class="res-ref-n">${esc(refPt(id, c, v.v))}</span><span class="res-gr" lang="grc">${grVerso(v, marcar)}</span>${v.pt ? `<span class="res-pt">${esc(v.pt)}</span>` : ''}</button>`;
+}
+function listaAgrupada(achados, marcar, limite = 150) {
+  let h = '', k = 0, ultimo = '';
+  achados.forEach(([id, c, v]) => {
+    if (id !== ultimo) { h += `<p class="res-livro${k >= limite ? ' res-oculto' : ''}">${esc(LIVROS[id].nome)}</p>`; ultimo = id; }
+    h += itemVerso(id, c, v, marcar, k >= limite); k++;
+  });
+  if (k > limite) h += `<p class="res-texto" data-mais><button class="btn">Mostrar todas as ${k} ocorrências</button></p>`;
+  return h;
+}
+
+async function concordancia(lema, so, daBusca) {
+  deBusca = !!daBusca;
+  const meu = ++buscaSeq;
+  abrirJanela(false);
+  const n = CONTAGEM[lema] || [];
+  const total = n.reduce((a, b) => a + b, 0);
+  let ids = ORDEM.filter((id, k) => n[k] > 0);
+  if (so && ids.includes(so)) ids = [so];
+  const voltar = deBusca && buscaCampo.value.trim() ? `<p class="voltar"><button class="lnk-sum" data-voltar-busca>‹ Voltar à busca</button></p>` : '';
+  const gl = (LEX && LEX[lema]) || (DADOS[livro] && DADOS[livro].L[lema] && DADOS[livro].L[lema][0]) || '';
+  const tr = TL(lema);
+  const cab = `${voltar}<div class="conc-cab"><p class="conc-lema" lang="grc">${esc(lema)}</p>${tr ? `<p class="conc-tr">${esc(tr.trans)}</p>` : ''}${gl ? `<p class="conc-gl">${esc(gl)}</p>` : ''}
+    <p class="conc-tot">${total} ${total === 1 ? 'ocorrência' : 'ocorrências'} no Novo Testamento${so ? ` · mostrando ${esc(LIVROS[so].nome)} (${n[ORDEM.indexOf(so)]}) <button class="lnk-sum" data-conc="${esc(lema)}">ver em todos os livros</button>` : ''}</p>
+    <div class="conc-dist">${ORDEM.map((id, k) => n[k] ? `<button class="${id === so ? 'at' : ''}" data-conc="${esc(lema)}" data-conc-livro="${id}">${LIVROS[id].abrev} <b>${n[k]}</b></button>` : '').join('')}</div></div>`;
+  buscaRes.innerHTML = cab + `<p class="res-msg" id="concProg">Carregando…</p>`;
+  buscaRes.scrollTop = 0; buscaEl.querySelector('.busca-in').scrollTop = 0;
+  await carregarVarios(ids, (a, b) => { const p = document.getElementById('concProg'); if (p && meu === buscaSeq) p.textContent = `Carregando livros… ${a} de ${b}`; });
+  if (meu !== buscaSeq) return;
+  const achados = [];
+  ids.forEach(id => DADOS[id] && DADOS[id].caps.forEach(C => C.V.forEach(v => { if (v.gr.some(t => t[1] === lema)) achados.push([id, C.c, v]); })));
+  buscaRes.innerHTML = cab + (achados.length ? listaAgrupada(achados, t => t[1] === lema) : `<p class="res-msg">Não foi possível carregar os livros. Verifique a conexão.</p>`);
+}
+
+async function buscarTexto(q) {
+  const qn = norm(q);
+  if (!qn) return;
+  const meu = ++buscaSeq;
+  const grego = temGrego(qn);
+  buscaRes.innerHTML = `<p class="voltar"><button class="lnk-sum" data-voltar-busca>‹ Voltar à busca</button></p><p class="res-cat">Texto com “${esc(q)}”</p><p class="res-msg" id="txtProg">Carregando os livros…</p>`;
+  await carregarVarios(ORDEM, (a, b) => { const p = document.getElementById('txtProg'); if (p && meu === buscaSeq) p.textContent = `Carregando os livros… ${a} de ${b}`; });
+  if (meu !== buscaSeq) return;
+  const achados = [];
+  const casaGr = t => norm(t[0]).startsWith(qn);
+  const re = new RegExp('(^|[^a-z0-9])' + qn.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'));
+  ORDEM.forEach(id => DADOS[id] && DADOS[id].caps.forEach(C => C.V.forEach(v => {
+    if (grego ? v.gr.some(casaGr) : re.test(norm(v.pt))) achados.push([id, C.c, v]);
+  })));
+  const cab = `<p class="voltar"><button class="lnk-sum" data-voltar-busca>‹ Voltar à busca</button></p><p class="res-cat">${achados.length} ${achados.length === 1 ? 'versículo' : 'versículos'} com “${esc(q)}” no texto ${grego ? 'grego' : 'de Almeida'}</p>`;
+  buscaRes.innerHTML = cab + (achados.length ? listaAgrupada(achados, grego ? casaGr : () => false) : `<p class="res-msg">Nada encontrado.</p>`);
+}
+
+document.getElementById('btnBusca').onclick = () => abrirBusca();
+document.querySelectorAll('[data-busca]').forEach(b => b.onclick = () => abrirBusca());
+painel.addEventListener('click', e => {
+  const b = e.target.closest('[data-conc]');
+  if (b) concordancia(b.dataset.conc, b.dataset.concLivro || '', false);
+  const s = e.target.closest('[data-compartilhar]');
+  if (s) menuCompartilhar(s, +s.dataset.compartilhar);
+});
+
+// ----- Compartilhar versículo (número do versículo e cabeçalho do painel)
+const compEl = document.getElementById('compMenu');
+let compV = 0;
+function textoVerso(v) {
+  const C = CAPS.find(x => x.c === capAtual), V = C && C.V.find(x => x.v === v);
+  if (!V) return null;
+  const gr = V.gr.map(t => t[0] + (t.length > 3 ? t[3] : ' ')).join('').trim();
+  return {ref: `${LIVROS[livro].nome} ${capAtual},${v}`, pt: V.pt || '', gr, url: `${URL_SITE}#${livro}${capAtual}:${v}`};
+}
+function menuCompartilhar(ancora, v) {
+  compV = v;
+  const x = textoVerso(v); if (!x) return;
+  compEl.querySelector('.comp-ref').textContent = x.ref;
+  compEl.querySelector('[data-comp="nativo"]').hidden = !navigator.share;
+  compEl.querySelector('.comp-msg').textContent = '';
+  compEl.hidden = false; compY = scrollY;
+  const r = ancora.getBoundingClientRect(), w = compEl.offsetWidth, h = compEl.offsetHeight;
+  let top = r.bottom + 6; if (top + h > innerHeight - 8) top = Math.max(8, r.top - h - 6);
+  compEl.style.top = top + 'px';
+  compEl.style.left = Math.max(12, Math.min(r.left, innerWidth - w - 12)) + 'px';
+  compEl.querySelector('button:not([hidden])').focus({preventScroll: true});
+}
+function fecharComp() { compEl.hidden = true; }
+async function copiar(t) {
+  try { await navigator.clipboard.writeText(t); return true; }
+  catch (e) {
+    const a = document.createElement('textarea'); a.value = t; a.style.position = 'fixed'; a.style.opacity = '0'; document.body.appendChild(a); a.select();
+    let ok = false; try { ok = document.execCommand('copy'); } catch (e2) {}
+    a.remove(); return ok;
+  }
+}
+compEl.addEventListener('click', async e => {
+  const b = e.target.closest('[data-comp]'); if (!b) return;
+  const x = textoVerso(compV); if (!x) return;
+  const completo = `${x.ref}\n${x.pt}\n\n${x.gr}\n\n${x.url}`;
+  const msg = compEl.querySelector('.comp-msg');
+  if (b.dataset.comp === 'link') msg.textContent = (await copiar(x.url)) ? 'Link copiado.' : 'Não foi possível copiar.';
+  if (b.dataset.comp === 'texto') msg.textContent = (await copiar(completo)) ? 'Texto copiado.' : 'Não foi possível copiar.';
+  if (b.dataset.comp === 'whats') { window.open('https://wa.me/?text=' + encodeURIComponent(completo), '_blank', 'noopener'); fecharComp(); }
+  if (b.dataset.comp === 'nativo') { try { await navigator.share({title: x.ref, text: `${x.ref}\n${x.pt}\n\n${x.gr}`, url: x.url}); } catch (err) {} fecharComp(); }
+});
+texto.addEventListener('click', e => {
+  const n = e.target.closest('.vn');
+  if (n) { e.stopPropagation(); const v = +n.closest('.verse').id.slice(1); if (v) menuCompartilhar(n, v); }
+});
+texto.addEventListener('keydown', e => {
+  const n = e.target.closest('.vn');
+  if (n && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); menuCompartilhar(n, +n.closest('.verse').id.slice(1)); }
+});
+document.addEventListener('click', e => { if (!compEl.hidden && !compEl.contains(e.target) && !e.target.closest('[data-compartilhar],.vn')) fecharComp(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !compEl.hidden) fecharComp(); });
+let compY = 0;
+addEventListener('scroll', () => { if (!compEl.hidden && Math.abs(scrollY - compY) > 60) fecharComp(); }, {passive: true});
+
+// ----- Índice das notas do editor
+const vNotas = document.getElementById('notasEd'), notasCorpo = document.getElementById('notasCorpo');
+async function mostrarNotas() {
+  so(vNotas);
+  document.title = 'Verbum Graecum · Notas do editor';
+  try { history.replaceState(null, '', '#notas'); } catch (e) {}
+  window.scrollTo(0, 0);
+  let lista = Object.values(NOTAS_FIXAS);
+  if (db) {
+    notasCorpo.innerHTML = `<p class="vazio">Carregando…</p>`;
+    try {
+      lista = await new Promise((ok, falha) => {
+        let un = null;
+        const t = setTimeout(() => falha(new Error('tempo')), 8000);
+        un = db.collection('comentarios').onSnapshot(s => { clearTimeout(t); ok(s.docs.map(d => d.data()).filter(x => x && x.texto)); setTimeout(() => un && un(), 0); }, falha);
+      });
+    } catch (e) { lista = Object.values(NOTAS_FIXAS); }
+  }
+  lista = lista.filter(x => x && x.texto && LIVROS[x.livro]).sort((a, b) => ORDEM.indexOf(a.livro) - ORDEM.indexOf(b.livro) || a.cap - b.cap || a.v - b.v);
+  if (!lista.length) { notasCorpo.innerHTML = `<p class="vazio">Ainda não há notas publicadas.</p>`; return; }
+  let h = `<p class="notas-tot">${lista.length} ${lista.length === 1 ? 'nota publicada' : 'notas publicadas'}</p>`, ult = '';
+  lista.forEach(x => {
+    if (x.livro !== ult) { h += `<h2 class="notas-livro">${esc(LIVROS[x.livro].nome)}</h2>`; ult = x.livro; }
+    const t = String(x.texto).replace(/\*+/g, '');
+    const trecho = t.length > 260 ? t.slice(0, 260).replace(/\s+\S*$/, '') + '…' : t;
+    h += `<button class="nota-item" data-nota="${esc(x.livro)}:${x.cap}:${x.v}"><span class="nota-ref">${esc(LIVROS[x.livro].nome)} ${x.cap}${x.v ? ',' + x.v : ' (capítulo)'}</span><span class="nota-txt">${esc(trecho)}</span><span class="nota-ler">Ler a nota ›</span></button>`;
+  });
+  notasCorpo.innerHTML = h;
+}
+notasCorpo.addEventListener('click', async e => {
+  const b = e.target.closest('[data-nota]'); if (!b) return;
+  const [id, c, v] = b.dataset.nota.split(':');
+  await abrirLivro(id, +c, +v);
+  if (document.body.classList.contains('sem-com')) verComentarios(true);
+  setTimeout(() => abrirNota(+v), 350);
+});
+document.addEventListener('click', e => { if (e.target.closest('[data-notas]')) { e.preventDefault(); fecharBusca(); mostrarNotas(); } });
+ligarNav(vNotas);
+
+// ----- Tamanho da letra do leitor
+const ESCALAS = [0.85, 0.92, 1, 1.1, 1.2, 1.32, 1.45];
+let escala = ESCALAS.indexOf(+ler('vg-fonte')); if (escala < 0) escala = 2;
+function aplicarEscala() {
+  document.documentElement.style.setProperty('--esc', ESCALAS[escala]);
+  document.getElementById('fonteMenos').disabled = escala === 0;
+  document.getElementById('fonteMais').disabled = escala === ESCALAS.length - 1;
+  guardar('vg-fonte', String(ESCALAS[escala]));
+}
+document.getElementById('fonteMenos').onclick = () => { if (escala > 0) { escala--; aplicarEscala(); } };
+document.getElementById('fonteMais').onclick = () => { if (escala < ESCALAS.length - 1) { escala++; aplicarEscala(); } };
+aplicarEscala();
+
+// ----- Leitura sem internet: baixar todos os livros (só no aplicativo / site público, com service worker)
+{ const caixa = document.getElementById('indOff'), btn = document.getElementById('btnBaixar'), msg = document.getElementById('baixarMsg');
+  const urls = () => ORDEM.map(id => `data/${id}.js?v=${VERSAO[id] || ''}`).concat([`data/lex.js?v=${LEX_V}`]);
+  async function conferir(soLivros) {
+    if (!('caches' in window)) return 0;
+    let n = 0;
+    for (const u of (soLivros ? urls().slice(0, ORDEM.length) : urls())) { try { if (await caches.match(new URL(u, location.href).href)) n++; } catch (e) {} }
+    return n;
+  }
+  async function estado() {
+    const n = await conferir(), tot = urls().length, livros = await conferir(true);
+    if (n >= tot) { btn.hidden = true; msg.textContent = '✓ Todos os livros estão guardados para ler sem internet.'; }
+    else { btn.hidden = false; msg.textContent = livros ? `${livros} de ${ORDEM.length} livros já guardados.` : 'Cerca de 7 MB.'; }
+  }
+  if ('serviceWorker' in navigator && 'caches' in window) {
+    navigator.serviceWorker.ready.then(() => { caixa.hidden = false; estado(); }).catch(() => {});
+    btnIndice.addEventListener('click', () => { if (!caixa.hidden) estado(); });
+    btn.onclick = async () => {
+      btn.disabled = true;
+      const lista = urls(); let n = 0, falhas = 0;
+      for (const u of lista) {
+        try { const r = await fetch(u); if (!r.ok) falhas++; } catch (e) { falhas++; }
+        n++; msg.textContent = `Baixando… ${n} de ${lista.length}`;
+      }
+      btn.disabled = false;
+      if (falhas) msg.textContent = 'Alguns livros não foram baixados. Verifique a conexão e tente de novo.';
+      else estado();
+    };
+  }
+}
+
 { const m = ler('jo1-modo'); if (m && modos[m] !== undefined) modo(m); if (ler('jo1-cor')) cor(true); }
 
 // Endereço: #mt5, #lc2:10 ou o antigo #c3 (João).
@@ -2644,6 +3143,7 @@ else if (ini === 'jo' && ler('jo-cap')) iniCap = +ler('jo-cap');
 if (hm) abrirLivro(ini, iniCap, iniV);
 else if (location.hash === '#basico') mostrarBasico();
 else if (location.hash === '#privacidade') mostrarPrivacidade();
+else if (location.hash === '#notas') mostrarNotas();
 else if (/^#liturgia(-\d{4}-\d{2}-\d{2})?$/.test(location.hash)) mostrarLiturgia(location.hash.slice(10));
 else if (/^#(cursos|curso-[\w-]+)$/.test(location.hash)) mostrarCursos(location.hash.startsWith('#curso-') ? location.hash.slice(7) : '');
 else mostrarInicio();
