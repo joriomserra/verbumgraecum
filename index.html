@@ -2156,7 +2156,7 @@ function acaoComentario(b) {
 // ---- Seções editoriais: Liturgia Dominical, Cursos e Formações e aviso de novidades.
 // No Claude, o conteúdo vem do banco de dados da página (coleções "liturgia", "cursos" e "avisos") e o editor
 // cadastra tudo pela própria página. No site público, vem da cópia CONTEUDO_FIXO, gravada a cada publicação.
-const CONTEUDO_FIXO = {"liturgia": {}, "cursos": {}, "aviso": {"ativo": true, "intro": "", "itens": ["Escolha do versículo na barra de leitura", "Sigla N.E. nos versículos com nota do editor", "Modo claro e escuro", "Transliteração e pronúncia de cada palavra grega", "Novas seções: Liturgia Dominical e Cursos e Formações"], "titulo": "Novidades no Verbum Graecum", "versao": "2026-10-25T22:40:00-03:00"}};
+const CONTEUDO_FIXO = {"liturgia": {}, "cursos": {}, "aviso": {"ativo": true, "intro": "Novos livros no texto grego, com a mesma análise palavra por palavra:", "itens": ["Carta de São Paulo aos Romanos", "Primeira e Segunda Cartas de São Paulo aos Coríntios", "Carta de São Paulo aos Gálatas", "Primeira e Segunda Cartas de São Pedro", "Nova seção na página inicial: Cartas de Paulo e de Pedro"], "titulo": "Novidades no Verbum Graecum", "versao": "2026-10-25T22:50:00-03:00"}};
 let LIT = {}, CUR = {}, AVISO = null, assetsAPI = null;
 const vLit = document.getElementById('liturgia'), vCur = document.getElementById('cursos');
 const litCorpo = document.getElementById('litCorpo'), curCorpo = document.getElementById('curCorpo');
