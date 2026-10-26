@@ -210,10 +210,13 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .lnk:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
 .lnk.lnk-vocab,.ini-links .lnk.lnk-vocab{color:var(--accent);border:1px solid var(--accent);border-radius:2px;padding:1px 10px;margin-left:10px}
 .lnk.lnk-vocab:hover{background:var(--accent);color:var(--bg)}
+.lnk.lnk-app,.ini-links .lnk.lnk-app{display:inline-flex;align-items:center;gap:5px;background:var(--accent);color:var(--bg);border:1px solid var(--accent);border-radius:2px;padding:1px 10px;margin-left:10px}
+.lnk.lnk-app:hover{filter:brightness(1.08);color:var(--bg)}
+.lnk.lnk-app[hidden]{display:none}
 .lnk.lnk-substack,.ini-links .lnk.lnk-substack{background:#ff6719;color:#ffffff;border:1px solid #ff6719;border-radius:2px;padding:1px 10px;margin-left:10px}
 .lnk.lnk-substack:hover{background:#ff8340;border-color:#ff8340;color:#ffffff}
 .ini-links .lnk.lnk-substack+.lnk{border-left:1px solid var(--accent)}
-@media (max-width:420px){.ini-links .lnk.lnk-vocab{margin:6px 0 0;padding:1px 8px}}
+@media (max-width:420px){.ini-links .lnk.lnk-vocab,.ini-links .lnk.lnk-app{margin:6px 0 0;padding:1px 8px}}
 .ini-corpo{max-width:1140px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:44px 24px;display:grid;gap:52px}
 .capitular{float:left;font-family:var(--f-greek);font-size:4.1em;line-height:.82;padding:.08em .12em 0 0;color:var(--tinta)}
 .invoc{margin:0}
@@ -636,7 +639,7 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
         <button class="lnk" data-busca>Buscar</button>
         <button class="lnk" id="irSobre">Sobre o editor</button>
         <a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a>
-        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a><button class="lnk lnk-app" type="button" data-app hidden><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Baixe o Aplicativo</button>
       </nav>
     </div>
   </header>
@@ -803,7 +806,7 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
         <button class="lnk" data-lit>Análise da Liturgia Dominical</button>
         <button class="lnk" data-cur>Cursos e Formações</button>
         <button class="lnk" data-home-sobre>Sobre o editor</button>
-        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a><button class="lnk lnk-app" type="button" data-app hidden><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Baixe o Aplicativo</button>
       </nav>
     </div>
   </header>
@@ -1475,7 +1478,7 @@ adjuntos.</p></li>
         <button class="lnk" data-basico>O Básico do Grego</button>
         <button class="lnk" data-lit>Análise da Liturgia Dominical</button>
         <button class="lnk" data-cur>Cursos e Formações</button>
-        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a><button class="lnk lnk-app" type="button" data-app hidden><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Baixe o Aplicativo</button>
       </nav>
     </div>
   </header>
@@ -1544,7 +1547,7 @@ adjuntos.</p></li>
         <button class="lnk" data-home-livros>Livros bíblicos</button>
         <button class="lnk" data-basico>O Básico do Grego</button>
         <button class="lnk" data-cur>Cursos e Formações</button>
-        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a><button class="lnk lnk-app" type="button" data-app hidden><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Baixe o Aplicativo</button>
       </nav>
     </div>
   </header>
@@ -1570,7 +1573,7 @@ adjuntos.</p></li>
         <button class="lnk" data-home-livros>Livros bíblicos</button>
         <button class="lnk" data-basico>O Básico do Grego</button>
         <button class="lnk" data-lit>Análise da Liturgia Dominical</button>
-        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a><button class="lnk lnk-app" type="button" data-app hidden><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Baixe o Aplicativo</button>
       </nav>
     </div>
   </header>
@@ -1618,7 +1621,7 @@ adjuntos.</p></li>
   <div class="orn" aria-hidden="true">✠</div>
 </header>
 <nav class="top" aria-label="Navegação"><div class="top-in">
-  <div class="casa-g"><button class="casa" id="irInicio" aria-label="Página inicial">Verbum Graecum</button><a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a><a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a></div>
+  <div class="casa-g"><button class="casa" id="irInicio" aria-label="Página inicial">Verbum Graecum</button><a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a><a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a><button class="lnk lnk-app" type="button" data-app hidden><svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 4v11M7 10l5 5 5-5M5 20h14"/></svg> Baixe o Aplicativo</button></div>
   <div class="livros">
     <button class="ind-btn" id="btnIndice" type="button" aria-expanded="false" aria-controls="indiceLivros"><span class="ind-rot">Livro</span> <span id="livroAtual">João</span> <span class="ind-seta" aria-hidden="true">▾</span></button>
     <button class="ind-btn bus-btn" id="btnBusca" type="button" aria-haspopup="dialog"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="11" cy="11" r="6.5"/><path d="M16 16l4.5 4.5"/></svg><span>Buscar</span></button>
