@@ -86,6 +86,107 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .bas-fim{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);text-align:center;display:grid;gap:14px;justify-items:center}
 .bas-fim p{margin:0;font-style:italic}
 @media (max-width:600px){.bas-txt p{text-align:left}}
+/* Liturgia Dominical e Cursos e Formações */
+.cur-in{max-width:1140px}
+.vazio{text-align:center;font-style:italic;margin:24px 0}
+.voltar{margin:0 0 18px}
+.adm{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin:0 0 22px;padding:10px 14px;border:1px dashed var(--line-2);border-radius:4px}
+.adm-dica{font-style:italic;font-size:.92rem;color:var(--muted)}
+.lit-dest{background:var(--painel);border:1px solid var(--line-2);border-radius:4px;padding:clamp(18px,3.5vw,32px);margin:0 0 40px;text-align:center}
+.lit-dest h2,.lit-tit{font-family:var(--f-body);font-weight:400;font-size:clamp(1.5rem,3vw,2rem);line-height:1.2;color:var(--tinta);margin:2px 0 6px;text-wrap:balance}
+.lit-meta{margin:0 0 14px;font-style:italic}
+.lit-dest .lit-leituras{justify-content:center}
+.lit-ler{margin:18px 0 0}
+.lit-leituras{list-style:none;margin:0 0 6px;padding:0;display:flex;flex-wrap:wrap;gap:6px 22px}
+.lit-leituras li{display:flex;flex-direction:column;align-items:flex-start;gap:0;min-width:0}
+.lit-dest .lit-leituras li{align-items:center}
+.lit-rot{font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:.9rem;color:var(--ouro)}
+.lit-ref{all:unset;cursor:pointer;color:var(--tinta);border-bottom:1px solid var(--ouro);font-variant-numeric:lining-nums}
+.lit-ref:hover{color:var(--ouro-2)}
+.lit-ref:focus-visible{outline:1px solid var(--ouro);outline-offset:2px}
+.lit-leituras li>span:last-child:not(.lit-rot){color:var(--tinta);font-variant-numeric:lining-nums}
+.lit-art{font-size:1.08rem;line-height:1.65}
+.lit-art .lit-leituras{margin:4px 0 26px;padding:14px 0;border-block:1px solid var(--line)}
+.lit-sec{margin:0 0 26px}
+.lit-sec h3{display:flex;align-items:center;gap:14px;font-family:var(--f-body);font-weight:400;font-size:1.45rem;color:var(--tinta);margin:0 0 10px}
+.lit-sec h3::after{content:"";flex:1;border-top:1px solid var(--line-2)}
+.lit-sec h4{font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:1.1rem;color:var(--ouro);margin:22px 0 6px}
+.lit-sec p{margin:0 0 14px;text-align:justify;hyphens:auto}
+.lit-sec strong{color:var(--tinta);font-weight:600}
+.lit-ano{font-family:var(--f-body);font-weight:500;color:var(--ouro);font-size:1.1rem;margin:22px 0 6px;font-variant-numeric:lining-nums}
+.lit-lista{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.lit-lista li{border-bottom:1px solid var(--line)}
+.lit-item{all:unset;cursor:pointer;display:grid;grid-template-columns:11rem minmax(0,1fr);gap:2px 18px;padding:10px 4px;width:100%;box-sizing:border-box}
+.lit-item:hover .lit-cel{color:var(--ouro-2)}
+.lit-item:focus-visible{outline:1px solid var(--ouro);outline-offset:2px}
+.lit-data{font-variant-numeric:lining-nums;font-style:italic}
+.lit-cel{color:var(--tinta)}
+.lit-refs{grid-column:2;font-size:.92rem;font-variant-numeric:lining-nums}
+@media (max-width:600px){.lit-item{grid-template-columns:minmax(0,1fr)}.lit-refs{grid-column:1}.lit-sec p{text-align:left}}
+.cur-grade{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,320px));justify-content:center;gap:26px}
+.cur-card{all:unset;cursor:pointer;display:flex;flex-direction:column;width:100%;height:100%;box-sizing:border-box;background:var(--painel);border:1px solid var(--line-2);border-radius:4px;overflow:hidden;transition:transform .2s,box-shadow .2s}
+.cur-card:hover{transform:translateY(-3px);box-shadow:0 10px 22px var(--sombra)}
+.cur-card:focus-visible{outline:1px solid var(--ouro);outline-offset:3px}
+.cur-card img{display:block;width:100%;height:auto;max-width:100%}
+.cur-sem{display:grid;place-items:center;aspect-ratio:4/3;font-family:var(--f-marca);letter-spacing:.12em;color:var(--ouro);background:var(--cab)}
+.cur-info{display:grid;gap:4px;padding:14px 16px 16px}
+.cur-tit{font-size:1.25rem;line-height:1.25;color:var(--tinta)}
+.cur-meta{font-style:italic;font-size:.95rem}
+.cur-ant{opacity:.72}
+.sit{justify-self:start;display:inline-block;font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:.9rem;line-height:1.4;padding:0 8px;border:1px solid currentColor;border-radius:2px;color:var(--muted)}
+.sit-aberta{color:var(--dat)}
+.sit-breve{color:var(--ouro)}
+.sit-andamento{color:var(--nom)}
+.cur-antigas{margin-top:36px}
+.cur-antigas summary{cursor:pointer;font-variant-caps:all-small-caps;letter-spacing:.1em;color:var(--ouro);margin-bottom:18px}
+.cur-det{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:32px;align-items:start}
+.cur-banner{margin:0}
+.cur-banner img{display:block;width:100%;height:auto;max-width:100%;border-radius:4px;box-shadow:0 8px 24px var(--sombra)}
+.cur-txt{min-width:0;font-size:1.06rem;line-height:1.6}
+.cur-txt p{margin:0 0 12px}
+.cur-dados{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 16px;margin:16px 0;padding:14px 0;border-block:1px solid var(--line)}
+.cur-dados dt{font-variant-caps:all-small-caps;letter-spacing:.08em;color:var(--ouro)}
+.cur-dados dd{margin:0;color:var(--tinta);overflow-wrap:anywhere}
+.cur-insc{margin:18px 0 0}
+.cur-insc .btn-ouro{display:inline-block;text-decoration:none}
+@media (max-width:760px){.cur-det{grid-template-columns:minmax(0,1fr)}}
+/* Formulários do editor (só no Claude) */
+.form-adm{display:grid;gap:12px;margin:0 0 30px}
+.f-linha{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.f-campo{display:grid;gap:3px;min-width:0}
+.f-campo>span{font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:.95rem;color:var(--ouro)}
+.f-campo input,.f-campo textarea,.f-campo select{font-family:var(--f-body);font-size:1.02rem;line-height:1.45;padding:7px 10px;border:1px solid var(--line-2);border-radius:2px;background:var(--bg);color:var(--fg);width:100%;box-sizing:border-box;min-width:0}
+.f-campo textarea{resize:vertical}
+.f-campo input:focus-visible,.f-campo textarea:focus-visible,.f-campo select:focus-visible{outline:1px solid var(--accent);outline-offset:0}
+.f-grupo{border:1px solid var(--line);border-radius:4px;padding:10px 14px 14px;margin:0;display:grid;gap:8px}
+.f-grupo legend{font-style:italic;font-size:.95rem;padding:0 6px}
+.f-rot{max-width:14rem}
+.f-dica{margin:0;font-style:italic;font-size:.92rem}
+.f-check{display:flex;gap:8px;align-items:center}
+.f-acoes{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.f-acoes .btn.pri{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.f-acoes .btn.pri:hover{background:var(--accent);border-color:var(--accent)}
+.f-acoes .btn.perigo{color:var(--accent);margin-left:auto}
+.f-acoes .msg{font-style:italic;font-size:.95rem}
+.f-acoes .msg.err{color:var(--accent)}
+.f-banner{display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end}
+.f-banner img{width:160px;height:auto;max-width:100%;border:1px solid var(--line-2);border-radius:2px}
+/* Aviso de novidades */
+.aviso{position:fixed;left:calc(18px + env(safe-area-inset-left,0px));bottom:calc(22px + env(safe-area-inset-bottom,0px));z-index:30;width:min(24rem,calc(100vw - 36px));
+  max-height:calc(100vh - 60px);overflow:auto;box-sizing:border-box;background:var(--surface);color:var(--fg);border:1px solid var(--line-2);border-radius:4px;
+  box-shadow:0 14px 34px var(--sombra);padding:14px 18px 12px;font-size:1rem;line-height:1.5}
+.aviso-cab{display:flex;align-items:flex-start;gap:10px}
+.aviso h2{flex:1;margin:0 0 6px;font-family:var(--f-body);font-weight:500;font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:1.12rem;color:var(--accent)}
+.aviso p{margin:0 0 6px}
+.aviso ul{margin:0 0 6px;padding-left:1.1em;display:grid;gap:3px}
+.aviso li::marker{color:var(--accent)}
+.aviso-x{all:unset;cursor:pointer;font-size:1.4rem;line-height:1;color:var(--muted);padding:0 4px}
+.aviso-x:hover{color:var(--accent)}
+.aviso-x:focus-visible{outline:1px solid var(--accent)}
+.aviso-acoes{display:flex;justify-content:flex-end;margin:4px 0 0}
+.aviso .f-campo>span{color:var(--muted)}
+@media (max-width:600px){.aviso{left:calc(12px + env(safe-area-inset-left,0px));right:calc(12px + env(safe-area-inset-right,0px));width:auto;bottom:calc(80px + env(safe-area-inset-bottom,0px))}}
+@media (prefers-reduced-motion:reduce){.cur-card{transition:none}}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .ini-cab{background:var(--cab);box-shadow:0 6px 18px var(--sombra);position:relative;z-index:2;
   padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));padding-block:26px 22px}
@@ -294,6 +395,10 @@ aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--nav-h,60px) 
 .ph{display:flex;align-items:baseline;gap:10px}
 .ph .word{font-family:var(--f-greek);font-size:2.3rem;line-height:1.1;margin:0;font-weight:400}
 .ph .ref{font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:.95rem;color:var(--accent);margin-left:auto;white-space:nowrap;font-variant-numeric:lining-nums}
+.tl{display:flex;flex-wrap:wrap;gap:2px 14px;align-items:baseline;margin:2px 0 0;font-size:1rem;color:var(--muted)}
+.tl-t{font-style:italic;color:var(--fg)}
+.tl-p{font-variant-numeric:lining-nums;letter-spacing:.02em}
+.tl-n{margin:2px 0 0;font-size:.86rem;line-height:1.4;color:var(--muted);font-style:italic}
 .lemma{font-size:.98rem;color:var(--muted);margin:4px 0 6px;font-variant-numeric:lining-nums}
 .lemma b{font-family:var(--f-greek);font-size:1.18rem;color:var(--fg);font-weight:700}
 .kind{display:inline-block;font-style:italic;color:var(--accent);font-size:1rem;margin:0 0 2px}
@@ -400,6 +505,8 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
       <nav class="ini-links" aria-label="Ligações">
         <button class="lnk" id="irLivros">Livros bíblicos</button>
         <button class="lnk" id="irBasico">O Básico do Grego</button>
+        <button class="lnk" data-lit>Liturgia Dominical</button>
+        <button class="lnk" data-cur>Cursos e Formações</button>
         <button class="lnk" id="irSobre">Sobre o editor</button>
         <a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a>
         <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
@@ -500,6 +607,7 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
     <p>Projeto desenvolvido por <span class="sc">Jório Serra Maia Júnior</span></p>
     <p class="fontes">Texto grego: <a href="https://sblgnt.com" target="_blank" rel="noopener">SBLGNT</a>, © Society of Biblical Literature e Logos Bible Software · Morfologia e sintaxe: <a href="https://github.com/Clear-Bible/macula-greek" target="_blank" rel="noopener">MACULA Greek</a>, © Biblica, Inc. · Ambos sob licença <a href="https://creativecommons.org/licenses/by/4.0/deed.pt-br" target="_blank" rel="noopener">CC BY 4.0</a>, adaptados para este site · Tradução: João Ferreira de Almeida, domínio público</p>
     <p class="fontes">Notas e comentários © Jório Serra Maia Júnior. Todos os direitos reservados. · <button class="lnk-rod" data-priv>Aviso de Privacidade</button></p>
+    <p class="fontes" id="avisoAdm" hidden><button class="lnk-rod" id="avisoEditar" type="button">Editar o aviso de novidades</button></p>
   </div>
 </section>
 
@@ -513,6 +621,8 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
       <nav class="ini-links" aria-label="Ligações">
         <button class="lnk" data-home>Início</button>
         <button class="lnk" data-home-livros>Livros bíblicos</button>
+        <button class="lnk" data-lit>Liturgia Dominical</button>
+        <button class="lnk" data-cur>Cursos e Formações</button>
         <button class="lnk" data-home-sobre>Sobre o editor</button>
         <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
       </nav>
@@ -1184,6 +1294,8 @@ adjuntos.</p></li>
         <button class="lnk" data-home>Início</button>
         <button class="lnk" data-home-livros>Livros bíblicos</button>
         <button class="lnk" data-basico>O Básico do Grego</button>
+        <button class="lnk" data-lit>Liturgia Dominical</button>
+        <button class="lnk" data-cur>Cursos e Formações</button>
         <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
       </nav>
     </div>
@@ -1238,6 +1350,58 @@ adjuntos.</p></li>
     <div class="bas-fim">
       <button class="btn-ouro" data-home>Voltar ao início ›</button>
     </div>
+  </div>
+</section>
+
+<section id="liturgia" class="basico" hidden aria-labelledby="tit-lit">
+  <header class="ini-cab bas-cab">
+  <button class="tema" type="button" data-tema-btn>Claro/Escuro</button>
+    <div class="ini-cab-in">
+      <div class="logo">
+        <p class="marca marca-p"><button class="casa-txt" data-home>Verbum Graecum</button></p>
+      </div>
+      <nav class="ini-links" aria-label="Ligações">
+        <button class="lnk" data-home>Início</button>
+        <button class="lnk" data-home-livros>Livros bíblicos</button>
+        <button class="lnk" data-basico>O Básico do Grego</button>
+        <button class="lnk" data-cur>Cursos e Formações</button>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+      </nav>
+    </div>
+  </header>
+  <div class="bas-in">
+    <div class="bas-topo">
+      <p class="kicker">Exegese das leituras do domingo</p>
+      <h1 id="tit-lit">Liturgia Dominical</h1>
+      <p class="bas-sub">A cada semana, uma análise dos textos bíblicos da liturgia do domingo, publicada até sexta-feira, às 22h</p>
+    </div>
+    <div id="litCorpo"></div>
+  </div>
+</section>
+
+<section id="cursos" class="basico" hidden aria-labelledby="tit-cur">
+  <header class="ini-cab bas-cab">
+  <button class="tema" type="button" data-tema-btn>Claro/Escuro</button>
+    <div class="ini-cab-in">
+      <div class="logo">
+        <p class="marca marca-p"><button class="casa-txt" data-home>Verbum Graecum</button></p>
+      </div>
+      <nav class="ini-links" aria-label="Ligações">
+        <button class="lnk" data-home>Início</button>
+        <button class="lnk" data-home-livros>Livros bíblicos</button>
+        <button class="lnk" data-basico>O Básico do Grego</button>
+        <button class="lnk" data-lit>Liturgia Dominical</button>
+        <a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a>
+      </nav>
+    </div>
+  </header>
+  <div class="bas-in cur-in">
+    <div class="bas-topo">
+      <p class="kicker">Atividades formativas</p>
+      <h1 id="tit-cur">Cursos e Formações</h1>
+      <p class="bas-sub">Cursos, minicursos, palestras e encontros ministrados pelo editor do Verbum Graecum</p>
+    </div>
+    <div id="curCorpo"></div>
   </div>
 </section>
 
@@ -1308,6 +1472,7 @@ adjuntos.</p></li>
 </div>
 </div>
 
+<div class="aviso" id="aviso" role="dialog" aria-labelledby="avisoTit" hidden></div>
 <button class="subir" id="subir" type="button" aria-label="Voltar ao topo" title="Voltar ao topo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></button>
 <script>
 const LIVROS = {
@@ -1402,7 +1567,7 @@ function carregar(id, tentativa = 0) {
   }; }
 const vInicio = document.getElementById('inicio'), vLeitor = document.getElementById('leitor'), vBasico = document.getElementById('basico'), vPriv = document.getElementById('privacidade');
 function mostrarInicio(alvo) {
-  vInicio.hidden = false; vLeitor.hidden = true; vBasico.hidden = true; vPriv.hidden = true;
+  so(vInicio);
   document.title = 'Verbum Graecum';
   const ult = ler('ev-livro');
   const cont = document.getElementById('continuar');
@@ -1417,7 +1582,7 @@ function mostrarInicio(alvo) {
   else window.scrollTo(0, 0);
 }
 function mostrarBasico() {
-  vInicio.hidden = true; vLeitor.hidden = true; vBasico.hidden = false; vPriv.hidden = true;
+  so(vBasico);
   document.title = 'Verbum Graecum · O Básico do Grego';
   try { history.replaceState(null, '', '#basico'); } catch (e) {}
   window.scrollTo(0, 0);
@@ -1427,7 +1592,7 @@ vBasico.querySelectorAll('[data-home]').forEach(b => b.onclick = () => mostrarIn
 vBasico.querySelectorAll('[data-home-livros]').forEach(b => b.onclick = () => mostrarInicio('livros'));
 vBasico.querySelectorAll('[data-home-sobre]').forEach(b => b.onclick = () => mostrarInicio('sobre'));
 function mostrarPrivacidade() {
-  vInicio.hidden = true; vLeitor.hidden = true; vBasico.hidden = true; vPriv.hidden = false;
+  so(vPriv);
   document.title = 'Verbum Graecum · Aviso de Privacidade';
   try { history.replaceState(null, '', '#privacidade'); } catch (e) {}
   window.scrollTo(0, 0);
@@ -1451,7 +1616,7 @@ document.getElementById('irLivros').onclick = () => document.getElementById('liv
 let pedido = 0;   // só o último livro clicado é aberto, mesmo que outro termine de carregar depois
 async function abrirLivro(id, cap, verso) {
   const meu = ++pedido;
-  vInicio.hidden = true; vBasico.hidden = true; vLeitor.hidden = false; vPriv.hidden = true;
+  so(vLeitor);
   if (!LIVROS[id]) id = 'jo';
   document.querySelectorAll('[data-livro]').forEach(b => b.setAttribute('aria-pressed', b.dataset.livro === id));
   const L = LIVROS[id];
@@ -1571,6 +1736,128 @@ function distribuicao(lema) {
   return `<div class="dist">${ORDEM.map((id, k) => `<span class="${id === livro ? 'at' : ''}">${LIVROS[id].abrev} <b>${n[k]}</b></span>`).join('')}<span>· total ${n.reduce((a, b) => a + b, 0)}</span></div>`;
 }
 
+// Transliteração (convenção acadêmica, sem acentos) e pronúncia aproximada para falantes de português,
+// segundo a pronúncia erasmiana adotada em “O Básico do Grego”. Gerada a partir da forma grega.
+const TL = (() => {
+  const VOG = 'αεηιουω';
+  const DITONGOS = ['αι', 'ει', 'οι', 'υι', 'αυ', 'ευ', 'ηυ', 'ου', 'ωυ'];
+  const TR_V = {α: 'a', ε: 'e', η: 'ē', ι: 'i', ο: 'o', υ: 'y', ω: 'ō'};
+  const TR_D = {αι: 'ai', ει: 'ei', οι: 'oi', υι: 'ui', αυ: 'au', ευ: 'eu', ηυ: 'ēu', ου: 'ou', ωυ: 'ōu'};
+  const PR_V = {α: 'a', ε: 'e', η: 'ê', ι: 'i', ο: 'o', υ: 'y', ω: 'ô'};
+  const PR_D = {αι: 'ai', ει: 'ei', οι: 'oi', υι: 'yi', αυ: 'au', ευ: 'eu', ηυ: 'êu', ου: 'u', ωυ: 'ôu'};
+  const TR_C = {β: 'b', γ: 'g', δ: 'd', ζ: 'z', θ: 'th', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'x', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', φ: 'ph', χ: 'ch', ψ: 'ps'};
+  const PR_C = {β: 'b', γ: 'g', δ: 'd', ζ: 'dz', θ: 'th', κ: 'k', λ: 'l', μ: 'm', ν: 'n', ξ: 'ks', π: 'p', ρ: 'r', σ: 's', ς: 's', τ: 't', φ: 'f', χ: 'ch', ψ: 'ps'};
+  const ONSET = /^(?:[πβφκγχτδθ][λρμν]|σ[πτκφθχμβ]|σ[πτκ][ρλ]|πτ|κτ|φθ|χθ|βδ|γν|μν|δμ)$/;
+
+  function letras(w) {
+    const L = [];
+    for (const ch of w.normalize('NFD')) {
+      const last = L[L.length - 1];
+      if (/[̀-ͯ]/.test(ch)) {
+        if (!last) continue;
+        if (ch === '̔') last.aspera = true;
+        else if (ch === '́' || ch === '̀' || ch === '͂') last.acento = true;
+        else if (ch === 'ͅ') last.subscrito = true;
+        else if (ch === '̈') last.dierese = true;
+        continue;
+      }
+      const lo = ch.toLowerCase();
+      if (/[α-ω]/.test(lo)) L.push({c: lo, maiusc: ch !== lo});
+    }
+    return L;
+  }
+
+  // Unidades: vogal ou ditongo (núcleo de sílaba) e consoantes.
+  function unidades(L) {
+    const U = [];
+    for (let i = 0; i < L.length; i++) {
+      const a = L[i], b = L[i + 1];
+      if (VOG.includes(a.c)) {
+        if (b && DITONGOS.includes(a.c + b.c) && !b.dierese && !a.subscrito) {
+          U.push({tipo: 'v', g: a.c + b.c, acento: a.acento || b.acento, aspera: a.aspera || b.aspera, maiusc: a.maiusc});
+          i++;
+        } else U.push({tipo: 'v', g: a.c, acento: a.acento, aspera: a.aspera, sub: a.subscrito, maiusc: a.maiusc});
+      } else U.push({tipo: 'c', g: a.c, aspera: a.aspera, maiusc: a.maiusc});
+    }
+    U.forEach((u, k) => { if (u.g === 'γ' && U[k + 1] && 'γκξχ'.includes(U[k + 1].g)) u.nasal = true; });
+    return U;
+  }
+
+  function silabas(U) {
+    const S = [];
+    let atual = [];
+    const nucleos = U.map((u, k) => u.tipo === 'v' ? k : -1).filter(k => k >= 0);
+    if (!nucleos.length) return [U];
+    let k = 0;
+    nucleos.forEach((n, idx) => {
+      const prox = nucleos[idx + 1];
+      while (k <= n) atual.push(U[k++]);
+      if (prox === undefined) { while (k < U.length) atual.push(U[k++]); S.push(atual); return; }
+      const grupo = U.slice(n + 1, prox);
+      let corte = grupo.length;           // quantas consoantes ficam na sílaba atual
+      if (grupo.length <= 1) corte = 0;
+      else {
+        for (let i = 0; i < grupo.length; i++) {
+          const resto = grupo.slice(i);
+          if (resto.length === 1 || (!resto[0].nasal && ONSET.test(resto.map(u => u.g).join('')))) { corte = i; break; }
+        }
+      }
+      for (let j = 0; j < corte; j++) atual.push(U[k++]);
+      S.push(atual); atual = [];
+    });
+    return S;
+  }
+
+  function frente(u) { return u && u.tipo === 'v' && 'εηιυ'.includes(u.g[0]); }
+
+  function pron(U, S) {
+    const tonica = S.findIndex(s => s.some(u => u.acento));
+    return S.map((s, i) => {
+      let t = s.map(u => {
+        const k = U.indexOf(u);
+        let x;
+        if (u.tipo === 'v') x = (u.aspera ? 'h' : '') + (u.g.length > 1 ? PR_D[u.g] : PR_V[u.g]);
+        else if (u.nasal) x = 'n';
+        else if (u.g === 'γ' && frente(U[k + 1])) x = 'gu';
+        else x = (u.g === 'ρ' && u.aspera ? 'rh' : PR_C[u.g]);
+        return x;
+      }).join('');
+      return i === tonica ? t.toUpperCase() : t;
+    }).join('·');
+  }
+
+  function translit(U) {
+    let out = U.map(u => {
+      if (u.tipo === 'v') return (u.aspera ? 'h' : '') + (u.g.length > 1 ? TR_D[u.g] : TR_V[u.g]) + (u.sub ? 'i' : '');
+      if (u.nasal) return 'n';
+      if (u.g === 'ρ' && u.aspera) return 'rh';
+      return TR_C[u.g];
+    }).join('');
+    if (U[0] && U[0].maiusc) out = out.charAt(0).toUpperCase() + out.slice(1);
+    return out;
+  }
+
+  function notas(U) {
+    const n = [];
+    const tem = g => U.some(u => u.g === g || u.g.includes(g));
+    if (U.some(u => u.aspera)) n.push('h: aspirado, como no inglês “house”');
+    if (tem('θ')) n.push('th: t aspirado');
+    if (tem('χ') && U.some(u => u.g === 'χ')) n.push('ch: k aspirado (não como em “chá”)');
+    if (U.some(u => u.g === 'υ' || u.g === 'υι')) n.push('y: “u” francês, com os lábios arredondados');
+    if (tem('ζ')) n.push('dz: como em “adze”');
+    if (U.some(u => u.nasal)) n.push('γ antes de γ, κ, ξ, χ soa como n');
+    if (U.some(u => /[ηω]/.test(u.g))) n.push('ê, ô: vogais longas (η, ω)');
+    return n;
+  }
+
+  return function (w) {
+    const U = unidades(letras(w.replace(/[’'ʼ᾽]/g, '')));
+    if (!U.length) return null;
+    const S = silabas(U);
+    return {trans: translit(U), pron: pron(U, S), notas: notas(U)};
+  };
+})();
+
 function mostrar(i, focar) {
   if (i < 0 || i >= tokens.length) return;
   document.querySelectorAll('.w.sel,.w.same').forEach(e => e.classList.remove('sel', 'same'));
@@ -1583,6 +1870,11 @@ function mostrar(i, focar) {
   const ocorr = lst.length, tot = DADOS[livro].totalLema[t.lema];
   const L = LIVROS[livro];
   let h = `<div class="ph"><p class="word" lang="grc">${esc(t.g)}</p><span class="ref">${L.abrev} ${capAtual}:${v}</span><button class="btn close" id="fechar" aria-label="Fechar">✕</button></div>`;
+  const tr = TL(t.g);
+  if (tr) {
+    h += `<p class="tl"><span class="tl-t" lang="grc-Latn" title="Transliteração">${esc(tr.trans)}</span><span class="tl-p" title="Pronúncia aproximada (erasmiana); sílaba tônica em maiúsculas">pronúncia: ${esc(tr.pron)}</span></p>`;
+    if (tr.notas.length) h += `<p class="tl-n">${tr.notas.map(esc).join(' · ')}</p>`;
+  }
   h += `<p class="lemma">Lema <b lang="grc">${esc(t.lema)}</b>${t.strong ? ' · Strong ' + esc(t.strong) : ''}</p>`;
   h += `<span class="kind">${esc(t.classe)}</span>`;
   h += `<p class="gloss">${esc(t.gl)}</p>`;
@@ -1812,6 +2104,372 @@ function acaoComentario(b) {
   }
 }
 
+
+// ---- Seções editoriais: Liturgia Dominical, Cursos e Formações e aviso de novidades.
+// No Claude, o conteúdo vem do banco de dados da página (coleções "liturgia", "cursos" e "avisos") e o editor
+// cadastra tudo pela própria página. No site público, vem da cópia CONTEUDO_FIXO, gravada a cada publicação.
+const CONTEUDO_FIXO = {"liturgia": {}, "cursos": {}, "aviso": {"ativo": true, "intro": "", "itens": ["Escolha do versículo na barra de leitura", "Sigla N.E. nos versículos com nota do editor", "Modo claro e escuro", "Transliteração e pronúncia de cada palavra grega", "Novas seções: Liturgia Dominical e Cursos e Formações"], "titulo": "Novidades no Verbum Graecum", "versao": "2026-10-25T22:40:00-03:00"}};
+let LIT = {}, CUR = {}, AVISO = null, assetsAPI = null;
+const vLit = document.getElementById('liturgia'), vCur = document.getElementById('cursos');
+const litCorpo = document.getElementById('litCorpo'), curCorpo = document.getElementById('curCorpo');
+
+const MESES = ['janeiro', 'fevereiro', 'março', 'abril', 'maio', 'junho', 'julho', 'agosto', 'setembro', 'outubro', 'novembro', 'dezembro'];
+const DIAS = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
+const dataISO = d => `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+const hojeISO = () => dataISO(new Date());
+function dataLonga(iso, comDia = true) {
+  const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(iso || '');
+  if (!m) return iso || '';
+  const d = new Date(+m[1], +m[2] - 1, +m[3]);
+  return `${comDia ? DIAS[d.getDay()] + ', ' : ''}${+m[3]} de ${MESES[+m[2] - 1]} de ${m[1]}`;
+}
+// Texto do editor: parágrafos separados por linha em branco; “## ” abre um subtítulo; *itálico*; **negrito**.
+function fmtTexto(t) {
+  return String(t || '').trim().split(/\n\s*\n/).map(par => {
+    par = par.trim();
+    if (!par) return '';
+    if (par.startsWith('## ')) return `<h4>${esc(par.slice(3))}</h4>`;
+    let h = esc(par).replace(/\*\*([^*\n]+)\*\*/g, '<strong>$1</strong>').replace(/\*([^*\n]+)\*/g, '<em>$1</em>').replace(/\n/g, '<br>');
+    return `<p>${h}</p>`;
+  }).join('');
+}
+const linkSeguro = u => /^https?:\/\/[^\s]+$/i.test(String(u || '').trim()) ? String(u).trim() : '';
+
+// Referência bíblica (“Mt 5,1-12a”, “1Jo 3,1-3”, “Jo 20,19-31”) → livro, capítulo e versículo do leitor, quando o livro está no site.
+function refLeitor(ref) {
+  const m = /^\s*([123])?\s*(Mt|Mc|Lc|Jo|At)\s*(\d+)(?:\s*[,:]\s*(\d+))?/i.exec(ref || '');
+  if (!m) return null;
+  const nome = m[2].toLowerCase();
+  const id = m[1] ? (nome === 'jo' ? m[1] + 'jo' : null) : nome;
+  if (!id || !LIVROS[id]) return null;
+  return {id, cap: +m[3], v: m[4] ? +m[4] : 0};
+}
+
+function so(v) { [vInicio, vLeitor, vBasico, vPriv, vLit, vCur].forEach(x => { x.hidden = x !== v; }); }
+function ligarNav(raiz) {
+  raiz.querySelectorAll('[data-home]').forEach(b => b.onclick = () => mostrarInicio());
+  raiz.querySelectorAll('[data-home-livros]').forEach(b => b.onclick = () => mostrarInicio('livros'));
+  raiz.querySelectorAll('[data-basico]').forEach(b => b.onclick = mostrarBasico);
+}
+document.addEventListener('click', e => {
+  const l = e.target.closest('[data-lit]'); if (l) { e.preventDefault(); mostrarLiturgia(l.dataset.lit || ''); return; }
+  const c = e.target.closest('[data-cur]'); if (c) { e.preventDefault(); mostrarCursos(c.dataset.cur || ''); }
+});
+ligarNav(vLit); ligarNav(vCur);
+
+// ---------- Liturgia Dominical
+let litAtual = '';
+function litPublicadas() {
+  return Object.values(LIT).filter(x => x && x.data && (x.publicado || podeEditar)).sort((a, b) => b.data.localeCompare(a.data));
+}
+function mostrarLiturgia(id) {
+  so(vLit);
+  litAtual = id || '';
+  document.title = 'Verbum Graecum · Liturgia Dominical';
+  try { history.replaceState(null, '', id ? '#liturgia-' + id : '#liturgia'); } catch (e) {}
+  pintarLiturgia();
+  window.scrollTo(0, 0);
+}
+function leiturasHTML(x) {
+  const L = (x.leituras || []).filter(r => r && r.ref);
+  if (!L.length) return '';
+  return `<ul class="lit-leituras">${L.map(r => {
+    const alvo = refLeitor(r.ref);
+    const ref = alvo ? `<button class="lit-ref" data-abrir="${alvo.id}|${alvo.cap}|${alvo.v}" title="Abrir no leitor grego">${esc(r.ref)} ›</button>` : `<span>${esc(r.ref)}</span>`;
+    return `<li><span class="lit-rot">${esc(r.rotulo || '')}</span>${ref}</li>`;
+  }).join('')}</ul>`;
+}
+function refsCurtas(x) { return (x.leituras || []).filter(r => r && r.ref).map(r => esc(r.ref)).join(' · '); }
+function pintarLiturgia() {
+  if (vLit.hidden) return;
+  const adm = podeEditar ? `<div class="adm"><button class="btn" data-lit-nova>+ Nova análise</button><span class="adm-dica">Só você vê estes controles. Rascunhos não aparecem no site.</span></div>` : '';
+  const todas = litPublicadas();
+  if (litAtual === '__nova' || (litAtual.startsWith('__editar:') && podeEditar)) { litCorpo.innerHTML = formLiturgia(litAtual === '__nova' ? null : LIT[litAtual.slice(9)]); return; }
+  if (litAtual) {
+    const x = LIT[litAtual];
+    if (!x || (!x.publicado && !podeEditar)) { litCorpo.innerHTML = `<p class="vazio">Esta análise não está disponível. <button class="lnk-sum" data-lit="">Ver todas as análises ›</button></p>`; return; }
+    let h = `<p class="voltar"><button class="lnk-sum" data-lit="">‹ Todas as análises</button></p><article class="lit-art">`;
+    h += `<p class="kicker">${esc(dataLonga(x.data))}${x.publicado ? '' : ' · rascunho'}</p><h2 class="lit-tit">${esc(x.celebracao || 'Liturgia dominical')}</h2>`;
+    const meta = [x.ciclo, x.calendario].filter(Boolean).map(esc).join(' · ');
+    if (meta) h += `<p class="lit-meta">${meta}</p>`;
+    h += leiturasHTML(x);
+    [['contexto', 'Texto e contexto'], ['exegese', 'Análise exegética'], ['aplicacao', 'Sentido teológico e espiritual']].forEach(([k, t]) => {
+      if (x[k] && String(x[k]).trim()) h += `<section class="lit-sec"><h3>${t}</h3>${fmtTexto(x[k])}</section>`;
+    });
+    h += `</article>`;
+    if (podeEditar) h += `<div class="adm"><button class="btn" data-lit-editar="${esc(x.data)}">Editar esta análise</button></div>`;
+    litCorpo.innerHTML = h;
+    return;
+  }
+  if (!todas.length) {
+    litCorpo.innerHTML = adm + `<p class="vazio">Ainda não há análises publicadas. A cada semana, a análise das leituras do domingo será publicada aqui até sexta-feira, às 22h.</p>`;
+    return;
+  }
+  const hoje = hojeISO();
+  const futuras = todas.filter(x => x.data >= hoje && x.publicado).sort((a, b) => a.data.localeCompare(b.data));
+  const destaque = futuras[0] || todas.find(x => x.publicado) || todas[0];
+  let h = adm;
+  h += `<article class="lit-dest"><p class="kicker">${destaque.data >= hoje ? 'Próximo domingo' : 'Análise mais recente'}</p>
+    <h2>${esc(destaque.celebracao || 'Liturgia dominical')}</h2><p class="lit-meta">${esc(dataLonga(destaque.data))}${destaque.ciclo ? ' · ' + esc(destaque.ciclo) : ''}</p>
+    ${leiturasHTML(destaque)}<p class="lit-ler"><button class="btn-ouro" data-lit="${esc(destaque.data)}">Ler a análise ›</button></p></article>`;
+  const resto = todas.filter(x => x !== destaque);
+  if (resto.length) {
+    h += `<h2 class="titulo-linha"><span>Arquivo</span></h2>`;
+    let ano = '';
+    resto.forEach(x => {
+      const a = x.data.slice(0, 4);
+      if (a !== ano) { if (ano) h += `</ul>`; h += `<h3 class="lit-ano">${a}</h3><ul class="lit-lista">`; ano = a; }
+      h += `<li><button class="lit-item" data-lit="${esc(x.data)}"><span class="lit-data">${esc(dataLonga(x.data, false))}</span><span class="lit-cel">${esc(x.celebracao || 'Liturgia dominical')}${x.publicado ? '' : ' <em>(rascunho)</em>'}</span><span class="lit-refs">${refsCurtas(x)}</span></button></li>`;
+    });
+    h += `</ul>`;
+  }
+  litCorpo.innerHTML = h;
+}
+function formLiturgia(x) {
+  x = x || {data: '', celebracao: '', ciclo: '', calendario: 'Calendário Romano Geral, com o Próprio do Brasil (CNBB)', leituras: [], contexto: '', exegese: '', aplicacao: '', publicado: false};
+  const rot = ['1ª leitura', 'Salmo responsorial', '2ª leitura', 'Evangelho'];
+  const L = rot.map((r, i) => (x.leituras || [])[i] || {rotulo: r, ref: ''});
+  const campo = (id, rotulo, val, extra = '') => `<label class="f-campo"><span>${rotulo}</span><input id="${id}" value="${esc(val || '')}" ${extra}></label>`;
+  const area = (id, rotulo, val, rows) => `<label class="f-campo"><span>${rotulo}</span><textarea id="${id}" rows="${rows}">${esc(val || '')}</textarea></label>`;
+  return `<form class="form-adm" id="formLit" data-orig="${esc(x.data || '')}">
+    <h2 class="titulo-linha"><span>${x.data ? 'Editar análise' : 'Nova análise'}</span></h2>
+    <div class="f-linha">${campo('litData', 'Data do domingo *', x.data, 'type="date" required')}${campo('litCic', 'Ano litúrgico / ciclo', x.ciclo, 'placeholder="Ex.: Ano A"')}</div>
+    ${campo('litCel', 'Celebração *', x.celebracao, 'required placeholder="Ex.: 31º Domingo do Tempo Comum"')}
+    ${campo('litCal', 'Calendário adotado', x.calendario)}
+    <fieldset class="f-grupo"><legend>Leituras (ex.: Mt 5,1-12a). Referências dos livros do site viram links para o leitor.</legend>
+      ${L.map((r, i) => `<div class="f-linha"><label class="f-campo f-rot"><span>Rótulo</span><input id="litRot${i}" value="${esc(r.rotulo || rot[i])}"></label><label class="f-campo"><span>Referência</span><input id="litRef${i}" value="${esc(r.ref || '')}"></label></div>`).join('')}
+    </fieldset>
+    ${area('litCtx', 'Texto e contexto', x.contexto, 6)}
+    ${area('litExe', 'Análise exegética', x.exegese, 12)}
+    ${area('litApl', 'Sentido teológico e espiritual', x.aplicacao, 6)}
+    <p class="f-dica">Parágrafos separados por uma linha em branco · “## ” no início da linha cria um subtítulo · *itálico* · **negrito**</p>
+    <label class="f-check"><input type="checkbox" id="litPub" ${x.publicado ? 'checked' : ''}> Publicada (desmarcada, fica como rascunho, visível só para você)</label>
+    <div class="f-acoes"><button class="btn pri" type="submit">Salvar</button><button class="btn" type="button" data-lit="${esc(x.data || '')}">Cancelar</button>
+    ${x.data ? `<button class="btn perigo" type="button" data-lit-excluir="${esc(x.data)}">Excluir</button>` : ''}<span class="msg" aria-live="polite"></span></div>
+  </form>`;
+}
+async function salvarLiturgia(f) {
+  const msg = f.querySelector('.msg'), v = id => f.querySelector('#' + id).value.trim();
+  const data = v('litData'), orig = f.dataset.orig;
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(data) || !v('litCel')) { msg.className = 'msg err'; msg.textContent = 'Preencha a data e a celebração.'; return; }
+  const doc = {data, celebracao: v('litCel'), ciclo: v('litCic'), calendario: v('litCal'),
+    leituras: [0, 1, 2, 3].map(i => ({rotulo: v('litRot' + i), ref: v('litRef' + i)})).filter(r => r.ref),
+    contexto: f.querySelector('#litCtx').value, exegese: f.querySelector('#litExe').value, aplicacao: f.querySelector('#litApl').value,
+    publicado: f.querySelector('#litPub').checked, atualizado: new Date().toISOString()};
+  msg.className = 'msg'; msg.textContent = 'Salvando…';
+  try {
+    await db.collection('liturgia').doc(data).set(doc);
+    if (orig && orig !== data) await db.collection('liturgia').doc(orig).delete();
+    LIT[data] = doc; if (orig && orig !== data) delete LIT[orig];
+    mostrarLiturgia(data);
+  } catch (e) { msg.className = 'msg err'; msg.textContent = erroDb(e); }
+}
+function erroDb(e) {
+  return e && e.code === 'quota_exceeded' ? 'Limite de armazenamento atingido.' : e && (e.code === 'permission_denied' || e.code === 'invalid_argument') ? 'Você não tem permissão para salvar aqui.' : 'Não foi possível salvar. Verifique a conexão e tente de novo.';
+}
+vLit.addEventListener('click', async e => {
+  const ab = e.target.closest('[data-abrir]');
+  if (ab) { const [id, c, v] = ab.dataset.abrir.split('|'); abrirLivro(id, +c, +v || 0); return; }
+  if (e.target.closest('[data-lit-nova]')) { litAtual = '__nova'; pintarLiturgia(); return; }
+  const ed = e.target.closest('[data-lit-editar]'); if (ed) { litAtual = '__editar:' + ed.dataset.litEditar; pintarLiturgia(); return; }
+  const ex = e.target.closest('[data-lit-excluir]');
+  if (ex) {
+    if (!ex.dataset.confirma) { ex.dataset.confirma = '1'; ex.textContent = 'Confirmar exclusão'; return; }
+    try { await db.collection('liturgia').doc(ex.dataset.litExcluir).delete(); delete LIT[ex.dataset.litExcluir]; mostrarLiturgia(''); }
+    catch (err) { const m = vLit.querySelector('.msg'); if (m) { m.className = 'msg err'; m.textContent = erroDb(err); } }
+  }
+});
+vLit.addEventListener('submit', e => { e.preventDefault(); salvarLiturgia(e.target); });
+
+// ---------- Cursos e Formações
+const SITUACAO = {aberta: 'Inscrições abertas', breve: 'Em breve', andamento: 'Em andamento', encerrada: 'Inscrições encerradas', realizada: 'Realizada'};
+const ORDEM_SIT = {aberta: 0, breve: 1, andamento: 2, encerrada: 3, realizada: 4};
+let curAtual = '';
+const EXT = {'image/jpeg': 'jpg', 'image/png': 'png', 'image/webp': 'webp', 'image/gif': 'gif'};
+const bannerSrc = x => x && x.banner ? (db ? '/_blob/' + x.banner : `banners/${x.banner}.${EXT[x.bannerTipo] || 'jpg'}`) : '';
+const anterior = x => x.arquivado || x.situacao === 'realizada';
+function mostrarCursos(id) {
+  so(vCur);
+  curAtual = id || '';
+  document.title = 'Verbum Graecum · Cursos e Formações';
+  try { history.replaceState(null, '', id && !id.startsWith('__') ? '#curso-' + id : '#cursos'); } catch (e) {}
+  pintarCursos();
+  window.scrollTo(0, 0);
+}
+function cartaoCurso(x) {
+  const src = bannerSrc(x);
+  return `<li><button class="cur-card${anterior(x) ? ' cur-ant' : ''}" data-cur="${esc(x.id)}">
+    ${src ? `<img src="${esc(src)}" alt="Banner: ${esc(x.titulo)}" loading="lazy">` : `<span class="cur-sem">${esc(x.tipo || 'Formação')}</span>`}
+    <span class="cur-info"><span class="sit sit-${esc(x.situacao || 'breve')}">${esc(SITUACAO[x.situacao] || '')}</span>
+    <span class="cur-tit">${esc(x.titulo)}</span><span class="cur-meta">${[x.tipo, x.datas, x.modalidade].filter(Boolean).map(esc).join(' · ')}</span></span></button></li>`;
+}
+function pintarCursos() {
+  if (vCur.hidden) return;
+  const todos = Object.values(CUR).filter(x => x && x.titulo);
+  if (curAtual === '__novo' || (curAtual.startsWith('__editar:') && podeEditar)) { curCorpo.innerHTML = formCurso(curAtual === '__novo' ? null : CUR[curAtual.slice(9)]); return; }
+  if (curAtual) {
+    const x = CUR[curAtual];
+    if (!x) { curCorpo.innerHTML = `<p class="vazio">Esta formação não está disponível. <button class="lnk-sum" data-cur="">Ver todas ›</button></p>`; return; }
+    const src = bannerSrc(x), link = linkSeguro(x.link);
+    let h = `<p class="voltar"><button class="lnk-sum" data-cur="">‹ Todos os cursos e formações</button></p><article class="cur-det">`;
+    if (src) h += `<figure class="cur-banner"><img src="${esc(src)}" alt="Banner: ${esc(x.titulo)}"></figure>`;
+    h += `<div class="cur-txt"><span class="sit sit-${esc(x.situacao || 'breve')}">${esc(SITUACAO[x.situacao] || '')}</span>
+      <p class="kicker">${esc(x.tipo || 'Formação')}</p><h2 class="lit-tit">${esc(x.titulo)}</h2>`;
+    if (x.descricao) h += fmtTexto(x.descricao);
+    const linhas = [['Data', x.datas], ['Horário', x.horario], ['Modalidade', x.modalidade], ['Local ou plataforma', x.local],
+      ['Inscrições até', x.prazo], ['Investimento', x.valor], ['Contato', x.contato]].filter(([, v]) => v && String(v).trim());
+    if (linhas.length) h += `<dl class="cur-dados">${linhas.map(([k, v]) => `<dt>${k}</dt><dd>${esc(v)}</dd>`).join('')}</dl>`;
+    if (link && x.situacao !== 'encerrada' && x.situacao !== 'realizada') h += `<p class="cur-insc"><a class="btn-ouro" href="${esc(link)}" target="_blank" rel="noopener">${x.situacao === 'aberta' ? 'Fazer inscrição ↗' : 'Mais informações ↗'}</a></p>`;
+    h += `</div></article>`;
+    if (podeEditar) h += `<div class="adm"><button class="btn" data-cur-editar="${esc(x.id)}">Editar</button></div>`;
+    curCorpo.innerHTML = h;
+    return;
+  }
+  const adm = podeEditar ? `<div class="adm"><button class="btn" data-cur-novo>+ Nova formação</button><span class="adm-dica">Só você vê estes controles.</span></div>` : '';
+  const ord = (a, b) => (ORDEM_SIT[a.situacao] ?? 9) - (ORDEM_SIT[b.situacao] ?? 9) || String(a.inicio || '9999').localeCompare(String(b.inicio || '9999'));
+  const proximas = todos.filter(x => !anterior(x)).sort(ord);
+  const antigas = todos.filter(anterior).sort((a, b) => String(b.inicio || '').localeCompare(String(a.inicio || '')));
+  let h = adm;
+  h += proximas.length ? `<ul class="cur-grade">${proximas.map(cartaoCurso).join('')}</ul>` : `<p class="vazio">Não há cursos ou formações programados no momento. Novas atividades serão divulgadas aqui.</p>`;
+  if (antigas.length) h += `<details class="cur-antigas"><summary>Atividades anteriores (${antigas.length})</summary><ul class="cur-grade">${antigas.map(cartaoCurso).join('')}</ul></details>`;
+  curCorpo.innerHTML = h;
+}
+function formCurso(x) {
+  x = x || {id: '', titulo: '', tipo: 'Curso', descricao: '', datas: '', inicio: '', horario: '', modalidade: 'Presencial', local: '', prazo: '', valor: '', link: '', contato: '', situacao: 'breve', arquivado: false, banner: '', bannerTipo: ''};
+  const campo = (id, rotulo, val, extra = '') => `<label class="f-campo"><span>${rotulo}</span><input id="${id}" value="${esc(val || '')}" ${extra}></label>`;
+  const opc = (id, rotulo, val, ops) => `<label class="f-campo"><span>${rotulo}</span><select id="${id}">${ops.map(([k, t]) => `<option value="${esc(k)}"${k === val ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></label>`;
+  const src = bannerSrc(x);
+  return `<form class="form-adm" id="formCur" data-id="${esc(x.id || '')}" data-banner="${esc(x.banner || '')}" data-banner-tipo="${esc(x.bannerTipo || '')}">
+    <h2 class="titulo-linha"><span>${x.id ? 'Editar formação' : 'Nova formação'}</span></h2>
+    <div class="f-banner"><img id="curPrev" alt="" ${src ? `src="${esc(src)}"` : 'hidden'}>
+      <label class="f-campo"><span>Banner (imagem JPG, PNG ou WebP)</span><input type="file" id="curBan" accept="image/jpeg,image/png,image/webp"></label></div>
+    ${campo('curTit', 'Título *', x.titulo, 'required')}
+    <div class="f-linha">${opc('curTipo', 'Tipo', x.tipo, ['Curso', 'Minicurso', 'Palestra', 'Encontro', 'Oficina', 'Retiro', 'Formação'].map(t => [t, t]))}
+      ${opc('curSit', 'Situação', x.situacao, Object.entries(SITUACAO))}</div>
+    <label class="f-campo"><span>Descrição</span><textarea id="curDesc" rows="6">${esc(x.descricao || '')}</textarea></label>
+    <div class="f-linha">${campo('curDatas', 'Data(s) por extenso', x.datas, 'placeholder="Ex.: Sábados, 7 e 14 de novembro de 2026"')}${campo('curIni', 'Data de início (para ordenar)', x.inicio, 'type="date"')}</div>
+    <div class="f-linha">${campo('curHor', 'Horário', x.horario)}${opc('curMod', 'Modalidade', x.modalidade, [['Presencial', 'Presencial'], ['On-line', 'On-line'], ['Híbrida', 'Híbrida'], ['', '—']])}</div>
+    ${campo('curLocal', 'Local ou plataforma', x.local)}
+    <div class="f-linha">${campo('curPrazo', 'Inscrições até', x.prazo)}${campo('curValor', 'Valor', x.valor, 'placeholder="Ex.: Gratuito ou R$ 50,00"')}</div>
+    ${campo('curLink', 'Link de inscrição (https://…)', x.link, 'type="url"')}
+    ${campo('curCont', 'Contato', x.contato, 'placeholder="Ex.: e-mail ou WhatsApp para inscrição"')}
+    <label class="f-check"><input type="checkbox" id="curArq" ${x.arquivado ? 'checked' : ''}> Arquivar (vai para “Atividades anteriores”)</label>
+    <div class="f-acoes"><button class="btn pri" type="submit">Salvar</button><button class="btn" type="button" data-cur="${esc(x.id || '')}">Cancelar</button>
+    ${x.id ? `<button class="btn perigo" type="button" data-cur-excluir="${esc(x.id)}">Excluir</button>` : ''}<span class="msg" aria-live="polite"></span></div>
+  </form>`;
+}
+async function salvarCurso(f) {
+  const msg = f.querySelector('.msg'), v = id => f.querySelector('#' + id).value.trim();
+  if (!v('curTit')) { msg.className = 'msg err'; msg.textContent = 'Informe o título.'; return; }
+  const link = v('curLink');
+  if (link && !linkSeguro(link)) { msg.className = 'msg err'; msg.textContent = 'O link de inscrição deve começar com https://'; return; }
+  const id = f.dataset.id || (Date.now().toString(36) + Math.random().toString(36).slice(2, 6));
+  let banner = f.dataset.banner, bannerTipo = f.dataset.bannerTipo;
+  const antigo = CUR[id] && CUR[id].banner;
+  msg.className = 'msg'; msg.textContent = 'Salvando…';
+  try {
+    const arq = f.querySelector('#curBan').files[0];
+    if (arq) {
+      if (!assetsAPI) throw {code: 'sem_assets'};
+      const r = await assetsAPI.upload(arq);
+      banner = r.id; bannerTipo = r.contentType;
+    }
+    const doc = {id, titulo: v('curTit'), tipo: v('curTipo'), situacao: v('curSit'), descricao: f.querySelector('#curDesc').value, datas: v('curDatas'),
+      inicio: v('curIni'), horario: v('curHor'), modalidade: v('curMod'), local: v('curLocal'), prazo: v('curPrazo'), valor: v('curValor'),
+      link, contato: v('curCont'), arquivado: f.querySelector('#curArq').checked, banner: banner || '', bannerTipo: bannerTipo || '', atualizado: new Date().toISOString()};
+    await db.collection('cursos').doc(id).set(doc);
+    CUR[id] = doc;
+    if (antigo && antigo !== doc.banner && assetsAPI) { try { await assetsAPI.delete(antigo); } catch (e) {} }
+    mostrarCursos(id);
+  } catch (e) {
+    msg.className = 'msg err';
+    msg.textContent = e && e.code === 'sem_assets' ? 'O envio de imagens não está disponível nesta visualização.'
+      : e && (e.code === 'too_large') ? 'A imagem é grande demais (limite de 20 MB).'
+      : e && e.code === 'unsupported_type' ? 'Formato de imagem não aceito. Use JPG, PNG ou WebP.' : erroDb(e);
+  }
+}
+vCur.addEventListener('click', async e => {
+  if (e.target.closest('[data-cur-novo]')) { curAtual = '__novo'; pintarCursos(); return; }
+  const ed = e.target.closest('[data-cur-editar]'); if (ed) { curAtual = '__editar:' + ed.dataset.curEditar; pintarCursos(); return; }
+  const ex = e.target.closest('[data-cur-excluir]');
+  if (ex) {
+    if (!ex.dataset.confirma) { ex.dataset.confirma = '1'; ex.textContent = 'Confirmar exclusão'; return; }
+    const id = ex.dataset.curExcluir, ban = CUR[id] && CUR[id].banner;
+    try {
+      await db.collection('cursos').doc(id).delete(); delete CUR[id];
+      if (ban && assetsAPI) { try { await assetsAPI.delete(ban); } catch (err) {} }
+      mostrarCursos('');
+    } catch (err) { const m = vCur.querySelector('.msg'); if (m) { m.className = 'msg err'; m.textContent = erroDb(err); } }
+  }
+});
+vCur.addEventListener('change', e => {
+  if (e.target.id !== 'curBan' || !e.target.files[0]) return;
+  const img = vCur.querySelector('#curPrev'); img.src = URL.createObjectURL(e.target.files[0]); img.hidden = false;
+});
+vCur.addEventListener('submit', e => { e.preventDefault(); salvarCurso(e.target); });
+
+// ---------- Aviso de novidades (pop-up discreto, uma vez por sessão)
+const avisoEl = document.getElementById('aviso');
+function mostrarAviso(forcar) {
+  const a = AVISO;
+  if (!a || !a.ativo || !(a.itens || []).length) { if (!forcar) return; }
+  let visto = null; try { visto = sessionStorage.getItem('vg-aviso'); } catch (e) {}
+  if (!forcar && visto === String(a.versao || '')) return;
+  avisoEl.innerHTML = `<div class="aviso-cab"><h2 id="avisoTit">${esc(a && a.titulo || 'Novidades')}</h2><button class="aviso-x" type="button" data-aviso-fechar aria-label="Fechar">×</button></div>
+    ${a && a.intro ? `<p>${esc(a.intro)}</p>` : ''}<ul>${((a && a.itens) || []).map(i => `<li>${esc(i)}</li>`).join('')}</ul>
+    <p class="aviso-acoes"><button class="btn" type="button" data-aviso-fechar>Fechar</button></p>`;
+  avisoEl.hidden = false;
+}
+function fecharAviso() {
+  avisoEl.hidden = true;
+  try { sessionStorage.setItem('vg-aviso', String((AVISO && AVISO.versao) || '')); } catch (e) {}
+}
+avisoEl.addEventListener('click', e => {
+  if (e.target.closest('[data-aviso-fechar]')) fecharAviso();
+  if (e.target.closest('[data-aviso-salvar]')) salvarAviso();
+});
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !avisoEl.hidden && !avisoEl.querySelector('form')) fecharAviso(); });
+function editarAviso() {
+  const a = AVISO || {titulo: 'Novidades no Verbum Graecum', intro: '', itens: [], ativo: true};
+  avisoEl.innerHTML = `<form class="form-adm aviso-form" onsubmit="return false"><div class="aviso-cab"><h2>Aviso de novidades</h2><button class="aviso-x" type="button" data-aviso-fechar aria-label="Fechar">×</button></div>
+    <label class="f-campo"><span>Título</span><input id="avTit" value="${esc(a.titulo || '')}"></label>
+    <label class="f-campo"><span>Frase de apresentação (opcional)</span><input id="avIntro" value="${esc(a.intro || '')}"></label>
+    <label class="f-campo"><span>Novidades (uma por linha)</span><textarea id="avItens" rows="6">${esc((a.itens || []).join('\n'))}</textarea></label>
+    <label class="f-check"><input type="checkbox" id="avAtivo" ${a.ativo ? 'checked' : ''}> Mostrar aos visitantes</label>
+    <div class="f-acoes"><button class="btn pri" type="button" data-aviso-salvar>Salvar</button><span class="msg" aria-live="polite"></span></div></form>`;
+  avisoEl.hidden = false;
+}
+async function salvarAviso() {
+  const g = id => avisoEl.querySelector('#' + id), msg = avisoEl.querySelector('.msg');
+  const doc = {titulo: g('avTit').value.trim() || 'Novidades', intro: g('avIntro').value.trim(),
+    itens: g('avItens').value.split('\n').map(s => s.trim()).filter(Boolean), ativo: g('avAtivo').checked, versao: new Date().toISOString()};
+  msg.className = 'msg'; msg.textContent = 'Salvando…';
+  try { await db.collection('avisos').doc('atual').set(doc); AVISO = doc; msg.textContent = 'Salvo. O aviso aparecerá de novo para todos os visitantes.'; }
+  catch (e) { msg.className = 'msg err'; msg.textContent = erroDb(e); }
+}
+document.getElementById('avisoEditar').onclick = editarAviso;
+
+// ---------- Carregamento do conteúdo
+function aplicarConteudo() { pintarLiturgia(); pintarCursos(); }
+function carregarFixo() {
+  LIT = Object.assign({}, CONTEUDO_FIXO.liturgia); CUR = Object.assign({}, CONTEUDO_FIXO.cursos); AVISO = CONTEUDO_FIXO.aviso;
+  aplicarConteudo();
+  setTimeout(() => mostrarAviso(false), 600);
+}
+async function iniciarConteudo() {
+  if (!db) return;
+  if (podeEditar) {
+    document.getElementById('avisoAdm').hidden = false;
+    try { assetsAPI = await window.claude.use('assets'); } catch (e) { assetsAPI = null; }
+  }
+  try {
+    db.collection('liturgia').onSnapshot(s => { LIT = {}; s.docs.forEach(d => { const x = d.data(); if (x) LIT[d.id] = x; }); if (!vLit.querySelector('form')) pintarLiturgia(); }, () => {});
+    db.collection('cursos').onSnapshot(s => { CUR = {}; s.docs.forEach(d => { const x = d.data(); if (x) CUR[d.id] = Object.assign({id: d.id}, x); }); if (!vCur.querySelector('form')) pintarCursos(); }, () => {});
+    db.doc('avisos/atual').onSnapshot(d => { const novo = d.exists ? d.data() : null; const primeira = AVISO === CONTEUDO_FIXO.aviso; AVISO = novo; if (primeira && avisoEl.hidden) mostrarAviso(false); }, () => {});
+  } catch (e) {}
+}
+carregarFixo();
+
 (async () => {
   const c = window.claude;
   if (!c || !c.use) return;
@@ -1821,6 +2479,7 @@ function acaoComentario(b) {
     podeEditar = !!(db && u && await u.canEdit());
   } catch (e) { db = null; }
   if (CAPS.length) assinarComentarios();
+  iniciarConteudo();
 })();
 
 { const m = ler('jo1-modo'); if (m && modos[m] !== undefined) modo(m); if (ler('jo1-cor')) cor(true); }
@@ -1834,6 +2493,8 @@ else if (ini === 'jo' && ler('jo-cap')) iniCap = +ler('jo-cap');
 if (hm) abrirLivro(ini, iniCap, iniV);
 else if (location.hash === '#basico') mostrarBasico();
 else if (location.hash === '#privacidade') mostrarPrivacidade();
+else if (/^#liturgia(-\d{4}-\d{2}-\d{2})?$/.test(location.hash)) mostrarLiturgia(location.hash.slice(10));
+else if (/^#(cursos|curso-[\w-]+)$/.test(location.hash)) mostrarCursos(location.hash.startsWith('#curso-') ? location.hash.slice(7) : '');
 else mostrarInicio();
 
 // Legenda dos casos: definição breve (extraída de “O Básico do Grego”)
