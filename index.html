@@ -320,6 +320,24 @@ body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset
 .ctrls .grupo{display:flex}
 .ctrls .grupo+.grupo{margin-left:10px;padding-left:10px;border-left:1px solid var(--line-2)}
 .livros button:focus-visible,.ctrls button:focus-visible{outline:1px solid var(--accent);outline-offset:1px}
+.livros .ind-btn{all:unset;cursor:pointer;font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:1.02rem;color:var(--fg);padding:2px 10px;line-height:1.5;border:1px solid var(--line-2);border-radius:2px;display:inline-flex;align-items:baseline;gap:6px}
+.livros .ind-btn .ind-rot{color:var(--muted)}
+.livros .ind-btn #livroAtual{color:var(--accent)}
+.livros .ind-btn .ind-seta{font-size:.8rem;color:var(--muted);transition:transform .15s}
+.livros .ind-btn[aria-expanded="true"] .ind-seta{transform:rotate(180deg)}
+.livros .ind-btn:hover{border-color:var(--accent)}
+.livros .ind-btn:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
+.indice{position:absolute;left:50%;top:100%;transform:translateX(-50%);width:min(760px,calc(100vw - 32px));max-height:calc(100vh - 140px);overflow:auto;box-sizing:border-box;background:var(--surface);border:1px solid var(--line-2);box-shadow:0 10px 28px rgba(0,0,0,.28);padding:16px 22px 20px;z-index:20;text-align:left}
+.ind-tit{margin:0 0 6px;font-family:var(--f-ui);font-size:1.25rem;color:var(--fg);display:flex;align-items:center;gap:14px}
+.ind-tit::after{content:"";flex:1;border-top:1px solid var(--line-2)}
+.ind-grupo{margin-top:10px}
+.ind-cat{margin:0 0 6px;font-variant-caps:all-small-caps;letter-spacing:.1em;font-size:.98rem;color:var(--muted)}
+.ind-grade{display:grid;grid-template-columns:repeat(auto-fill,minmax(105px,1fr));gap:8px}
+.livros .ind-grade button{all:unset;cursor:pointer;box-sizing:border-box;text-align:center;font-family:var(--f-ui);font-size:1.05rem;color:var(--fg);padding:6px 8px;border:1px solid var(--line);border-radius:2px;line-height:1.3;transition:border-color .15s,color .15s}
+.livros .ind-grade button:hover{border-color:var(--accent);color:var(--accent)}
+.livros .ind-grade button[aria-pressed="true"]{border-color:var(--accent);color:var(--accent);background:var(--accent-soft);text-decoration:none}
+.livros .ind-grade button:focus-visible{outline:1px solid var(--accent);outline-offset:1px}
+@media (max-width:520px){.indice{padding:12px 14px 16px}.ind-grade{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .cap{display:flex;align-items:center;gap:6px;color:var(--muted)}
 .cap label{font-variant-caps:all-small-caps;letter-spacing:.08em;font-size:1.02rem}
 .cap select{font-family:var(--f-ui);font-size:1rem;padding:1px 4px;border:0;border-bottom:1px solid var(--line-2);border-radius:0;background:transparent;color:var(--fg);font-variant-numeric:lining-nums}
@@ -483,7 +501,7 @@ footer{grid-column:1/-1;font-size:.92rem;font-style:italic;color:var(--muted);bo
   .gr{font-size:1.26rem}
   .verse{grid-template-columns:1.5rem minmax(0,1fr);gap:0 8px}
   .chcom{padding-left:1.5rem}
-  .top{position:static}
+  .top{position:relative}
   .verse,.chead,.com{scroll-margin-top:calc(env(safe-area-inset-top,0px) + var(--leg-h,0px) + 12px)}
   .legend-bar{top:env(safe-area-inset-top,0px)}
   .legend{gap:0 10px;font-size:.88rem}
@@ -1447,23 +1465,16 @@ adjuntos.</p></li>
 </header>
 <nav class="top" aria-label="Navegação"><div class="top-in">
   <div class="casa-g"><button class="casa" id="irInicio" aria-label="Página inicial">Verbum Graecum</button><a class="lnk lnk-substack" href="https://substack.com/@joriomaia" target="_blank" rel="noopener">Substack ↗</a><a class="lnk lnk-vocab" href="https://leafy-otter-59322f.netlify.app/" target="_blank" rel="noopener">Aprenda o Vocabulário ↗</a></div>
-  <div class="livros" role="group" aria-label="Livro">
-    <button data-livro="mt" aria-pressed="false">Mateus</button>
-    <button data-livro="mc" aria-pressed="false">Marcos</button>
-    <button data-livro="lc" aria-pressed="false">Lucas</button>
-    <button data-livro="jo" aria-pressed="false">João</button>
-    <button data-livro="at" aria-pressed="false">Atos</button>
-    <button data-livro="rm" aria-pressed="false">Rm</button>
-    <button data-livro="1co" aria-pressed="false">1 Co</button>
-    <button data-livro="2co" aria-pressed="false">2 Co</button>
-    <button data-livro="gl" aria-pressed="false">Gl</button>
-    <button data-livro="ef" aria-pressed="false">Ef</button>
-    <button data-livro="fl" aria-pressed="false">Fl</button>
-    <button data-livro="1pe" aria-pressed="false">1 Pe</button>
-    <button data-livro="2pe" aria-pressed="false">2 Pe</button>
-    <button data-livro="1jo" aria-pressed="false">1 Jo</button>
-    <button data-livro="2jo" aria-pressed="false">2 Jo</button>
-    <button data-livro="3jo" aria-pressed="false">3 Jo</button>
+  <div class="livros">
+    <button class="ind-btn" id="btnIndice" type="button" aria-expanded="false" aria-controls="indiceLivros"><span class="ind-rot">Livro</span> <span id="livroAtual">João</span> <span class="ind-seta" aria-hidden="true">▾</span></button>
+    <div class="indice" id="indiceLivros" role="group" aria-label="Índice dos livros bíblicos" hidden>
+      <p class="ind-tit">Índice</p>
+      <div class="ind-grupo"><p class="ind-cat">Evangelhos</p><div class="ind-grade"><button data-livro="mt" aria-pressed="false">Mateus</button><button data-livro="mc" aria-pressed="false">Marcos</button><button data-livro="lc" aria-pressed="false">Lucas</button><button data-livro="jo" aria-pressed="false">João</button></div></div>
+      <div class="ind-grupo"><p class="ind-cat">História</p><div class="ind-grade"><button data-livro="at" aria-pressed="false">Atos</button></div></div>
+      <div class="ind-grupo"><p class="ind-cat">Cartas de Paulo</p><div class="ind-grade"><button data-livro="rm" aria-pressed="false">Romanos</button><button data-livro="1co" aria-pressed="false">1 Coríntios</button><button data-livro="2co" aria-pressed="false">2 Coríntios</button><button data-livro="gl" aria-pressed="false">Gálatas</button><button data-livro="ef" aria-pressed="false">Efésios</button><button data-livro="fl" aria-pressed="false">Filipenses</button></div></div>
+      <div class="ind-grupo"><p class="ind-cat">Cartas de Pedro</p><div class="ind-grade"><button data-livro="1pe" aria-pressed="false">1 Pedro</button><button data-livro="2pe" aria-pressed="false">2 Pedro</button></div></div>
+      <div class="ind-grupo"><p class="ind-cat">Cartas de João</p><div class="ind-grade"><button data-livro="1jo" aria-pressed="false">1 João</button><button data-livro="2jo" aria-pressed="false">2 João</button><button data-livro="3jo" aria-pressed="false">3 João</button></div></div>
+    </div>
   </div>
   <div class="cap">
     <button class="btn" id="capPrev" aria-label="Capítulo anterior">‹</button>
@@ -1668,6 +1679,7 @@ async function abrirLivro(id, cap, verso) {
   so(vLeitor);
   if (!LIVROS[id]) id = 'jo';
   document.querySelectorAll('[data-livro]').forEach(b => b.setAttribute('aria-pressed', b.dataset.livro === id));
+  document.getElementById('livroAtual').textContent = LIVROS[id].nome;
   const L = LIVROS[id];
   document.getElementById('brandGr').textContent = maiusc(L.gr);
   document.getElementById('brandPt').textContent = L.sub;
@@ -1987,7 +1999,18 @@ function passo(d) {
 sel.onchange = () => abrir(+sel.value);
 ['capPrev','capPrev2'].forEach(id => document.getElementById(id).onclick = () => passo(-1));
 ['capNext','capNext2'].forEach(id => document.getElementById(id).onclick = () => passo(1));
-document.querySelectorAll('[data-livro]').forEach(b => b.onclick = () => { if (b.dataset.livro !== livro || !CAPS.length || !texto.querySelector('.w')) abrirLivro(b.dataset.livro); });
+document.querySelectorAll('[data-livro]').forEach(b => b.onclick = () => { fecharIndice(); if (b.dataset.livro !== livro || !CAPS.length || !texto.querySelector('.w')) abrirLivro(b.dataset.livro); });
+// Índice dos livros: abre e fecha pelo botão “Livro”, fecha com Esc ou clique fora.
+const btnIndice = document.getElementById('btnIndice'), indiceLivros = document.getElementById('indiceLivros');
+function fecharIndice() { indiceLivros.hidden = true; btnIndice.setAttribute('aria-expanded', 'false'); }
+btnIndice.onclick = e => {
+  e.stopPropagation();
+  const abrir = indiceLivros.hidden;
+  indiceLivros.hidden = !abrir; btnIndice.setAttribute('aria-expanded', String(abrir));
+  if (abrir) (indiceLivros.querySelector('[aria-pressed="true"]') || indiceLivros.querySelector('button')).focus();
+};
+document.addEventListener('click', e => { if (!indiceLivros.hidden && !indiceLivros.contains(e.target)) fecharIndice(); });
+document.addEventListener('keydown', e => { if (e.key === 'Escape' && !indiceLivros.hidden) { fecharIndice(); btnIndice.focus(); } });
 
 const modos = {'v-both':'', 'v-gr':'only-gr', 'v-pt':'only-pt'};
 function modo(id) {
