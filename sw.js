@@ -1,7 +1,7 @@
 // Service worker do Verbum Graecum: permite instalar o site como aplicativo e lê-lo sem internet.
 // Página: rede primeiro (as atualizações chegam logo) e cópia guardada quando não há conexão.
 // Livros (data/*.js?v=…): guardados na primeira leitura; cada versão nova substitui a anterior.
-const VERSAO = 'f5e60c5f96';
+const VERSAO = '285060bf20';
 const CACHE = 'vg-' + VERSAO;
 const BASE = ['./', 'fonts.js', 'pwa.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'];
 
