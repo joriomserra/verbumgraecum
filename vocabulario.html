@@ -1,0 +1,1444 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aprenda o Vocabulário · Verbum Graecum</title>
+<link rel="icon" href="icons/icon-192.png">
+<style>
+  :root {
+    --bg: #0a1628;
+    --card: #112240;
+    --card2: #1a3260;
+    --gold: #c9a227;
+    --gold2: #f0c84a;
+    --cream: #f0e6c8;
+    --muted: #8899aa;
+    --correct: #27ae60;
+    --wrong: #c0392b;
+    --accent: #2980b9;
+    --radius: 14px;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg);
+    color: var(--cream);
+    font-family: 'Georgia', 'Times New Roman', serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0a1628 0%, #1a2c50 100%);
+    border-bottom: 2px solid var(--gold);
+    padding: 12px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+  }
+  .logo { display: flex; align-items: center; gap: 12px; }
+  .logo-icon { font-size: 2rem; }
+  .logo-text { font-size: 1.4rem; font-weight: bold; color: var(--gold); letter-spacing: 1px; }
+  .logo-sub { font-size: 0.8rem; color: var(--muted); }
+
+  /* ── CONTROLS ── */
+  .controls {
+    background: #0d1e3a;
+    border-bottom: 1px solid #1e3a6e;
+    padding: 10px 24px;
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
+  }
+  .ctrl-group { display: flex; align-items: center; gap: 8px; }
+  .ctrl-label { font-size: 0.75rem; color: var(--muted); text-transform: uppercase; letter-spacing: 1px; }
+  .btn-group { display: flex; gap: 5px; flex-wrap: wrap; }
+  .btn {
+    padding: 7px 14px;
+    border: 2px solid #1e3a6e;
+    background: var(--card);
+    color: var(--cream);
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 0.85rem;
+    font-family: inherit;
+    transition: all 0.2s;
+  }
+  .btn:hover { border-color: var(--gold); color: var(--gold); }
+  .btn.active { background: var(--gold); color: #0a1628; border-color: var(--gold); font-weight: bold; }
+  .btn-mode { font-size: 0.8rem; padding: 7px 12px; }
+  .btn-mode.active { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+  /* ── MAIN ── */
+  main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow: hidden;
+  }
+
+  /* ── SCREENS ── */
+  .screen { display: none; width: 100%; max-width: 900px; }
+  .screen.active { display: flex; flex-direction: column; align-items: center; gap: 20px; }
+
+  /* START SCREEN */
+  .start-screen {
+    text-align: center;
+    gap: 28px;
+  }
+  .start-icon { font-size: 5rem; }
+  .start-title { font-size: 2.5rem; color: var(--gold); }
+  .start-sub { color: var(--muted); font-size: 1.1rem; }
+  .start-stats {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  }
+  .stat-card {
+    background: var(--card);
+    border: 1px solid #1e3a6e;
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    text-align: center;
+    min-width: 120px;
+  }
+  .stat-num { font-size: 2.2rem; color: var(--gold2); font-weight: bold; }
+  .stat-lbl { font-size: 0.8rem; color: var(--muted); }
+  .btn-start {
+    font-size: 1.3rem;
+    padding: 16px 40px;
+    background: var(--gold);
+    color: #0a1628;
+    border: none;
+    border-radius: var(--radius);
+    cursor: pointer;
+    font-family: inherit;
+    font-weight: bold;
+    transition: transform 0.15s, background 0.15s;
+  }
+  .btn-start:hover { background: var(--gold2); transform: scale(1.03); }
+
+  /* FLASHCARD */
+  .flashcard-wrap { perspective: 1200px; width: 100%; max-width: 700px; }
+  .flashcard {
+    width: 100%;
+    min-height: 280px;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.5s cubic-bezier(.4,0,.2,1);
+    cursor: pointer;
+    border-radius: var(--radius);
+  }
+  .flashcard.flipped { transform: rotateY(180deg); }
+  .card-face {
+    position: absolute; inset: 0;
+    backface-visibility: hidden;
+    border-radius: var(--radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 40px 30px;
+    gap: 16px;
+  }
+  .card-front {
+    background: linear-gradient(135deg, #112240 0%, #1a3260 100%);
+    border: 2px solid var(--gold);
+  }
+  .card-back {
+    background: linear-gradient(135deg, #1a3260 0%, #0d2244 100%);
+    border: 2px solid var(--accent);
+    transform: rotateY(180deg);
+  }
+  .card-lesson-tag {
+    font-size: 0.75rem;
+    color: var(--gold);
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    padding: 3px 12px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: absolute;
+    top: 16px;
+    left: 16px;
+  }
+  .card-hint {
+    font-size: 0.75rem;
+    color: var(--muted);
+    position: absolute;
+    bottom: 14px;
+  }
+  .greek-word {
+    font-size: 3.5rem;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.2;
+    font-style: italic;
+  }
+  .greek-small { font-size: 2.2rem; }
+  .pt-meaning {
+    font-size: 1.8rem;
+    color: var(--cream);
+    text-align: center;
+    line-height: 1.3;
+  }
+  .card-tap-hint { font-size: 0.8rem; color: var(--muted); font-style: normal; }
+  .flashcard-nav {
+    display: flex; gap: 14px; align-items: center;
+  }
+  .btn-nav {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    background: var(--card);
+    border: 2px solid #1e3a6e;
+    color: var(--cream);
+    font-size: 1.4rem;
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .btn-nav:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-nav:disabled { opacity: 0.3; cursor: default; }
+  .flash-counter { font-size: 1rem; color: var(--muted); min-width: 70px; text-align: center; }
+
+  /* QUIZ */
+  .quiz-question {
+    background: linear-gradient(135deg, #112240 0%, #1a3260 100%);
+    border: 2px solid var(--gold);
+    border-radius: var(--radius);
+    padding: 36px 40px;
+    text-align: center;
+    width: 100%;
+    max-width: 700px;
+    min-height: 160px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  .q-label { font-size: 0.8rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; }
+  .q-word { font-size: 3rem; color: var(--cream); font-style: italic; line-height: 1.3; }
+  .q-word-sm { font-size: 2rem; }
+  .q-word.pt-word { font-style: normal; font-size: 2rem; }
+
+  .quiz-options {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 700px;
+  }
+  .opt-btn {
+    padding: 18px 20px;
+    background: var(--card);
+    border: 2px solid #1e3a6e;
+    border-radius: var(--radius);
+    color: var(--cream);
+    font-size: 1.15rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .opt-btn:hover:not(:disabled) { border-color: var(--gold); background: var(--card2); transform: translateY(-2px); }
+  .opt-btn.correct { background: #1a4a2a; border-color: var(--correct); color: #7dffaa; }
+  .opt-btn.wrong { background: #4a1a1a; border-color: var(--wrong); color: #ff9999; }
+  .opt-btn.reveal { background: #1a4a2a; border-color: var(--correct); color: #7dffaa; }
+  .opt-btn:disabled { cursor: default; }
+
+  .feedback-bar {
+    width: 100%; max-width: 700px;
+    padding: 14px 20px;
+    border-radius: var(--radius);
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    display: none;
+    gap: 10px;
+    align-items: center;
+    justify-content: center;
+  }
+  .feedback-bar.correct { background: #1a4a2a; border: 2px solid var(--correct); color: #7dffaa; display: flex; }
+  .feedback-bar.wrong { background: #4a1a1a; border: 2px solid var(--wrong); color: #ff9999; display: flex; }
+
+  /* TIMER BAR */
+  .timer-bar-wrap {
+    width: 100%; max-width: 700px;
+    height: 6px;
+    background: #1e3a6e;
+    border-radius: 3px;
+    overflow: hidden;
+  }
+  .timer-bar-fill {
+    height: 100%;
+    background: var(--gold);
+    transition: width linear;
+    border-radius: 3px;
+  }
+
+  /* MATCH PAIRS */
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    width: 100%;
+    max-width: 800px;
+  }
+  .match-col { display: flex; flex-direction: column; gap: 10px; }
+  .match-col-label { font-size: 0.75rem; color: var(--gold); text-transform: uppercase; letter-spacing: 1px; text-align: center; margin-bottom: 4px; }
+  .match-btn {
+    padding: 14px 16px;
+    background: var(--card);
+    border: 2px solid #1e3a6e;
+    border-radius: var(--radius);
+    color: var(--cream);
+    font-size: 1.05rem;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+    line-height: 1.3;
+    min-height: 60px;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .match-btn.greek-btn { font-style: italic; font-size: 1.2rem; }
+  .match-btn:hover:not(:disabled):not(.matched) { border-color: var(--gold); background: var(--card2); }
+  .match-btn.selected { border-color: var(--gold2); background: var(--card2); box-shadow: 0 0 0 3px rgba(201,162,39,0.3); }
+  .match-btn.matched { background: #1a3a2a; border-color: var(--correct); color: #7dffaa; cursor: default; opacity: 0.7; }
+  .match-btn.wrong-match { background: #3a1a1a; border-color: var(--wrong); animation: shake 0.4s; }
+  @keyframes shake {
+    0%,100%{transform:translateX(0)} 20%{transform:translateX(-6px)} 60%{transform:translateX(6px)}
+  }
+
+  /* LIGHTNING */
+  .lightning-header {
+    display: flex; gap: 24px; align-items: center; justify-content: center;
+    width: 100%;
+  }
+  .lightning-timer {
+    font-size: 3rem;
+    color: var(--gold);
+    font-weight: bold;
+    min-width: 80px;
+    text-align: center;
+  }
+  .lightning-timer.urgent { color: var(--wrong); animation: pulse 0.5s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
+  .score-chip {
+    background: var(--card);
+    border: 1px solid #1e3a6e;
+    border-radius: 30px;
+    padding: 8px 18px;
+    font-size: 1rem;
+    color: var(--cream);
+  }
+  .score-chip span { color: var(--gold2); font-weight: bold; font-size: 1.2rem; }
+
+  /* RESULTS */
+  .results-screen {
+    text-align: center;
+    gap: 24px;
+  }
+  .result-title { font-size: 2.5rem; color: var(--gold); }
+  .result-emoji { font-size: 4rem; }
+  .result-stats {
+    display: flex; gap: 20px; justify-content: center; flex-wrap: wrap;
+  }
+  .result-stat {
+    background: var(--card);
+    border: 1px solid #1e3a6e;
+    border-radius: var(--radius);
+    padding: 20px 28px;
+    text-align: center;
+  }
+  .result-stat-num { font-size: 2.5rem; font-weight: bold; color: var(--gold2); }
+  .result-stat-lbl { font-size: 0.85rem; color: var(--muted); }
+  .retry-words {
+    background: var(--card);
+    border: 1px solid #1e3a6e;
+    border-radius: var(--radius);
+    padding: 16px 24px;
+    max-width: 600px;
+    width: 100%;
+    text-align: left;
+  }
+  .retry-words h3 { color: var(--wrong); margin-bottom: 10px; font-size: 0.9rem; }
+  .retry-word { color: var(--cream); font-size: 0.95rem; padding: 4px 0; border-bottom: 1px solid #1e3a6e; }
+  .retry-word:last-child { border-bottom: none; }
+  .retry-word .greek-r { color: var(--gold); font-style: italic; }
+
+  /* FOOTER */
+  footer {
+    background: #0d1e3a;
+    border-top: 1px solid #1e3a6e;
+    padding: 10px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-shrink: 0;
+    gap: 16px;
+  }
+  .progress-wrap { display: flex; align-items: center; gap: 12px; flex: 1; }
+  .progress-bar {
+    flex: 1;
+    height: 8px;
+    background: #1e3a6e;
+    border-radius: 4px;
+    overflow: hidden;
+    max-width: 300px;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--gold2) 100%);
+    border-radius: 4px;
+    transition: width 0.4s ease;
+  }
+  .progress-text { font-size: 0.85rem; color: var(--muted); white-space: nowrap; }
+  .score-display { display: flex; gap: 20px; }
+  .score-item { font-size: 0.9rem; color: var(--muted); }
+  .score-item .val { font-weight: bold; }
+  .score-item .val.green { color: #7dffaa; }
+  .score-item .val.red { color: #ff9999; }
+
+  /* UTIL */
+  .hidden { display: none !important; }
+  .italic { font-style: italic; }
+
+  /* Keyboard hints */
+  .key-hints {
+    display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  }
+  .key-hint {
+    font-size: 0.75rem;
+    color: var(--muted);
+    display: flex; align-items: center; gap: 5px;
+  }
+  .key { background: #1e3a6e; border-radius: 4px; padding: 1px 7px; font-family: monospace; color: var(--cream); font-size: 0.8rem; }
+
+  /* RESPONSIVE */
+  @media (max-width: 600px) {
+    .quiz-options { grid-template-columns: 1fr; }
+    .greek-word { font-size: 2.5rem; }
+    .q-word { font-size: 2rem; }
+    .controls { gap: 10px; }
+  }
+  .voltar { color: var(--gold); text-decoration: none; font-size: .85rem; letter-spacing: 1px; border: 1px solid var(--gold); border-radius: 8px; padding: 6px 12px; white-space: nowrap; }
+  .vg-curto { display: none; }
+  .voltar:hover { background: var(--gold); color: var(--bg); }
+  @media (max-width: 700px) { body { overflow: auto; } header { padding: 10px 16px; gap: 10px; } .controls { padding: 10px 16px; } .logo-text { font-size: 1.15rem; } .vg-nome { display: none; } .vg-curto { display: inline; } }
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">
+    <div class="logo-icon">🏛</div>
+    <div>
+      <div class="logo-text">VOCABULÁRIO GREGO</div>
+      <div class="logo-sub">Grego Bíblico · Koiné</div>
+    </div>
+  </div>
+  <a class="voltar" href="./">← <span class="vg-nome">Verbum Graecum</span><span class="vg-curto">Início</span></a>
+</header>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <div class="ctrl-group">
+    <span class="ctrl-label">Aula</span>
+    <div class="btn-group" id="lessonBtns">
+      <button class="btn active" data-lesson="all">Todas</button>
+      <button class="btn" data-lesson="1">1</button>
+      <button class="btn" data-lesson="2">2</button>
+      <button class="btn" data-lesson="3">3</button>
+      <button class="btn" data-lesson="4">4</button>
+      <button class="btn" data-lesson="5">5</button>
+      <button class="btn" data-lesson="6">6</button>
+      <button class="btn" data-lesson="7">7</button>
+    </div>
+  </div>
+  <div class="ctrl-group">
+    <span class="ctrl-label">Essenciais NT</span>
+    <div class="btn-group" id="essBtns"></div>
+  </div>
+  <div class="ctrl-group">
+    <span class="ctrl-label">Modo</span>
+    <div class="btn-group" id="modeBtns">
+      <button class="btn btn-mode active" data-mode="start">Início</button>
+      <button class="btn btn-mode" data-mode="flash">🃏 Flashcards</button>
+      <button class="btn btn-mode" data-mode="quiz_gp">📝 Quiz Grego→PT</button>
+      <button class="btn btn-mode" data-mode="quiz_pg">🔄 Quiz PT→Grego</button>
+      <button class="btn btn-mode" data-mode="match">🔗 Conectar</button>
+      <button class="btn btn-mode" data-mode="lightning">⚡ Relâmpago</button>
+    </div>
+  </div>
+</div>
+
+<!-- MAIN -->
+<main>
+
+  <!-- START SCREEN -->
+  <div class="screen active" id="screen-start">
+    <div class="start-icon">🏺</div>
+    <div class="start-title">Vocabulário Grego Koiné</div>
+    <div class="start-sub">Selecione uma aula e um modo de jogo para começar</div>
+    <div class="start-stats" id="startStats"></div>
+    <button class="btn-start" id="btnStartGame">▶ Iniciar Jogo</button>
+    <div class="key-hints">
+      <div class="key-hint"><span class="key">Space</span> Virar carta / Confirmar</div>
+      <div class="key-hint"><span class="key">→</span> Próxima</div>
+      <div class="key-hint"><span class="key">←</span> Anterior</div>
+      <div class="key-hint"><span class="key">1–4</span> Escolher opção</div>
+    </div>
+  </div>
+
+  <!-- FLASHCARD SCREEN -->
+  <div class="screen" id="screen-flash">
+    <div class="flashcard-wrap">
+      <div class="flashcard" id="flashcard" onclick="flipCard()">
+        <div class="card-face card-front">
+          <div class="card-lesson-tag" id="fc-lesson-tag">Aula 1</div>
+          <div class="greek-word" id="fc-greek">λόγος</div>
+          <div class="card-hint">Clique para ver a tradução</div>
+        </div>
+        <div class="card-face card-back">
+          <div class="card-lesson-tag" id="fc-lesson-tag2" style="border-color:var(--accent);color:var(--accent)">Aula 1</div>
+          <div class="pt-meaning" id="fc-pt">Palavra</div>
+          <div class="card-hint">Clique para virar</div>
+        </div>
+      </div>
+    </div>
+    <div class="flashcard-nav">
+      <button class="btn-nav" id="btnPrev" onclick="flashPrev()">←</button>
+      <div class="flash-counter" id="flashCounter">1 / 14</div>
+      <button class="btn-nav" id="btnNext" onclick="flashNext()">→</button>
+    </div>
+    <div class="key-hints">
+      <div class="key-hint"><span class="key">Space</span> Virar</div>
+      <div class="key-hint"><span class="key">→</span> Próxima</div>
+      <div class="key-hint"><span class="key">←</span> Anterior</div>
+    </div>
+  </div>
+
+  <!-- QUIZ SCREEN (Grego→PT and PT→Grego) -->
+  <div class="screen" id="screen-quiz">
+    <div class="quiz-question">
+      <div class="q-label" id="qLabel">Qual é o significado?</div>
+      <div class="q-word" id="qWord">λόγος</div>
+    </div>
+    <div class="timer-bar-wrap hidden" id="timerBarWrap">
+      <div class="timer-bar-fill" id="timerBarFill" style="width:100%"></div>
+    </div>
+    <div class="quiz-options" id="quizOptions"></div>
+    <div class="feedback-bar" id="feedbackBar"></div>
+  </div>
+
+  <!-- MATCH PAIRS SCREEN -->
+  <div class="screen" id="screen-match">
+    <div style="font-size:0.85rem;color:var(--muted);text-align:center">
+      Clique em uma palavra grega e depois na sua tradução para conectá-las.
+    </div>
+    <div class="match-grid" id="matchGrid">
+      <div class="match-col">
+        <div class="match-col-label">🇬🇷 Grego</div>
+        <div id="matchGreek"></div>
+      </div>
+      <div class="match-col">
+        <div class="match-col-label">🇧🇷 Português</div>
+        <div id="matchPt"></div>
+      </div>
+    </div>
+    <div class="feedback-bar" id="matchFeedback"></div>
+    <div style="display:flex;gap:12px;align-items:center">
+      <div class="score-chip">Pares: <span id="matchScore">0</span> / <span id="matchTotal">6</span></div>
+      <button class="btn" id="btnMatchNext" onclick="startMatch()" style="display:none">Próximas palavras →</button>
+    </div>
+  </div>
+
+  <!-- LIGHTNING SCREEN -->
+  <div class="screen" id="screen-lightning">
+    <div class="lightning-header">
+      <div class="score-chip">✓ <span id="lScore">0</span></div>
+      <div class="lightning-timer" id="lTimer">120</div>
+      <div class="score-chip">✗ <span id="lWrong">0</span></div>
+    </div>
+    <div class="quiz-question" style="min-height:140px">
+      <div class="q-label" id="lLabel">Qual é o significado?</div>
+      <div class="q-word" id="lWord">λόγος</div>
+    </div>
+    <div class="quiz-options" id="lightningOptions"></div>
+  </div>
+
+  <!-- RESULTS SCREEN -->
+  <div class="screen" id="screen-results">
+    <div class="result-emoji" id="resultEmoji">🏆</div>
+    <div class="result-title" id="resultTitle">Excelente!</div>
+    <div class="result-stats">
+      <div class="result-stat">
+        <div class="result-stat-num" id="rCorrect">0</div>
+        <div class="result-stat-lbl">Corretas</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num" id="rWrong" style="color:#ff9999">0</div>
+        <div class="result-stat-lbl">Erradas</div>
+      </div>
+      <div class="result-stat">
+        <div class="result-stat-num" id="rPct" style="color:var(--gold2)">0%</div>
+        <div class="result-stat-lbl">Acertos</div>
+      </div>
+    </div>
+    <div class="retry-words hidden" id="retryWords">
+      <h3>⚠ Palavras para revisar:</h3>
+      <div id="retryList"></div>
+    </div>
+    <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+      <button class="btn-start" onclick="restartCurrent()" style="font-size:1rem;padding:12px 28px">↺ Jogar novamente</button>
+      <button class="btn" onclick="showScreen('start')" style="font-size:1rem;padding:12px 28px;border-color:var(--gold);color:var(--gold)">← Menu</button>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <div class="progress-wrap">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progressFill" style="width:0%"></div>
+    </div>
+    <div class="progress-text" id="progressText">—</div>
+  </div>
+  <div class="score-display">
+    <div class="score-item">Corretas: <span class="val green" id="ftCorrect">—</span></div>
+    <div class="score-item">Erradas: <span class="val red" id="ftWrong">—</span></div>
+    <div class="score-item">Grupo: <span class="val" id="ftLesson">Todas</span></div>
+  </div>
+</footer>
+
+<script>
+// ─── VOCABULARY DATA ─────────────────────────────────────────────────────────
+const VOCAB = {
+  1: [
+    { g: "ὁ, ἡ, τό",         p: "Artigo definido (masc., fem., neut.)" },
+    { g: "καί",               p: "E, também" },
+    { g: "δέ",                p: "Mas, porém" },
+    { g: "ἐν",                p: "Em, dentro de" },
+    { g: "λέγω",              p: "Eu digo, falo" },
+    { g: "εἰμί",              p: "Eu sou, estou, existo" },
+    { g: "οὐ / οὐκ / οὐχ",   p: "Não (negação direta)" },
+    { g: "μή",                p: "Não (negação subjetiva)" },
+    { g: "ἐγώ",               p: "Eu" },
+    { g: "σύ",                p: "Tu" },
+    { g: "αὐτός, -ή, -ό",    p: "Ele / Ela / Isso" },
+    { g: "ἡμεῖς",             p: "Nós" },
+    { g: "ὑμεῖς",             p: "Vós" },
+    { g: "αὐτοί, -αί, -ά",   p: "Eles / Elas" },
+  ],
+  2: [
+    { g: "θεός, ὁ",           p: "Deus, deus" },
+    { g: "γάρ",               p: "Pois, então" },
+    { g: "Ἰησοῦς",            p: "Jesus" },
+    { g: "κύριος, ὁ",         p: "Senhor, amo, dono" },
+    { g: "ἔχω",               p: "Eu tenho" },
+    { g: "ἀλλά",              p: "Mas, porém, exceto" },
+    { g: "ποιέω",             p: "Eu faço" },
+    { g: "ἄνθρωπος, ὁ",      p: "Homem, ser humano, pessoa" },
+    { g: "χριστός, ὁ",        p: "Cristo" },
+  ],
+  3: [
+    { g: "ἔρχομαι",           p: "Eu vou, venho" },
+    { g: "ὁράω",              p: "Eu vejo, percebo, contemplo" },
+    { g: "ἀκούω",             p: "Eu ouço, escuto, entendo" },
+    { g: "πνεύμα, τό",        p: "Vento, sopro, espírito" },
+    { g: "ἡμέρα, ἡ",          p: "Dia" },
+    { g: "υἱός, ὁ",           p: "Filho" },
+    { g: "ἀδελφός, ὁ",        p: "Irmão" },
+    { g: "λόγος, ὁ",          p: "Palavra" },
+    { g: "λαλέω",             p: "Eu falo" },
+    { g: "λαμβάνω",           p: "Eu tomo, recebo" },
+    { g: "πιστεύω",           p: "Eu creio, acredito, confio" },
+    { g: "πίστις, ἡ",         p: "Fidelidade, fé, confiança, crença" },
+  ],
+  4: [
+    { g: "θέλω",              p: "Eu desejo, quero" },
+    { g: "γράφω",             p: "Eu escrevo" },
+    { g: "βάλλω",             p: "Eu jogo, lanço" },
+    { g: "διδάσκω",           p: "Eu ensino" },
+    { g: "ἄγω",               p: "Eu vou, guio, conduzo" },
+    { g: "λύω",               p: "Eu desato, solto, liberto, destruo" },
+    { g: "λούω",              p: "Eu lavo / me banho" },
+    { g: "γινώσκω",           p: "Eu conheço, sei, compreendo" },
+    { g: "σώζω",              p: "Eu salvo, liberto, preservo, curo" },
+    { g: "εὑρίσκω",           p: "Eu acho, encontro" },
+  ],
+  5: [
+    { g: "ἀπόστολος, ὁ",     p: "Apóstolo, enviado, mensageiro" },
+    { g: "διδάσκαλος, ὁ",    p: "Mestre, professor" },
+    { g: "δοῦλος, ὁ",         p: "Escravo, servo" },
+    { g: "καιρός, ὁ",         p: "Tempo certo; oportunidade" },
+    { g: "κόσμος, ὁ",         p: "Mundo, universo" },
+    { g: "νόμος, ὁ",          p: "Lei" },
+    { g: "ὀφθαλμός, ὁ",      p: "Olho" },
+    { g: "φίλος, ὁ",          p: "Amigo" },
+    { g: "φιλία",             p: "Amizade" },
+    { g: "φιλέω",             p: "Amar (vínculo emocional / amizade)" },
+    { g: "ἀγάπη, ἡ",          p: "Amor sacrificial; essência do amor divino" },
+    { g: "ἀγαπάω",            p: "Amar (virtude teologal)" },
+  ],
+  6: [
+    { g: "ἀλήθεια, ἡ",        p: "Verdade" },
+    { g: "βασιλεία, ἡ",       p: "Reino; reinado, domínio real" },
+    { g: "γλῶσσα, ἡ",         p: "Língua, linguagem, idioma" },
+    { g: "δόξα, ἡ",            p: "Glória, Louvor" },
+    { g: "ἐκκλησία, ἡ",       p: "Igreja, assembleia, congregação" },
+    { g: "ζωή, ἡ",             p: "Vida (física e espiritual)" },
+    { g: "μαθητής, ὁ",         p: "Discípulo, aprendiz, aluno" },
+    { g: "Μεσσίας, ὁ",         p: "Messias, ungido" },
+    { g: "νεανίας, ὁ",         p: "Jovem, moço" },
+    { g: "οἰκία, ἡ",           p: "Casa; família" },
+    { g: "παραβολή, ἡ",        p: "Parábola, ilustração" },
+    { g: "προφήτης, ὁ",        p: "Profeta" },
+    { g: "σοφία, ἡ",           p: "Sabedoria" },
+    { g: "συναγωγή, ἡ",        p: "Sinagoga, assembleia" },
+    { g: "σωτηρία, ἡ",         p: "Salvação, libertação, preservação" },
+    { g: "ψυχή, ἡ",            p: "Alma, vida" },
+  ],
+  7: [
+    { g: "ἀγαθός, -ή, -όν",   p: "Bom, reto" },
+    { g: "ἀγαπητός, -ή, -ον", p: "Amado" },
+    { g: "ἅγιος, -ία, -ον",   p: "Santo, consagrado, separado para Deus" },
+    { g: "αἰώνιος, -ον",      p: "Eterno" },
+    { g: "ἄλλος, -η, -ο",     p: "Outro (da mesma espécie)" },
+    { g: "ἕτερος, -α, -ον",   p: "Outro (de natureza diferente)" },
+    { g: "ἁμαρτωλός, -όν",   p: "Pecaminoso" },
+    { g: "δίκαιος, -α, -ον",  p: "Justo, reto" },
+    { g: "ἔσχατος, -η, -ον",  p: "Último" },
+    { g: "καινός, -η, -όν",   p: "Novo (inédito, novidade)" },
+    { g: "νέος, -α, -ον",     p: "Novo, jovem, recente" },
+    { g: "πιστός, -ή, -όν",   p: "Fiel, confiável, crente" },
+    { g: "πονηρός, -ά, -όν",  p: "Mau, maligno" },
+    { g: "κακός, -ή, -όν",    p: "Mau, ruim" },
+    { g: "καλός, -ή, -όν",    p: "Bom, lindo, belo" },
+    { g: "μόνος, -η, -ον",    p: "Único, só; somente" },
+    { g: "νεκρός, -ά, -όν",   p: "Morto" },
+    { g: "πνευματικός, -ή, -όν", p: "Espiritual" },
+    { g: "πρῶτος, -η, -ον",   p: "Primeiro" },
+    { g: "σάρκινος, -η, -ον", p: "Carnal" },
+  ],
+  "E1": [
+    { g: "εἰς", p: "Para dentro de; para; até" },
+    { g: "οὗτος, αὕτη, τοῦτο", p: "Este, esta, isto" },
+    { g: "ὅς, ἥ, ὅ", p: "O qual, a qual; que (relativo)" },
+    { g: "ὅτι", p: "Que; porque, pois" },
+    { g: "πᾶς, πᾶσα, πᾶν", p: "Todo, cada; todos" },
+    { g: "ἐκ, ἐξ", p: "De dentro de; a partir de" },
+    { g: "ἐπί", p: "Sobre, em cima de; no tempo de" },
+    { g: "πρός", p: "Em direção a; junto a, perto de" },
+    { g: "γίνομαι", p: "Eu me torno; venho a ser; aconteço" },
+    { g: "διά", p: "Por meio de, através de; por causa de" },
+    { g: "ἵνα", p: "Para que, a fim de que" },
+    { g: "ἀπό", p: "De, desde; da parte de" },
+    { g: "τίς, τί", p: "Quem? Que? Qual? (interrogativo)" },
+    { g: "τις, τι", p: "Alguém, algum; alguma coisa (indefinido)" },
+    { g: "εἰ", p: "Se (condição real)" },
+    { g: "ὡς", p: "Como, assim como; quando" },
+    { g: "οὖν", p: "Portanto, então; pois" },
+    { g: "κατά", p: "Segundo, conforme; contra; para baixo" },
+  ],
+  "E2": [
+    { g: "μετά", p: "Com, junto de; depois de" },
+    { g: "πολύς, πολλή, πολύ", p: "Muito" },
+    { g: "δίδωμι", p: "Eu dou; entrego; confio" },
+    { g: "πατήρ, πατρός, ὁ", p: "Pai" },
+    { g: "ἐάν", p: "Se (+ subjuntivo, condição provável)" },
+    { g: "εἷς, μία, ἕν", p: "Um, uma (numeral)" },
+    { g: "ἤ", p: "Ou; do que" },
+    { g: "περί", p: "Acerca de, sobre; ao redor de" },
+    { g: "ἑαυτοῦ, -ῆς", p: "De si mesmo" },
+    { g: "οἶδα", p: "Eu sei; conheço" },
+    { g: "οὐρανός, ὁ", p: "Céu" },
+    { g: "ἐκεῖνος, -η, -ο", p: "Aquele, aquela, aquilo" },
+    { g: "γῆ, ἡ", p: "Terra" },
+    { g: "μέγας, μεγάλη, μέγα", p: "Grande" },
+    { g: "ἀποκρίνομαι", p: "Eu respondo" },
+    { g: "ὄνομα, -ατος, τό", p: "Nome; pessoa; reputação" },
+    { g: "οὐδείς, οὐδεμία, οὐδέν", p: "Nenhum, ninguém; nada" },
+    { g: "ὑπό", p: "Por (agente); sob, debaixo de" },
+  ],
+  "E3": [
+    { g: "ἐξέρχομαι", p: "Eu saio" },
+    { g: "ἀνήρ, ἀνδρός, ὁ", p: "Homem, varão; marido" },
+    { g: "γυνή, -αικός, ἡ", p: "Mulher; esposa" },
+    { g: "τε", p: "E (conectivo); τε...καί: tanto... como" },
+    { g: "δύναμαι", p: "Eu posso, sou capaz" },
+    { g: "οὕτω / οὕτως", p: "Assim, desta maneira" },
+    { g: "ἰδού", p: "Eis! Olha! Vê!" },
+    { g: "εἰσέρχομαι", p: "Eu entro" },
+    { g: "παρά", p: "Da parte de; junto de, ao lado de" },
+    { g: "καθώς", p: "Assim como, conforme; visto que" },
+    { g: "μέν", p: "Partícula correlativa (geralmente não traduzida)" },
+    { g: "χείρ, χειρός, ἡ", p: "Mão" },
+    { g: "ἄγγελος, ὁ", p: "Anjo, mensageiro" },
+    { g: "ὄχλος, ὁ", p: "Multidão, turba" },
+    { g: "ἁμαρτία, ἡ", p: "Pecado" },
+    { g: "ἔργον, τό", p: "Trabalho, obra" },
+    { g: "ἄν", p: "Partícula de condição (geralmente não traduzida)" },
+    { g: "πόλις, -εως, ἡ", p: "Cidade" },
+  ],
+  "E4": [
+    { g: "ἔθνος, -ους, τό", p: "Nação, povo; pl.: gentios" },
+    { g: "τότε", p: "Então, naquela época" },
+    { g: "ἐσθίω", p: "Eu como" },
+    { g: "καρδία, ἡ", p: "Coração" },
+    { g: "χάρις, -ιτος, ἡ", p: "Graça" },
+    { g: "ἵστημι", p: "Eu coloco de pé; permaneço firme" },
+    { g: "πορεύομαι", p: "Eu vou, ando; vivo (conduta)" },
+    { g: "ὑπέρ", p: "Em favor de; acima de, além de" },
+    { g: "καλέω", p: "Eu chamo; convido; convoco" },
+    { g: "νῦν / νυνί", p: "Agora" },
+    { g: "ὅστις, ἥτις, ὅ τι", p: "Quem quer que; qualquer que" },
+    { g: "σάρξ, σαρκός, ἡ", p: "Carne; natureza humana ou pecaminosa" },
+    { g: "ἀφίημι", p: "Eu deixo ir; perdoo; abandono" },
+    { g: "ἕως", p: "Até, até que; enquanto" },
+    { g: "ἐγείρω", p: "Eu levanto, desperto; ressuscito" },
+    { g: "οὐδέ", p: "Nem; e não; também não" },
+    { g: "λαός, ὁ", p: "Povo (de Deus)" },
+    { g: "σῶμα, -ατος, τό", p: "Corpo" },
+  ],
+  "E5": [
+    { g: "πάλιν", p: "De novo, outra vez" },
+    { g: "ζάω", p: "Eu vivo (estar vivo)" },
+    { g: "φωνή, -ῆς, ἡ", p: "Voz; som" },
+    { g: "βλέπω", p: "Eu vejo, olho (com os olhos)" },
+    { g: "ἀποστέλλω", p: "Eu envio" },
+    { g: "δύο", p: "Dois" },
+    { g: "ἀμήν", p: "Amém; verdadeiramente" },
+    { g: "σύν", p: "Com (companhia, associação)" },
+    { g: "ὅταν", p: "Quando, sempre que" },
+    { g: "αἰών, αἰῶνος, ὁ", p: "Eternidade; era, século" },
+    { g: "ἀρχιερεύς, -έως, ὁ", p: "Sumo sacerdote" },
+    { g: "θάνατος, ὁ", p: "Morte" },
+    { g: "δύναμις, -εως, ἡ", p: "Poder, força; milagre" },
+    { g: "παραδίδωμι", p: "Eu entrego; transmito" },
+    { g: "ἀπέρχομαι", p: "Eu parto, saio; vou embora" },
+    { g: "μένω", p: "Eu permaneço, fico" },
+    { g: "ζητέω", p: "Eu procuro, busco" },
+    { g: "βασιλεύς, -έως, ὁ", p: "Rei" },
+  ],
+  "E6": [
+    { g: "κρίνω", p: "Eu julgo" },
+    { g: "ἴδιος, -ία, -ον", p: "Próprio" },
+    { g: "οἶκος, ὁ", p: "Casa, lar; linhagem" },
+    { g: "ἀποθνήσκω", p: "Eu morro" },
+    { g: "ὅλος, -η, -ον", p: "Inteiro, completo" },
+    { g: "ὅσος, -η, -ον", p: "Quanto; tantos quantos" },
+    { g: "μέλλω (+ inf.)", p: "Estou prestes a; devo (+ infinitivo)" },
+    { g: "παρακαλέω", p: "Eu exorto; conforto, encorajo" },
+    { g: "ἀνίστημι", p: "Eu me levanto; ressuscito" },
+    { g: "ὥρα, -ας, ἡ", p: "Hora" },
+    { g: "ἐκεῖ", p: "Lá, ali" },
+    { g: "ὅτε", p: "Quando; enquanto" },
+    { g: "πῶς", p: "Como? De que maneira?" },
+    { g: "ἐξουσία, ἡ", p: "Autoridade, poder" },
+    { g: "αἴρω", p: "Eu levanto, carrego; tiro, removo" },
+    { g: "δεῖ", p: "É necessário, deve-se" },
+    { g: "ὁδός, ὁ", p: "Caminho" },
+    { g: "ἀλλήλων", p: "Uns aos outros" },
+    { g: "τίθημι", p: "Eu ponho, coloco" },
+  ],
+};
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let currentLesson = 'all';
+let currentMode   = 'start';
+let currentWords  = [];
+let currentIndex  = 0;
+let isFlipped     = false;
+let score = { correct: 0, wrong: 0 };
+let wrongWords    = [];
+let queueWords    = [];
+let timerInterval = null;
+let lightningInterval = null;
+let lightningTime = 120;
+let matchSelected = null;
+let matchPairs    = [];
+let matchOffset   = 0;
+
+// ─── HELPERS ─────────────────────────────────────────────────────────────────
+function lessonLabel(k) {
+  return /^\d+$/.test(String(k)) ? `Aula ${k}` : `Essenciais ${String(k).slice(1)}`;
+}
+
+function getWords(lesson) {
+  if (lesson === 'all') {
+    let all = [];
+    Object.keys(VOCAB).forEach(k => {
+      VOCAB[k].forEach(w => all.push({ ...w, lesson: k }));
+    });
+    return all;
+  }
+  return VOCAB[lesson].map(w => ({ ...w, lesson: lesson }));
+}
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+}
+
+function getDistractors(correct, pool, key, count = 3) {
+  const others = pool.filter(w => w[key] !== correct[key]);
+  return shuffle(others).slice(0, count);
+}
+
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById('screen-' + id).classList.add('active');
+}
+
+function updateFooter() {
+  document.getElementById('ftCorrect').textContent = score.correct || '—';
+  document.getElementById('ftWrong').textContent   = score.wrong   || '—';
+  document.getElementById('ftLesson').textContent  = currentLesson === 'all' ? 'Todas' : lessonLabel(currentLesson);
+}
+
+function updateProgress(cur, total) {
+  const pct = total ? Math.round((cur / total) * 100) : 0;
+  document.getElementById('progressFill').style.width = pct + '%';
+  document.getElementById('progressText').textContent  = total ? `${cur} / ${total}` : '—';
+}
+
+// ─── START SCREEN ─────────────────────────────────────────────────────────────
+function buildStartStats() {
+  const words = getWords(currentLesson);
+  const groups = currentLesson === 'all' ? Object.keys(VOCAB).length : 1;
+  const html = `
+    <div class="stat-card">
+      <div class="stat-num">${words.length}</div>
+      <div class="stat-lbl">Palavras</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">${groups}</div>
+      <div class="stat-lbl">Grupo${groups > 1 ? 's' : ''}</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num">5</div>
+      <div class="stat-lbl">Modos</div>
+    </div>
+  `;
+  document.getElementById('startStats').innerHTML = html;
+}
+
+// ─── LESSON / MODE BUTTONS ────────────────────────────────────────────────────
+// Build the "Essenciais NT" buttons from the data (keys starting with "E")
+Object.keys(VOCAB).filter(k => !/^\d+$/.test(k)).forEach(k => {
+  const b = document.createElement('button');
+  b.className = 'btn';
+  b.dataset.lesson = k;
+  b.textContent = k.slice(1);
+  document.getElementById('essBtns').appendChild(b);
+});
+
+document.querySelectorAll('[data-lesson]').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('[data-lesson]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentLesson = btn.dataset.lesson;
+    resetScores();
+    buildStartStats();
+    // If we're in a game, restart from menu
+    if (currentMode !== 'start') {
+      setMode('start');
+    }
+  });
+});
+
+document.getElementById('modeBtns').addEventListener('click', e => {
+  const btn = e.target.closest('[data-mode]');
+  if (!btn) return;
+  setMode(btn.dataset.mode);
+});
+
+function setMode(mode) {
+  currentMode = mode;
+  document.querySelectorAll('#modeBtns .btn-mode').forEach(b => b.classList.remove('active'));
+  const activeBtn = document.querySelector(`[data-mode="${mode}"]`);
+  if (activeBtn) activeBtn.classList.add('active');
+  stopTimers();
+  resetScores();
+
+  if (mode === 'start') {
+    buildStartStats();
+    showScreen('start');
+  } else if (mode === 'flash') {
+    startFlash();
+  } else if (mode === 'quiz_gp' || mode === 'quiz_pg') {
+    startQuiz(mode);
+  } else if (mode === 'match') {
+    startMatch();
+  } else if (mode === 'lightning') {
+    startLightning();
+  }
+}
+
+document.getElementById('btnStartGame').addEventListener('click', () => setMode('flash'));
+
+function resetScores() {
+  score = { correct: 0, wrong: 0 };
+  wrongWords = [];
+  updateFooter();
+  updateProgress(0, 0);
+}
+
+function stopTimers() {
+  clearInterval(timerInterval);
+  clearInterval(lightningInterval);
+  timerInterval = null;
+  lightningInterval = null;
+}
+
+// ─── FLASHCARDS ───────────────────────────────────────────────────────────────
+function startFlash() {
+  currentWords = getWords(currentLesson);
+  currentIndex = 0;
+  showScreen('flash');
+  renderFlash();
+}
+
+function renderFlash() {
+  const w = currentWords[currentIndex];
+  isFlipped = false;
+  const card = document.getElementById('flashcard');
+  card.classList.remove('flipped');
+  document.getElementById('fc-greek').textContent   = w.g;
+  document.getElementById('fc-pt').textContent      = w.p;
+  document.getElementById('fc-lesson-tag').textContent  = lessonLabel(w.lesson);
+  document.getElementById('fc-lesson-tag2').textContent = lessonLabel(w.lesson);
+  // Adjust font size
+  const len = w.g.length;
+  const gEl = document.getElementById('fc-greek');
+  gEl.className = 'greek-word' + (len > 18 ? ' greek-small' : '');
+  document.getElementById('flashCounter').textContent = `${currentIndex + 1} / ${currentWords.length}`;
+  document.getElementById('btnPrev').disabled = currentIndex === 0;
+  document.getElementById('btnNext').disabled = currentIndex === currentWords.length - 1;
+  updateProgress(currentIndex + 1, currentWords.length);
+}
+
+function flipCard() {
+  isFlipped = !isFlipped;
+  document.getElementById('flashcard').classList.toggle('flipped', isFlipped);
+}
+
+function flashPrev() {
+  if (currentIndex > 0) { currentIndex--; renderFlash(); }
+}
+function flashNext() {
+  if (currentIndex < currentWords.length - 1) { currentIndex++; renderFlash(); }
+  else showResults();
+}
+
+// ─── QUIZ ─────────────────────────────────────────────────────────────────────
+let quizMode = 'quiz_gp';
+
+function startQuiz(mode) {
+  quizMode = mode;
+  currentWords  = shuffle(getWords(currentLesson));
+  queueWords    = [...currentWords];
+  currentIndex  = 0;
+  showScreen('quiz');
+  renderQuiz();
+}
+
+function renderQuiz() {
+  if (queueWords.length === 0) { showResults(); return; }
+  const w    = queueWords[0];
+  const pool = getWords(currentLesson);
+  const isGP = (quizMode === 'quiz_gp');
+
+  document.getElementById('qLabel').textContent = isGP
+    ? 'Qual é o significado em português?'
+    : 'Qual é a palavra grega?';
+
+  const qWordEl = document.getElementById('qWord');
+  qWordEl.textContent = isGP ? w.g : w.p;
+  qWordEl.className   = 'q-word' + (isGP ? (w.g.length > 20 ? ' q-word-sm' : '') : ' pt-word');
+
+  // Generate options
+  const distractors = getDistractors(w, pool, isGP ? 'p' : 'g', 3);
+  const opts = shuffle([w, ...distractors]);
+
+  const container = document.getElementById('quizOptions');
+  container.innerHTML = '';
+  opts.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className   = 'opt-btn';
+    btn.textContent = isGP ? opt.p : opt.g;
+    btn.dataset.idx = i;
+    btn.onclick = () => handleQuizAnswer(btn, opt, w, isGP);
+    container.appendChild(btn);
+  });
+
+  document.getElementById('feedbackBar').className = 'feedback-bar';
+  updateProgress(currentWords.length - queueWords.length, currentWords.length);
+}
+
+let quizLocked = false;
+
+function handleQuizAnswer(btn, chosen, correct, isGP) {
+  if (quizLocked) return;
+  quizLocked = true;
+  const isCorrect = isGP ? (chosen.g === correct.g && chosen.p === correct.p)
+                          : (chosen.g === correct.g);
+
+  const allBtns = document.querySelectorAll('.opt-btn');
+  allBtns.forEach(b => {
+    b.disabled = true;
+    const text = isGP ? b.textContent : b.textContent;
+    const cText = isGP ? correct.p : correct.g;
+    if (b.textContent === cText) b.classList.add('reveal');
+  });
+
+  const fb = document.getElementById('feedbackBar');
+  if (isCorrect) {
+    btn.classList.add('correct');
+    score.correct++;
+    fb.className = 'feedback-bar correct';
+    fb.textContent = '✓ Correto!';
+    queueWords.shift();
+  } else {
+    btn.classList.add('wrong');
+    score.wrong++;
+    wrongWords.push(correct);
+    fb.className = 'feedback-bar wrong';
+    fb.textContent = `✗ Errado! A resposta era: ${isGP ? correct.p : correct.g}`;
+    // Move wrong answer to back of queue
+    const popped = queueWords.shift();
+    const insertAt = Math.min(queueWords.length, 3 + Math.floor(Math.random() * 3));
+    queueWords.splice(insertAt, 0, popped);
+  }
+
+  updateFooter();
+  quizLocked = false;
+  setTimeout(() => renderQuiz(), 1600);
+}
+
+// ─── MATCH PAIRS ──────────────────────────────────────────────────────────────
+const MATCH_SIZE = 6;
+let matchCorrect = 0;
+let matchTotal   = 0;
+let matchPairsCompleted = 0;
+let matchSelectedGreek = null;
+let matchSelectedPt    = null;
+let matchWordsLeft     = [];
+
+function startMatch() {
+  currentWords    = shuffle(getWords(currentLesson));
+  matchWordsLeft  = [...currentWords];
+  matchPairsCompleted = 0;
+  matchCorrect    = 0;
+  matchTotal      = 0;
+  score           = { correct: 0, wrong: 0 };
+  matchOffset     = 0;
+  document.getElementById('matchFeedback').className = 'feedback-bar';
+  document.getElementById('btnMatchNext').style.display = 'none';
+  showScreen('match');
+  renderMatchBatch();
+}
+
+function renderMatchBatch() {
+  const batch = matchWordsLeft.splice(0, MATCH_SIZE);
+  if (batch.length === 0) { showResults(); return; }
+  matchPairs = batch;
+  matchTotal = batch.length;
+  matchCorrect = 0;
+  matchSelectedGreek = null;
+  matchSelectedPt    = null;
+
+  document.getElementById('matchScore').textContent = '0';
+  document.getElementById('matchTotal').textContent = batch.length;
+  document.getElementById('matchFeedback').className = 'feedback-bar';
+  document.getElementById('btnMatchNext').style.display = 'none';
+
+  const greekDiv = document.getElementById('matchGreek');
+  const ptDiv    = document.getElementById('matchPt');
+  greekDiv.innerHTML = '';
+  ptDiv.innerHTML    = '';
+
+  const shuffledPt = shuffle([...batch]);
+
+  batch.forEach((w, i) => {
+    const gb = document.createElement('button');
+    gb.className   = 'match-btn greek-btn';
+    gb.textContent = w.g;
+    gb.dataset.idx = i;
+    gb.dataset.type = 'greek';
+    gb.onclick = () => handleMatchClick(gb, 'greek', w);
+    greekDiv.appendChild(gb);
+  });
+
+  shuffledPt.forEach((w, i) => {
+    const pb = document.createElement('button');
+    pb.className   = 'match-btn';
+    pb.textContent = w.p;
+    pb.dataset.type = 'pt';
+    pb.onclick = () => handleMatchClick(pb, 'pt', w);
+    ptDiv.appendChild(pb);
+  });
+
+  updateProgress(currentWords.length - matchWordsLeft.length - batch.length, currentWords.length);
+}
+
+function handleMatchClick(btn, type, word) {
+  if (btn.classList.contains('matched')) return;
+
+  if (type === 'greek') {
+    // Deselect previous greek
+    if (matchSelectedGreek) matchSelectedGreek.btn.classList.remove('selected');
+    matchSelectedGreek = { btn, word };
+    btn.classList.add('selected');
+  } else {
+    if (matchSelectedPt) matchSelectedPt.btn.classList.remove('selected');
+    matchSelectedPt = { btn, word };
+    btn.classList.add('selected');
+  }
+
+  if (matchSelectedGreek && matchSelectedPt) {
+    const gw = matchSelectedGreek.word;
+    const pw = matchSelectedPt.word;
+    if (gw.g === pw.g) {
+      // Correct match
+      matchSelectedGreek.btn.classList.remove('selected');
+      matchSelectedPt.btn.classList.remove('selected');
+      matchSelectedGreek.btn.classList.add('matched');
+      matchSelectedPt.btn.classList.add('matched');
+      matchSelectedGreek = null;
+      matchSelectedPt    = null;
+      matchCorrect++;
+      score.correct++;
+      document.getElementById('matchScore').textContent = matchCorrect;
+      updateFooter();
+      const fb = document.getElementById('matchFeedback');
+      fb.className = 'feedback-bar correct';
+      fb.textContent = '✓ Par correto!';
+      setTimeout(() => { fb.className = 'feedback-bar'; }, 800);
+      if (matchCorrect === matchTotal) {
+        matchPairsCompleted += matchTotal;
+        if (matchWordsLeft.length > 0) {
+          const nextBtn = document.getElementById('btnMatchNext');
+          nextBtn.style.display = 'block';
+          const fb2 = document.getElementById('matchFeedback');
+          fb2.className = 'feedback-bar correct';
+          fb2.textContent = `🎉 Rodada completa! ${matchWordsLeft.length} palavra(s) restante(s).`;
+        } else {
+          setTimeout(() => showResults(), 800);
+        }
+      }
+    } else {
+      // Wrong match
+      score.wrong++;
+      wrongWords.push(gw);
+      matchSelectedGreek.btn.classList.remove('selected');
+      matchSelectedPt.btn.classList.remove('selected');
+      matchSelectedGreek.btn.classList.add('wrong-match');
+      matchSelectedPt.btn.classList.add('wrong-match');
+      const g = matchSelectedGreek.btn;
+      const p = matchSelectedPt.btn;
+      setTimeout(() => {
+        g.classList.remove('wrong-match');
+        p.classList.remove('wrong-match');
+      }, 500);
+      matchSelectedGreek = null;
+      matchSelectedPt    = null;
+      const fb = document.getElementById('matchFeedback');
+      fb.className = 'feedback-bar wrong';
+      fb.textContent = '✗ Não é esse par! Tente novamente.';
+      setTimeout(() => { fb.className = 'feedback-bar'; }, 900);
+      updateFooter();
+    }
+  }
+}
+
+document.getElementById('btnMatchNext').addEventListener('click', () => {
+  document.getElementById('btnMatchNext').style.display = 'none';
+  document.getElementById('matchFeedback').className = 'feedback-bar';
+  renderMatchBatch();
+});
+
+// ─── LIGHTNING ROUND ─────────────────────────────────────────────────────────
+let lScore = 0, lWrong = 0;
+let lightningWords = [];
+let lightningLocked = false;
+
+function startLightning() {
+  lightningWords = shuffle(getWords(currentLesson));
+  lScore  = 0;
+  lWrong  = 0;
+  lightningTime  = 120;
+  lightningLocked = false;
+
+  document.getElementById('lScore').textContent  = 0;
+  document.getElementById('lWrong').textContent  = 0;
+  document.getElementById('lTimer').textContent  = 120;
+  document.getElementById('lTimer').className    = 'lightning-timer';
+
+  showScreen('lightning');
+  renderLightning();
+  startLightningTimer();
+}
+
+function startLightningTimer() {
+  clearInterval(lightningInterval);
+  lightningInterval = setInterval(() => {
+    lightningTime--;
+    document.getElementById('lTimer').textContent = lightningTime;
+    if (lightningTime <= 10) document.getElementById('lTimer').className = 'lightning-timer urgent';
+    if (lightningTime <= 0) {
+      clearInterval(lightningInterval);
+      showResults();
+    }
+  }, 1000);
+}
+
+function renderLightning() {
+  if (lightningWords.length === 0) lightningWords = shuffle(getWords(currentLesson));
+  const w    = lightningWords[0];
+  const pool = getWords(currentLesson);
+  const isGP = Math.random() > 0.3; // 70% Greek→PT
+
+  document.getElementById('lLabel').textContent = isGP ? 'Significado em português?' : 'Palavra grega?';
+  const lWordEl = document.getElementById('lWord');
+  lWordEl.textContent = isGP ? w.g : w.p;
+  lWordEl.className   = 'q-word' + ((!isGP) ? ' pt-word' : '');
+
+  const distractors = getDistractors(w, pool, isGP ? 'p' : 'g', 3);
+  const opts = shuffle([w, ...distractors]);
+  const container = document.getElementById('lightningOptions');
+  container.innerHTML = '';
+  opts.forEach(opt => {
+    const btn = document.createElement('button');
+    btn.className   = 'opt-btn';
+    btn.textContent = isGP ? opt.p : opt.g;
+    btn.onclick = () => handleLightning(btn, opt, w, isGP);
+    container.appendChild(btn);
+  });
+}
+
+function handleLightning(btn, chosen, correct, isGP) {
+  if (lightningLocked) return;
+  lightningLocked = true;
+
+  const allBtns = document.querySelectorAll('#lightningOptions .opt-btn');
+  allBtns.forEach(b => b.disabled = true);
+
+  const isCorrect = isGP ? (chosen.p === correct.p) : (chosen.g === correct.g);
+  if (isCorrect) {
+    btn.classList.add('correct');
+    lScore++;
+    document.getElementById('lScore').textContent = lScore;
+    lightningWords.shift();
+  } else {
+    btn.classList.add('wrong');
+    lWrong++;
+    document.getElementById('lWrong').textContent = lWrong;
+    // Highlight correct
+    const cText = isGP ? correct.p : correct.g;
+    allBtns.forEach(b => { if (b.textContent === cText) b.classList.add('reveal'); });
+    lightningWords.shift();
+  }
+
+  setTimeout(() => {
+    lightningLocked = false;
+    renderLightning();
+  }, 700);
+}
+
+// ─── RESULTS ─────────────────────────────────────────────────────────────────
+function showResults() {
+  stopTimers();
+  let correct, wrong;
+  if (currentMode === 'lightning') {
+    correct = lScore;
+    wrong   = lWrong;
+  } else {
+    correct = score.correct;
+    wrong   = score.wrong;
+  }
+  const total = correct + wrong;
+  const pct   = total ? Math.round((correct / total) * 100) : 0;
+
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rPct').textContent     = pct + '%';
+
+  let emoji = '🥇', title = 'Excelente!';
+  if (pct < 50)      { emoji = '📖'; title = 'Continue praticando!'; }
+  else if (pct < 75) { emoji = '💪'; title = 'Bom trabalho!'; }
+  else if (pct < 90) { emoji = '🌟'; title = 'Muito bem!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent  = title;
+
+  const retryDiv  = document.getElementById('retryWords');
+  const retryList = document.getElementById('retryList');
+  const uniqueWrong = [...new Map(wrongWords.map(w => [w.g, w])).values()];
+  if (uniqueWrong.length > 0) {
+    retryList.innerHTML = uniqueWrong.map(w =>
+      `<div class="retry-word"><span class="greek-r">${w.g}</span> = ${w.p}</div>`
+    ).join('');
+    retryDiv.classList.remove('hidden');
+  } else {
+    retryDiv.classList.add('hidden');
+  }
+
+  showScreen('results');
+  updateProgress(total, total);
+}
+
+function restartCurrent() {
+  resetScores();
+  setMode(currentMode);
+}
+
+// ─── KEYBOARD ────────────────────────────────────────────────────────────────
+document.addEventListener('keydown', e => {
+  if (currentMode === 'flash') {
+    if (e.code === 'Space') { e.preventDefault(); flipCard(); }
+    else if (e.code === 'ArrowRight') flashNext();
+    else if (e.code === 'ArrowLeft')  flashPrev();
+  } else if (currentMode === 'quiz_gp' || currentMode === 'quiz_pg') {
+    const keys = ['Digit1','Digit2','Digit3','Digit4'];
+    const idx  = keys.indexOf(e.code);
+    if (idx !== -1) {
+      const btns = document.querySelectorAll('#quizOptions .opt-btn');
+      if (btns[idx]) btns[idx].click();
+    }
+  } else if (currentMode === 'lightning') {
+    const keys = ['Digit1','Digit2','Digit3','Digit4'];
+    const idx  = keys.indexOf(e.code);
+    if (idx !== -1) {
+      const btns = document.querySelectorAll('#lightningOptions .opt-btn');
+      if (btns[idx]) btns[idx].click();
+    }
+  }
+});
+
+// ─── INIT ────────────────────────────────────────────────────────────────────
+buildStartStats();
+updateFooter();
+</script>
+</body>
+</html>

@@ -1,7 +1,7 @@
 // Service worker do Verbum Graecum: permite instalar o site como aplicativo e lê-lo sem internet.
 // Página: rede primeiro (as atualizações chegam logo) e cópia guardada quando não há conexão.
 // Livros (data/*.js?v=…): guardados na primeira leitura; cada versão nova substitui a anterior.
-const VERSAO = '327b5bfc11';
+const VERSAO = '327b5bfc12';
 const CACHE = 'vg-' + VERSAO;
 const BASE = ['./', 'fonts.js', 'pwa.js', 'manifest.webmanifest', 'icons/icon-192.png', 'icons/icon-512.png', 'icons/apple-touch-icon.png'];
 
@@ -49,10 +49,12 @@ self.addEventListener('fetch', e => {
       try {
         const r = await fetch(req);
         const c = await caches.open(CACHE);
-        if (r.ok && !r.redirected) c.put('./', r.clone());
+        // A página inicial fica guardada como './'; as outras páginas (ex.: vocabulario.html) com o próprio endereço.
+        const inicial = /\/(index\.html)?$/.test(url.pathname);
+        if (r.ok && !r.redirected) c.put(inicial ? './' : req, r.clone());
         return r;
       } catch (err) {
-        return (await caches.match('./')) || Response.error();
+        return (await caches.match(req, { ignoreSearch: true })) || (await caches.match('./')) || Response.error();
       }
     })());
     return;
