@@ -432,6 +432,7 @@ body.cor .w.sel{color:var(--bg)}
 .btn:disabled{opacity:.35;cursor:default;border-color:var(--line);color:var(--muted)}
 .btn:focus-visible{outline:1px solid var(--accent);outline-offset:2px}
 .capnav{display:flex;justify-content:space-between;gap:10px;margin-top:26px;padding-top:16px;border-top:1px solid var(--line)}
+.capnav.capnav-topo{margin:0 0 18px;padding:0 0 14px;border-top:0;border-bottom:1px solid var(--line)}
 
 /* Margem: verbete da palavra */
 aside{position:sticky;top:calc(env(safe-area-inset-top,0px) + var(--nav-h,60px) + var(--leg-h,0px) + 12px);align-self:start;max-height:calc(100vh - var(--nav-h,60px) - var(--leg-h,0px) - 28px);overflow:auto;
@@ -1682,6 +1683,7 @@ adjuntos.</p></li>
 
 <div class="wrap">
   <main>
+    <div class="capnav capnav-topo"><button class="btn" id="capPrev3">‹ capítulo anterior</button><button class="btn" id="capNext3">próximo capítulo ›</button></div>
     <div class="chead"><h2 id="capTit"></h2><span id="capInfo"></span></div>
     <div id="texto"><p class="carregando">Carregando…</p></div>
     <div class="capnav"><button class="btn" id="capPrev2">‹ capítulo anterior</button><button class="btn" id="capNext2">próximo capítulo ›</button></div>
@@ -1970,8 +1972,8 @@ function abrir(c, verso) {
   editando = null;
   assinarComentarios();
   painel.innerHTML = vazio; painel.classList.add('idle');
-  document.getElementById('capPrev').disabled = document.getElementById('capPrev2').disabled = C.c === CAPS[0].c && livro === ORDEM[0];
-  document.getElementById('capNext').disabled = document.getElementById('capNext2').disabled = C.c === CAPS[CAPS.length - 1].c && livro === ORDEM[ORDEM.length - 1];
+  document.getElementById('capPrev').disabled = document.getElementById('capPrev2').disabled = document.getElementById('capPrev3').disabled = C.c === CAPS[0].c && livro === ORDEM[0];
+  document.getElementById('capNext').disabled = document.getElementById('capNext2').disabled = document.getElementById('capNext3').disabled = C.c === CAPS[CAPS.length - 1].c && livro === ORDEM[ORDEM.length - 1];
   guardar('ev-cap-' + livro, C.c);
   verSel.replaceChildren(new Option('Todo', ''), ...C.V.map(v => new Option(v.v, v.v)));
   if (verso && C.V.some(v => v.v === +verso)) irVerso(+verso, false);
@@ -2196,8 +2198,8 @@ function passo(d) {
   carregar(ORDEM[j]).then(D => abrirLivro(ORDEM[j], d > 0 ? 1 : D.caps.length)).catch(() => abrirLivro(ORDEM[j]));
 }
 sel.onchange = () => abrir(+sel.value);
-['capPrev','capPrev2'].forEach(id => document.getElementById(id).onclick = () => passo(-1));
-['capNext','capNext2'].forEach(id => document.getElementById(id).onclick = () => passo(1));
+['capPrev','capPrev2','capPrev3'].forEach(id => document.getElementById(id).onclick = () => passo(-1));
+['capNext','capNext2','capNext3'].forEach(id => document.getElementById(id).onclick = () => passo(1));
 document.querySelectorAll('[data-livro]').forEach(b => b.onclick = () => { fecharIndice(); if (b.dataset.livro !== livro || !CAPS.length || !texto.querySelector('.w')) abrirLivro(b.dataset.livro); });
 // Dica do botão “?” ao lado de “Notas”: explica a sigla N.E.
 (() => {
